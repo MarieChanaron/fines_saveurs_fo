@@ -181,3 +181,5 @@ public class FinesSaveursFoApplication implements CommandLineRunner {
         orderRepository.save(order);
     }
 }
+
+// Add a comment in develop branch only for test purpose
