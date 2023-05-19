@@ -33,5 +33,5 @@ build/
 .vscode/
 
 ### Credentials ###
-/src/main/resources/app.properties
+application.properties
 
