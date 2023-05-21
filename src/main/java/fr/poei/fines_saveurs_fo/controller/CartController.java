@@ -1,4 +1,4 @@
-package fr.poei.fines_saveurs_fo.web;
+package fr.poei.fines_saveurs_fo.controller;
 
 import fr.poei.fines_saveurs_fo.entity.Cart;
 import fr.poei.fines_saveurs_fo.entity.CartProduct;
