@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Produits</title>
+  <div th:replace="fragments/frag_head :: frag_head"></div>
+</head>
+<body>
+<div th:replace="fragments/frag_nav :: frag_nav"></div>
+
+<div class="container">
+  <div class="card">
+    <div class="card-header">Liste des produits</div>
+    <div class="card-body">
+      <table>
+        <thead class="table">
+        <tr>
+          <th>ID</th><th>Marque</th><th>Conditionnement</th><th>Description</th><th>image</th><th>Ingrédients</th><th>Nom</th><th>Origine</th><th>Prix</th><th>Référence</th><th>Stock</th><th>Catégorie (id)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p:${listProducts}">
+          <td th:text="${p.id}"></td>
+          <td th:text="${p.brand}"></td>
+          <td th:text="${p.conditioning}"></td>
+          <td th:text="${p.description}"></td>
+          <c:choose>
+            <c:when test="${prod.imageUrl == null || prod.imageUrl.length() == 0}">
+              <img src="../static/image/placeholder.jpg" alt="">
+            </c:when>
+            <c:otherwise>
+              <img src="image?file=${pageContext.request.contextPath}${prod.imageUrl}" alt="">
+            </c:otherwise>
+          </c:choose>
+          <td th:text="${p.ingredient}"></td>
+          <td th:text="${p.name}"></td>
+          <td th:text="${p.origin}"></td>
+          <td th:text="${p.price}"></td>
+          <td th:text="${p.reference}"></td>
+          <td th:text="${p.stock}"></td>
+<!--          <td th:text="${p.category}"></td>-->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div th:replace="fragments/frag_footer :: frag_footer"></div>
+
+</body>
+</html>
