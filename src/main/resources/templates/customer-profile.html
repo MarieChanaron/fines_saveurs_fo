@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+  <title>Title</title>
+</head>
+<body>
+<main>
+  <div class="container d-flex flex-column align-items-center justify-content-center mt-4">
+    <div class=" mb-4 d-flex justify-content-around " >
+      <a href="account" title="retour"><img src="/images/arrow_back.svg" style="width: 1.5rem; margin-right: 1em" alt=""></a>
+      <h2>Mes informations personnelles</h2>
+    </div>
+    <div class="card row shadow p-3 mb-5 bg-body rounded" style="width: 35%">
+      <div class="col-12">
+        <img class="w-100" src="/images/card_profile.png" alt="">
+      </div>
+      <div class="card-body col-12">
+        <tr th:each="customer : ${customers}">
+          <td th:text="${customer.id}"/>
+        <p>Nom: <td th:text="${customer.lastname}"/></p>
+        <p>Prénom: <td th:text="${customer.firstname}"/></p>
+        <p>Email : <td th:text="${customer.email}"/></p>
+        <p>Password: ********</p>
+          <div class="d-flex justify-content-around col-12">
+            <div class=" mt-2 mb-2">
+              <li>
+              <a th:href="@{'customers/edit/'+${customer.id}}">Modifier le profil </a>
+              </li>
+
+            </div>
+          </div>
+        </tr>
+      </div>
+
+    </div>
+  </div>
+</main>
+</body>
+</html>
