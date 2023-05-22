@@ -1,5 +1,7 @@
 package fr.poei.fines_saveurs_fo.controller;
 
+import fr.poei.fines_saveurs_fo.controller.dto.CartProductDto;
+import fr.poei.fines_saveurs_fo.controller.dto.MapStructMapper;
 import fr.poei.fines_saveurs_fo.entity.Cart;
 import fr.poei.fines_saveurs_fo.entity.CartProduct;
 import fr.poei.fines_saveurs_fo.entity.Product;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +22,12 @@ public class CartController {
 
     final CartService cartService;
     final ProductService productService;
+    final MapStructMapper mapStructMapper;
 
-    public CartController(CartService cartService, ProductService productService) {
+    public CartController(CartService cartService, ProductService productService, MapStructMapper mapStructMapper) {
         this.cartService = cartService;
         this.productService = productService;
+        this.mapStructMapper = mapStructMapper;
     }
 
     @GetMapping("/add-to-cart")
@@ -50,9 +55,14 @@ public class CartController {
     public String cart(HttpServletRequest request) {
         Cart cart = (Cart) request.getSession().getAttribute("cart");
 
-        // Retrieve the items in the cart
+        // Retrieve the items from the cart
         List<CartProduct> cartItems = cartService.findAllCartItems(cart);
-        System.out.println(cartItems);
+        List<CartProductDto> cartProductDtos = new ArrayList<>();
+        for (CartProduct item : cartItems) {
+            CartProductDto dto = mapStructMapper.toDto(item);
+            cartProductDtos.add(dto);
+        }
+        System.out.println(cartProductDtos);
         return "cart";
     }
 }
