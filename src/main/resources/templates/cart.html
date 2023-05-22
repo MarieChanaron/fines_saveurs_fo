@@ -22,24 +22,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
+                        <tr th:each="item: ${cartItems}">
+                            <th scope="row" th:text="${item.productDto.name}"></th>
+                            <td th:text="${item.quantity}"></td>
+                            <td th:text="${item.productDto.price}"></td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2">Nombre de produits</th>
+                            <td th:text="${totalQuantity}"></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Prix</th>
+                            <td th:text="${totalPrice} + ' €'"></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

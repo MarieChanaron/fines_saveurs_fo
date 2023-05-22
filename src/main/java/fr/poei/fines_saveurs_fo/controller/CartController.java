@@ -2,6 +2,7 @@ package fr.poei.fines_saveurs_fo.controller;
 
 import fr.poei.fines_saveurs_fo.controller.dto.CartProductDto;
 import fr.poei.fines_saveurs_fo.controller.dto.MapStructMapper;
+import fr.poei.fines_saveurs_fo.controller.dto.ProductDto;
 import fr.poei.fines_saveurs_fo.entity.Cart;
 import fr.poei.fines_saveurs_fo.entity.CartProduct;
 import fr.poei.fines_saveurs_fo.entity.Product;
@@ -9,6 +10,7 @@ import fr.poei.fines_saveurs_fo.service.CartService;
 import fr.poei.fines_saveurs_fo.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -47,22 +49,35 @@ public class CartController {
         cartService.saveLineItems(lineItem);
 
         request.getSession().setAttribute("cart", savedCart);
-        System.out.println(request.getSession().getAttribute("cart"));
+
         return "redirect:/cart";
     }
 
     @GetMapping("cart")
-    public String cart(HttpServletRequest request) {
+    public String cart(HttpServletRequest request, Model model) {
         Cart cart = (Cart) request.getSession().getAttribute("cart");
 
         // Retrieve the items from the cart
-        List<CartProduct> cartItems = cartService.findAllCartItems(cart);
-        List<CartProductDto> cartProductDtos = new ArrayList<>();
-        for (CartProduct item : cartItems) {
-            CartProductDto dto = mapStructMapper.toDto(item);
-            cartProductDtos.add(dto);
+        List<CartProduct> cartProducts = cartService.findAllCartItems(cart);
+        List<CartProductDto> cartItems = new ArrayList<>();
+        int totalQuantity = 0;
+        double totalPrice = 0;
+
+        for (CartProduct item : cartProducts) {
+            ProductDto productDto = mapStructMapper.toDto(item.getProduct());
+            CartProductDto lineItem = mapStructMapper.toDto(item);
+
+            totalQuantity += lineItem.getQuantity();
+            totalPrice += productDto.getPrice().doubleValue() * lineItem.getQuantity();
+
+            lineItem.setProductDto(productDto);
+            cartItems.add(lineItem);
         }
-        System.out.println(cartProductDtos);
+
+        model.addAttribute("cartItems", cartItems);
+        model.addAttribute("totalQuantity", totalQuantity);
+        model.addAttribute("totalPrice", totalPrice);
+
         return "cart";
     }
 }

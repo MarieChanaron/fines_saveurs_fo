@@ -2,9 +2,12 @@ package fr.poei.fines_saveurs_fo.controller.dto;
 
 import fr.poei.fines_saveurs_fo.entity.Category;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+@Data @NoArgsConstructor
 public class ProductDto {
 
     @Id

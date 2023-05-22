@@ -31,7 +31,7 @@ public class CartService {
     }
 
     public List<CartProduct> findAllCartItems(Cart cart) {
-        return cartProductRepository.findAllByCart(cart);
+        return cartProductRepository.findCartProductsByCart(cart);
     }
 
 }
