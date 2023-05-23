@@ -17,6 +17,7 @@
         <img class="w-100" src="/images/card_profile.png" alt="">
       </div>
       <div class="card-body col-12">
+        <table>
         <tr th:each="customer : ${customers}">
           <td th:text="${customer.id}"/>
         <p>Nom: <td th:text="${customer.lastname}"/></p>
@@ -32,6 +33,7 @@
             </div>
           </div>
         </tr>
+        </table>
       </div>
 
     </div>
