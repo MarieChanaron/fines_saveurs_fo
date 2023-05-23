@@ -1,0 +1,123 @@
+:root {
+    --primary-color-dark: #262221;
+    --primary-color-medium: #33302F;
+    --primary-color-light: #3D3A3A;
+    --secondary-color-dark: #D9B589;
+    --secondary-color-medium: #EFCA9C;
+    --secondary-color-light: #FFDCB1;
+    --accent-color-dark: #7A2D1C;
+    --accent-color-medium: #994331;
+    --accent-color-light: #BB553E;
+    --grey-0: #FCF5ED;
+    --grey-1: #EADDCE;
+    --grey-2: #C8B8A6;
+    --grey-3: #928372;
+    --grey-4: #5D5246;
+    --font-serif: 'Lora', serif;
+    --font-sans-serif: 'Open Sans', sans-serif;
+    --header-height: 60px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans-serif);
+    font-size: 1.4rem;
+}
+
+html {
+    height: 100%;
+    font-size: 65%;
+}
+
+body {
+    height: 100%;
+    color: var(--primary-color-dark);
+    /* padding-top: var(--header-height);*/
+}
+
+h1, h2, h3 {
+    font-size: revert;
+    font-family: var(--font-serif);
+    color: var(--primary-color-dark);
+    text-shadow: 1px 0px 0px rgba(252, 245, 237, 0.3);
+}
+
+a, a:hover {
+    color: var(--accent-color-dark);
+}
+
+.bg-beige {
+    background: var(--grey-0);
+}
+
+.button {
+    min-width: 156px;
+    width: fit-content;
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: var(--primary-color-dark);
+    color: var(--grey-0);
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    border: 0;
+    height: 36px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+}
+
+.button:hover {
+    background-color: var(--accent-color-medium);
+    color: var(--primary-color-dark);
+    transition: 0.2s;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+}
+
+.button-outline {
+    min-width: 154px;
+    width: fit-content;
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: white;
+    color: var(--primary-color-dark);
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    border: 1px solid var(--primary-color-dark);
+    height: 34px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+}
+
+.underline-none {
+    text-decoration: none;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.small {
+    font-size: 95%;
+}
+
+.smaller {
+    font-size: 85%;
+}
+
+.page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
