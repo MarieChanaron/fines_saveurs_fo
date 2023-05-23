@@ -5,6 +5,8 @@ import fr.poei.fines_saveurs_fo.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ProductServiceImpl implements ProductService{
 
@@ -17,5 +19,8 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> getAllProduct() {
         return productRepository.findAll();
     }
+
+    @Override
+    public Optional<Product> getById(Long id) { return productRepository.findById(id);}
 
 }

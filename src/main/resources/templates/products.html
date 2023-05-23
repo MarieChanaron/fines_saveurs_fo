@@ -14,7 +14,8 @@
       <table>
         <thead class="table">
         <tr>
-          <th>ID</th><th>Marque</th><th>Conditionnement</th><th>Description</th><th>image</th><th>Ingrédients</th><th>Nom</th><th>Origine</th><th>Prix</th><th>Référence</th><th>Stock</th><th>Catégorie (id)</th>
+          <th>ID</th><th>Marque</th><th>Conditionnement</th><th>Description</th><th>Ingrédients</th><th>Nom</th><th>Origine</th><th>Prix</th><th>Référence</th><th>Stock</th><th>Go</th>
+<!--        TODO; <th>image</th>, <th>Catégorie (id)</th>-->
         </tr>
         </thead>
         <tbody>
@@ -23,14 +24,14 @@
           <td th:text="${p.brand}"></td>
           <td th:text="${p.conditioning}"></td>
           <td th:text="${p.description}"></td>
-          <c:choose>
-            <c:when test="${prod.imageUrl == null || prod.imageUrl.length() == 0}">
+          <th:choose>
+            <th:when test="${prod.imageUrl == null || prod.imageUrl.length() == 0}">
               <img src="../static/image/placeholder.jpg" alt="">
-            </c:when>
-            <c:otherwise>
+            </th:when>
+            <th:otherwise>
               <img src="image?file=${pageContext.request.contextPath}${prod.imageUrl}" alt="">
-            </c:otherwise>
-          </c:choose>
+            </th:otherwise>
+          </th:choose>
           <td th:text="${p.ingredient}"></td>
           <td th:text="${p.name}"></td>
           <td th:text="${p.origin}"></td>
@@ -38,6 +39,9 @@
           <td th:text="${p.reference}"></td>
           <td th:text="${p.stock}"></td>
 <!--          <td th:text="${p.category}"></td>-->
+          <td>
+            <a th:href="@{/product/{id}(id=${p.id})}">Voir détails</a>
+          </td>
         </tr>
         </tbody>
       </table>

@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -20,6 +23,17 @@ public class ProductController {
         model.addAttribute("listProducts", products);
         model.addAttribute("newProduct", new Product());
         return "products";
+    }
+
+    @GetMapping("/product/{id}")
+    public String detailProduct(@PathVariable("id") Long id, Model model) {
+        Optional<Product> product = productService.getById(id);
+        if (product.isPresent()) {
+            model.addAttribute("product", product.get());
+            return "/product-details";
+        } else {
+            return "error-page";
+        }
     }
 
 }
