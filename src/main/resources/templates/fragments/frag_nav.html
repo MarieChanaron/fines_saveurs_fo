@@ -1,9 +1,11 @@
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
 <th:block th:fragment="frag_nav">
 
     <nav class="navbar navbar-expand-lg position-sticky top-0">
         <div class="container d-flex">
 
-                <a class="navbar-brand" href="#"><img src="/images/logo-transparent.svg" alt="Logo fines saveurs" class="logo"></a>
+                <a class="navbar-brand" href="#" th:href="@{/products}"><img src="/images/logo-transparent.svg" alt="Logo fines saveurs" class="logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
