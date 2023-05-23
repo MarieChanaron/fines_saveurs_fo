@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Produit</title>
-  <div th:replace="fragments/frag_head :: frag_head"></div>
+  <div th:replace="~{fragments/frag_head :: frag_head}"></div>
 </head>
 <body>
-<div th:replace="fragments/frag_nav :: frag_nav"></div>
+<div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
 
   <div class="container">
 
@@ -75,7 +75,7 @@
       </div>
     </div>
   </div>
-
+<div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
 
 </body>
 </html>
