@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-public class AdminController {
+public class  AdminController {
     private AdminServiceImpl adminService;
 
     @GetMapping("/admins")

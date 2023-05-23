@@ -4,10 +4,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Table(name = "admin")
 @Data @NoArgsConstructor
-public class Admin {
+public class Admin{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id")
