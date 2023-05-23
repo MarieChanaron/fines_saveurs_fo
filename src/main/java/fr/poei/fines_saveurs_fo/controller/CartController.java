@@ -39,7 +39,7 @@ public class CartController {
         Cart savedCart = cartService.saveCart(cart);
 
         CartProduct lineItem = new CartProduct();
-        Optional<Product> productOptional = productService.findProductById(id);
+        Optional<Product> productOptional = productService.getById((long) id);
         if (productOptional.isPresent()) {
             lineItem.setCart(cart);
             Product product = productOptional.get();

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Produit</title>
+  <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+</head>
+<body>
+<div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
+
+  <div class="container">
+
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+          <h2 class="text-center">Fiche produit</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="container px-0 py-3" id="product-info">
+      <div class="row justify-content-between">
+        <div class="col-6 p-3">
+
+          <dl class="row">
+
+            <dt class="col-sm-3 py-3">Nom</dt>
+            <dd class="col-sm-9 py-3 uppercase bold small" th:text="${product.name}"></dd>
+            <hr>
+            <dt class="col-sm-3 py-3">Marque</dt>
+            <dd class="col-sm-9 py-3 bold" th:text="${product.brand}"></dd>
+            <hr>
+            <dt class="col-sm-3 py-3">Référence</dt>
+            <dd class="col-sm-9 py-3" th:text="${product.reference}"></dd>
+            <hr>
+            <dt class="col-sm-3 py-3">Prix</dt>
+            <dd class="col-sm-9 py-3" th:text="${product.price}"> €</dd>
+            <hr>
+            <dt class="col-sm-3 py-3">Conditionnement</dt>
+            <dd class="col-sm-9 py-3" th:text="${product.conditioning}"></dd>
+            <hr>
+            <dt class="col-sm-3 py-3">Description</dt>
+            <dd class="col-sm-9 py-3" th:text="${product.description}"></dd>
+            <hr>
+            <dt class="col-sm-3 py-3">Ingrédients</dt>
+            <dd class="col-sm-9 py-3" th:text="${product.ingredient}"></dd>
+            <hr>
+            <dt class="col-sm-3 py-3">Origine</dt>
+            <dd class="col-sm-9 py-3" th:text="${product.origin}"></dd>
+            <hr>
+            <dt class="col-sm-3 py-3">Stock</dt>
+            <dd class="col-sm-9 py-3" th:text="${product.stock}"></dd>
+<!--            TODO: Ne pas afficher le stock mais si stock = 0, non disponible ? -->
+            <hr>
+            <dt class="col-sm-3 py-3">Catégorie</dt>
+            <dd class="col-sm-9 py-3" th:text="${product.category.name}"></dd>
+<!--            TODO: ADD IMG-->
+          </dl>
+
+        </div>
+
+<!--        <div class="col-5 img-container position-relative p-0">-->
+<!--          <a href="${pageContext.request.contextPath}/secured/edit-image?id=${product.id}">-->
+<!--            <img src="/images/bxs_camera.svg" alt="icone appareil photo" class="position-absolute icon">-->
+<!--          </a>-->
+<!--          <th:choose>-->
+<!--            <th:when test="${product.imageUrl == null || product.imageUrl.length() == 0}">-->
+<!--              <img src="/images/placeholder.jpg" alt="photo du produit" class="product-img">-->
+<!--            </th:when>-->
+<!--            <th:otherwise>-->
+<!--              <img src="image?file=${pageContext.request.contextPath}${product.imageUrl}" alt="photo du produit" class="product-img">-->
+<!--            </th:otherwise>-->
+<!--          </th:choose>-->
+<!--        </div>-->
+
+      </div>
+    </div>
+  </div>
+<div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+
+</body>
+</html>
