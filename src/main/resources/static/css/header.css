@@ -1,0 +1,19 @@
+nav {
+    height: var(--header-height);
+    background-color: var(--grey-0) !important;
+}
+
+nav a {
+    font-family: var(--font-serif);
+    font-size: 1.5rem !important;
+    color: var(--primary-color-dark) !important;
+}
+
+.header {
+    background-color: var(--grey-0);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    width: 110px;
+}

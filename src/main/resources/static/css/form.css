@@ -1,0 +1,37 @@
+/* Forms */
+input {
+    height: 32px;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--primary-color-dark);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+    padding: 0 8px;
+}
+
+.mb-3 {
+    display: flex;
+}
+
+.mb-3 label {
+    width: 220px;
+}
+
+form input[type="submit"] {
+    margin-top: 72px;
+    min-width: 156px;
+    width: fit-content;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 0;
+}
+
+input, select, textarea {
+    border: 1px solid var(--primary-color-dark) !important;
+    border-radius: 0px !important;
+    font-size: 1.4rem !important;
+}
+
+form .button {
+    float: right !important;
+}
