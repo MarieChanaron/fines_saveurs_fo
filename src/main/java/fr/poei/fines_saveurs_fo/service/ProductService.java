@@ -1,12 +1,24 @@
 package fr.poei.fines_saveurs_fo.service;
 
 import fr.poei.fines_saveurs_fo.entity.Product;
+import fr.poei.fines_saveurs_fo.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface ProductService {
-    List<Product> getAllProduct();
+@Service
+public class ProductService {
+    final
+    ProductRepository productRepository;
 
-    Optional<Product> getById(Long id);
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    public Optional<Product> findProductById(int id) {
+        Optional<Product> productOptional = productRepository.findById(id);
+        return productOptional;
+    }
+
 }

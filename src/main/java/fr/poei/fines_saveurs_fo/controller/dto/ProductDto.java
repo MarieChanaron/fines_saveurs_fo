@@ -1,17 +1,17 @@
-package fr.poei.fines_saveurs_fo.entity;
+package fr.poei.fines_saveurs_fo.controller.dto;
 
+import fr.poei.fines_saveurs_fo.entity.Category;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "product")
 @Data @NoArgsConstructor
-public class Product {
+public class ProductDto {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
     @Column(name = "name")
@@ -34,7 +34,4 @@ public class Product {
     private String origin;
     @Column(name = "price")
     private BigDecimal price;
-    @ManyToOne
-    @JoinColumn(name = "id_category", nullable = false)
-    private Category category;
 }
