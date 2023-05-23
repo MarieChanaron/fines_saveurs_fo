@@ -114,6 +114,10 @@ a, a:hover {
     font-size: 85%;
 }
 
+.hidden {
+    display: none;
+}
+
 .page {
     height: 100%;
     display: flex;
