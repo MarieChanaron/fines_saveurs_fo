@@ -53,25 +53,16 @@
             <hr>
             <dt class="col-sm-3 py-3">Catégorie</dt>
             <dd class="col-sm-9 py-3" th:text="${product.category.name}"></dd>
-<!--            TODO: ADD IMG-->
+            <td>
+              <th:block th:if="${product.imageUrl == null or product.imageUrl.isEmpty()}">
+                <img th:src="@{/image/placeholder.jpg}" alt="">
+              </th:block>
+              <th:block th:unless="${product.imageUrl == null or product.imageUrl.isEmpty()}">
+                <img th:src="@{'http://localhost:8080/image?file=' + ${product.imageUrl}}" alt="">
+              </th:block>
+            </td>
           </dl>
-
         </div>
-
-<!--        <div class="col-5 img-container position-relative p-0">-->
-<!--          <a href="${pageContext.request.contextPath}/secured/edit-image?id=${product.id}">-->
-<!--            <img src="/images/bxs_camera.svg" alt="icone appareil photo" class="position-absolute icon">-->
-<!--          </a>-->
-<!--          <th:choose>-->
-<!--            <th:when test="${product.imageUrl == null || product.imageUrl.length() == 0}">-->
-<!--              <img src="/images/placeholder.jpg" alt="photo du produit" class="product-img">-->
-<!--            </th:when>-->
-<!--            <th:otherwise>-->
-<!--              <img src="image?file=${pageContext.request.contextPath}${product.imageUrl}" alt="photo du produit" class="product-img">-->
-<!--            </th:otherwise>-->
-<!--          </th:choose>-->
-<!--        </div>-->
-
       </div>
     </div>
   </div>

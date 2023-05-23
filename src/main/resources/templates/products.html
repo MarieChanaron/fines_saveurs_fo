@@ -14,8 +14,7 @@
       <table>
         <thead class="table">
         <tr>
-          <th>ID</th><th>Marque</th><th>Conditionnement</th><th>Description</th><th>Ingrédients</th><th>Nom</th><th>Origine</th><th>Prix</th><th>Référence</th><th>Stock</th><th>Go</th>
-<!--        TODO; <th>image</th>, <th>Catégorie (id)</th>-->
+          <th>ID</th><th>Marque</th><th>Conditionnement</th><th>Description</th><th>Ingrédients</th><th>Nom</th><th>Origine</th><th>Prix</th><th>Référence</th><th>Stock</th><th>image</th>, <th>Catégorie (id)</th><th>Go</th>
         </tr>
         </thead>
         <tbody>
@@ -24,21 +23,21 @@
           <td th:text="${p.brand}"></td>
           <td th:text="${p.conditioning}"></td>
           <td th:text="${p.description}"></td>
-          <th:choose>
-            <th:when test="${prod.imageUrl == null || prod.imageUrl.length() == 0}">
-              <img src="../static/image/placeholder.jpg" alt="">
-            </th:when>
-            <th:otherwise>
-              <img src="image?file=${pageContext.request.contextPath}${prod.imageUrl}" alt="">
-            </th:otherwise>
-          </th:choose>
+          <td>
+            <th:block th:if="${p.imageUrl == null or p.imageUrl.isEmpty()}">
+              <img th:src="@{/image/placeholder.jpg}" alt="">
+            </th:block>
+            <th:block th:unless="${p.imageUrl == null or p.imageUrl.isEmpty()}">
+              <img th:src="@{'http://localhost:8080/image?file=' + ${p.imageUrl}}" alt="">
+            </th:block>
+          </td>
           <td th:text="${p.ingredient}"></td>
           <td th:text="${p.name}"></td>
           <td th:text="${p.origin}"></td>
           <td th:text="${p.price}"></td>
           <td th:text="${p.reference}"></td>
           <td th:text="${p.stock}"></td>
-<!--          <td th:text="${p.category}"></td>-->
+          <td th:text="${p.category.name}"></td>
           <td>
             <a th:href="@{/product/{id}(id=${p.id})}">Voir détails</a>
           </td>
