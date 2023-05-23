@@ -4,12 +4,13 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "cart")
 @Data @NoArgsConstructor
-public class Cart {
+public class Cart implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -19,4 +20,5 @@ public class Cart {
     private Customer customer;
     @Column(name = "created_at", columnDefinition = "DATE")
     private LocalDateTime createdAt;
+
 }
