@@ -28,7 +28,7 @@
               <img th:src="@{/image/placeholder.jpg}" alt="">
             </th:block>
             <th:block th:unless="${p.imageUrl == null or p.imageUrl.isEmpty()}">
-              <img th:src="@{'image?file=' + ${pageContext.request.contextPath} + ${p.imageUrl}}" alt="">
+              <img th:src="@{'http://localhost:8080/image?file=' + ${p.imageUrl}}" alt="">
             </th:block>
           </td>
           <td th:text="${p.ingredient}"></td>
