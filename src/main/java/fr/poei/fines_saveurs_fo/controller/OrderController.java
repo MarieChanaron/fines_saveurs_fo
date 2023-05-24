@@ -23,7 +23,8 @@ public class OrderController {
         Cart cart = (Cart) session.getAttribute("cart");
         CartDto cartDto = mapStructMapper.toDto(cart);
         System.out.println(cartDto);
-        if (cart.getCustomer() == null) { // If the customer is not logged in
+
+        if (session.getAttribute("email") == null || session.getAttribute("email") == "") { // If the customer is not logged in
             session.setAttribute("redirect", "order");
             return "redirect:/login";
         } else {

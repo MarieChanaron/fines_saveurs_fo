@@ -32,14 +32,6 @@ public class ProductController {
         // Get cart and set customer
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart != null && session.getAttribute("redirect") == "order") {
-            System.out.println("setting customer");
-            System.out.println((String) session.getAttribute("email"));
-            String email = (String) session.getAttribute("email");
-            System.out.println(email);
-            Optional<Customer> customer = customerService.fetchByEmail(email);
-            if (customer.isPresent()) {
-                cart.setCustomer(customer.get());
-            }
             return "redirect:/order";
         }
 
