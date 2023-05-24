@@ -1,3 +1,61 @@
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
 <th:block th:fragment="frag_nav">
-<p>NAVBAR</p>
+
+    <nav class="navbar navbar-expand-lg position-sticky top-0" style="z-index: 3000">
+        <div class="container d-flex">
+
+                <a class="navbar-brand" href="#" th:href="@{/products}"><img src="/images/logo-transparent.svg" alt="Logo fines saveurs" class="logo"></a>
+                <p th:if="${session.email != null && session.email != ''}" class="my-0 mx-3">Bienvenue !</p>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+
+                        <li class="nav-item ms-3">
+                            <a class="nav-link" href="#" th:href="@{/products}">Produits</a>
+                        </li>
+
+                        <li class="nav-item dropdown ms-3">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Catégories
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown ms-3">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <img src="/images/mdi_account.svg" alt="mon compte">
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li th:if="${session.email == null || session.email == ''}"><a class="dropdown-item" href="#" th:href="@{/login}">Se connecter</a></li>
+                                <li th:if="${session.email == null || session.email == ''}"><a class="dropdown-item" href="#" th:href="@{/subscription}">S'inscrire</a></li>
+                                <li th:if="${session.email != null && session.email != ''}"><a class="dropdown-item" href="#" th:href="@{/customers}">Mon compte</a></li>
+                                <li th:if="${session.email != null && session.email != ''}">
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li th:if="${session.email != null && session.email != ''}"><a class="dropdown-item" href="#" th:href="@{/logout}">Déconnexion</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <a class="nav-link ms-4" href="#" th:href="@{/cart}" id="cart-icon"><img src="/images/solar_cart-bold.svg" alt="panier"></a>
+
+        </div>
+
+    </nav>
+
+
 </th:block>

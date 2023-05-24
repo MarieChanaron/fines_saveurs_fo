@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -20,7 +21,12 @@ public class CustomerService {
     public void save (Customer customer) {
         customerRepository.save(customer);
     }
+
     public void delete(int id){
-        customerRepository.deleteById(id);
+        customerRepository.deleteById(id);}
+
+
+    public Optional<Customer> fetchByEmail(String email) {
+        return customerRepository.findByEmail(email);
     }
 }

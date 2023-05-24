@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+  <div th:replace="~{fragments/frag_head :: frag_head}"></div>
   <title>Compte client</title>
 </head>
+
 <body>
 
-<main>
-  <div class="container mt-4">
+  <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
 
-    <div class="row mb-4 text-center">
-      <h2>Votre compte</h2>
+  <main>
+    <div class="container mt-4">
+
+      <div class="row mb-4 text-center">
+        <h2>Votre compte</h2>
+      </div>
+
+
     </div>
-
-
-  </div>
-</main>
+  </main>
 
 </body>
 </html>

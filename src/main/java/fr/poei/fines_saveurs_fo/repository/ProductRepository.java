@@ -8,12 +8,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Modifying
     @Transactional
     @Query("update Product p set p.stock = ?1 where p.id = ?2")
-    int updateStock(int stock, int id);
-
+    int updateStock(int stock, long id);
 
 }
