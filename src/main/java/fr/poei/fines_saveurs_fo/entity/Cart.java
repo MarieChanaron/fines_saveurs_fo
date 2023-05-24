@@ -18,7 +18,8 @@ public class Cart implements Serializable {
     @OneToOne
     @JoinColumn(name = "customer")
     private Customer customer;
+    @Column(name = "token")
+    private String token;
     @Column(name = "created_at", columnDefinition = "DATE")
     private LocalDateTime createdAt;
-
 }

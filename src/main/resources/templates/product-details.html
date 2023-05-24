@@ -3,6 +3,7 @@
 <head>
     <title>Produit</title>
     <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+    <script src="/js/set-cart-token.js" async></script>
 </head>
 <body>
 <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
@@ -57,7 +58,7 @@
                         <dd class="col-sm-9 py-3" th:text="${product.category.name}"></dd>
                         <td>
                             <th:block th:if="${product.imageUrl == null or product.imageUrl.isEmpty()}">
-                                <img th:src="@{/image/placeholder.jpg}" alt="">
+                                <img th:src="@{/images/placeholder.jpg}" alt="">
                             </th:block>
                             <th:block th:unless="${product.imageUrl == null or product.imageUrl.isEmpty()}">
                                 <img th:src="@{'http://localhost:8080/image?file=' + ${product.imageUrl}}" alt=""
@@ -71,7 +72,8 @@
     </div>
 
     <div class="container">
-        <form action="" th:action="@{/add-to-cart}" method="get">
+        <form action="#" th:action="@{/add-to-cart}" method="get" id="add-to-cart">
+            <input type="text" value="" name="token" id="token"> <!-- JS token -->
             <input type="text" name="id" id="id-input" th:value="${product.id}" class="hidden">
             <label for="qty-input">Quantité</label>
             <input type="number" name="qty" id="qty-input" value="1">
@@ -81,5 +83,6 @@
 
     <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
 </div>
+
 </body>
 </html>

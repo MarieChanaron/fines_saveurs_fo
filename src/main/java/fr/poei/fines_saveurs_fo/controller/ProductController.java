@@ -1,7 +1,11 @@
 package fr.poei.fines_saveurs_fo.controller;
 
+import fr.poei.fines_saveurs_fo.entity.Cart;
+import fr.poei.fines_saveurs_fo.entity.Customer;
 import fr.poei.fines_saveurs_fo.entity.Product;
 import fr.poei.fines_saveurs_fo.service.ProductServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +22,16 @@ public class ProductController {
     private ProductServiceImpl productService;
 
     @GetMapping("/products")
-    public String getAllProduct(Model model) {
+    public String getAllProduct(Model model, HttpSession session) {
+
+        // Get cart and set customer
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart != null) {
+            System.out.println("setting customer");
+            cart.setCustomer(new Customer());
+            return "redirect:/order";
+        }
+
         List<Product> products = productService.getAllProduct();
         model.addAttribute("listProducts", products);
         model.addAttribute("newProduct", new Product());

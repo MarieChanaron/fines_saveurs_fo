@@ -4,6 +4,7 @@
 <head>
     <title>Cart</title>
     <div th:replace="fragments/frag_head :: frag_head"></div>
+    <script src="/js/cart.js" async></script>
 </head>
 
 <body>
@@ -43,7 +44,21 @@
         </div>
     </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a href="#" th:href="@{/order}">
+                    <button class="button" id="order-button">Commander</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
 <div th:replace="fragments/frag_footer :: frag_footer"></div>
+
+<script>
+    document.getElementById("order-button").onclick = () => sessionStorage.setItem("redirect", "order");
+</script>
 
 </body>
 

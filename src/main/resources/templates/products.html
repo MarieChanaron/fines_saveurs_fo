@@ -25,7 +25,7 @@
           <td th:text="${p.description}"></td>
           <td>
             <th:block th:if="${p.imageUrl == null or p.imageUrl.isEmpty()}">
-              <img th:src="@{/image/placeholder.jpg}" alt="">
+              <img th:src="@{/images/placeholder.jpg}" alt="">
             </th:block>
             <th:block th:unless="${p.imageUrl == null or p.imageUrl.isEmpty()}">
               <img th:src="@{'http://localhost:8080/image?file=' + ${p.imageUrl}}" alt="">
