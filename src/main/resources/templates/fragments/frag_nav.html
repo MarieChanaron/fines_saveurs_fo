@@ -16,7 +16,7 @@
                     <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
 
                         <li class="nav-item ms-3">
-                            <a class="nav-link" href="#">Produits</a>
+                            <a class="nav-link" href="#" th:href="@{/products}">Produits</a>
                         </li>
 
                         <li class="nav-item dropdown ms-3">
@@ -39,7 +39,8 @@
                                 <img src="/images/mdi_account.svg" alt="mon compte">
                             </a>
                             <ul class="dropdown-menu">
-                                <li th:if="${session.email == null || session.email == ''}"><a class="dropdown-item" href="#" th:href="@{/login}">Connexion</a></li>
+                                <li th:if="${session.email == null || session.email == ''}"><a class="dropdown-item" href="#" th:href="@{/login}">Se connecter</a></li>
+                                <li th:if="${session.email == null || session.email == ''}"><a class="dropdown-item" href="#" th:href="@{/subscription}">S'inscrire</a></li>
                                 <li th:if="${session.email != null && session.email != ''}"><a class="dropdown-item" href="#" th:href="@{/customers}">Mon compte</a></li>
                                 <li th:if="${session.email != null && session.email != ''}">
                                     <hr class="dropdown-divider">
