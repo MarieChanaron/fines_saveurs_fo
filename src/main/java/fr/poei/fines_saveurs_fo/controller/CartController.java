@@ -34,9 +34,16 @@ public class CartController {
 
     @GetMapping("/add-to-cart")
     public String addToCart(@RequestParam int id, @RequestParam byte qty, HttpServletRequest request) {
-        Cart cart = new Cart();
-        cart.setCreatedAt(LocalDateTime.now());
-        Cart savedCart = cartService.saveCart(cart);
+
+        Cart cart;
+
+        if (request.getSession().getAttribute("cart") == null) {
+            Cart newCart = new Cart();
+            newCart.setCreatedAt(LocalDateTime.now());
+            cart = cartService.saveCart(newCart);
+        } else {
+            cart = (Cart) request.getSession().getAttribute("cart");
+        }
 
         CartProduct lineItem = new CartProduct();
         Optional<Product> productOptional = productService.getById((long) id);
@@ -48,7 +55,7 @@ public class CartController {
         }
         cartService.saveLineItems(lineItem);
 
-        request.getSession().setAttribute("cart", savedCart);
+        request.getSession().setAttribute("cart", cart);
 
         return "redirect:/cart";
     }

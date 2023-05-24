@@ -1,72 +1,85 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Produit</title>
-  <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+    <title>Produit</title>
+    <div th:replace="~{fragments/frag_head :: frag_head}"></div>
 </head>
 <body>
 <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
 
-  <div class="container">
+<div class="page">
 
-    <div class="container py-5">
-      <div class="row">
-        <div class="col">
-          <h2 class="text-center">Fiche produit</h2>
+    <div class="container">
+
+        <div class="container py-5">
+            <div class="row">
+                <div class="col">
+                    <h2 class="text-center">Fiche produit</h2>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="container px-0 py-3" id="product-info">
+            <div class="row justify-content-between">
+                <div class="col-6 p-3">
+
+                    <dl class="row">
+
+                        <dt class="col-sm-3 py-3">Nom</dt>
+                        <dd class="col-sm-9 py-3 uppercase bold small" th:text="${product.name}"></dd>
+                        <hr>
+                        <dt class="col-sm-3 py-3">Marque</dt>
+                        <dd class="col-sm-9 py-3 bold" th:text="${product.brand}"></dd>
+                        <hr>
+                        <dt class="col-sm-3 py-3">Référence</dt>
+                        <dd class="col-sm-9 py-3" th:text="${product.reference}"></dd>
+                        <hr>
+                        <dt class="col-sm-3 py-3">Prix</dt>
+                        <dd class="col-sm-9 py-3" th:text="${product.price}"> €</dd>
+                        <hr>
+                        <dt class="col-sm-3 py-3">Conditionnement</dt>
+                        <dd class="col-sm-9 py-3" th:text="${product.conditioning}"></dd>
+                        <hr>
+                        <dt class="col-sm-3 py-3">Description</dt>
+                        <dd class="col-sm-9 py-3" th:text="${product.description}"></dd>
+                        <hr>
+                        <dt class="col-sm-3 py-3">Ingrédients</dt>
+                        <dd class="col-sm-9 py-3" th:text="${product.ingredient}"></dd>
+                        <hr>
+                        <dt class="col-sm-3 py-3">Origine</dt>
+                        <dd class="col-sm-9 py-3" th:text="${product.origin}"></dd>
+                        <hr>
+                        <dt class="col-sm-3 py-3">Stock</dt>
+                        <dd class="col-sm-9 py-3" th:text="${product.stock}"></dd>
+                        <!--            TODO: Ne pas afficher le stock mais si stock = 0, non disponible ? -->
+                        <hr>
+                        <dt class="col-sm-3 py-3">Catégorie</dt>
+                        <dd class="col-sm-9 py-3" th:text="${product.category.name}"></dd>
+                        <td>
+                            <th:block th:if="${product.imageUrl == null or product.imageUrl.isEmpty()}">
+                                <img th:src="@{/image/placeholder.jpg}" alt="">
+                            </th:block>
+                            <th:block th:unless="${product.imageUrl == null or product.imageUrl.isEmpty()}">
+                                <img th:src="@{'http://localhost:8080/image?file=' + ${product.imageUrl}}" alt=""
+                                     th:alt="${product.name}">
+                            </th:block>
+                        </td>
+                    </dl>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="container px-0 py-3" id="product-info">
-      <div class="row justify-content-between">
-        <div class="col-6 p-3">
-
-          <dl class="row">
-
-            <dt class="col-sm-3 py-3">Nom</dt>
-            <dd class="col-sm-9 py-3 uppercase bold small" th:text="${product.name}"></dd>
-            <hr>
-            <dt class="col-sm-3 py-3">Marque</dt>
-            <dd class="col-sm-9 py-3 bold" th:text="${product.brand}"></dd>
-            <hr>
-            <dt class="col-sm-3 py-3">Référence</dt>
-            <dd class="col-sm-9 py-3" th:text="${product.reference}"></dd>
-            <hr>
-            <dt class="col-sm-3 py-3">Prix</dt>
-            <dd class="col-sm-9 py-3" th:text="${product.price}"> €</dd>
-            <hr>
-            <dt class="col-sm-3 py-3">Conditionnement</dt>
-            <dd class="col-sm-9 py-3" th:text="${product.conditioning}"></dd>
-            <hr>
-            <dt class="col-sm-3 py-3">Description</dt>
-            <dd class="col-sm-9 py-3" th:text="${product.description}"></dd>
-            <hr>
-            <dt class="col-sm-3 py-3">Ingrédients</dt>
-            <dd class="col-sm-9 py-3" th:text="${product.ingredient}"></dd>
-            <hr>
-            <dt class="col-sm-3 py-3">Origine</dt>
-            <dd class="col-sm-9 py-3" th:text="${product.origin}"></dd>
-            <hr>
-            <dt class="col-sm-3 py-3">Stock</dt>
-            <dd class="col-sm-9 py-3" th:text="${product.stock}"></dd>
-<!--            TODO: Ne pas afficher le stock mais si stock = 0, non disponible ? -->
-            <hr>
-            <dt class="col-sm-3 py-3">Catégorie</dt>
-            <dd class="col-sm-9 py-3" th:text="${product.category.name}"></dd>
-            <td>
-              <th:block th:if="${product.imageUrl == null or product.imageUrl.isEmpty()}">
-                <img th:src="@{/image/placeholder.jpg}" alt="">
-              </th:block>
-              <th:block th:unless="${product.imageUrl == null or product.imageUrl.isEmpty()}">
-                <img th:src="@{'http://localhost:8080/image?file=' + ${product.imageUrl}}" alt="">
-              </th:block>
-            </td>
-          </dl>
-        </div>
-      </div>
+    <div class="container">
+        <form action="" th:action="@{/add-to-cart}" method="get">
+            <input type="text" name="id" id="id-input" th:value="${product.id}" class="hidden">
+            <label for="qty-input">Quantité</label>
+            <input type="number" name="qty" id="qty-input" value="1">
+            <input type="submit" value="Ajouter au panier">
+        </form>
     </div>
-  </div>
-<div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
 
+    <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+</div>
 </body>
 </html>
