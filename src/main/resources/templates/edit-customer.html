@@ -18,9 +18,9 @@
                 </p>
             </div>
             <div class="card-body">
-                <form action="#" th:action="@{/edit-customer}" th:object="${customer}" method="post">
+                <form action="#" th:action="@{/edit/id}" th:object="${customer}" method="post">
                     <div class="row">
-                        <input type="hidden" th:field="*{customer.id}" name="id_customer"/>
+                        <input type="hidden" th:each="customer: ${customer.id}" name="id_customer"/>
                         <div class="mb-3 col-12">
                             <label for="lastname" class="form-label fw-bold">Prénom</label>
                             <input type="text" class="form-control" id="lastname" name="lastname" th:field="*{lastname}"
