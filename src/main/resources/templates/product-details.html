@@ -3,7 +3,6 @@
 <head>
     <title>Produit</title>
     <div th:replace="~{fragments/frag_head :: frag_head}"></div>
-    <script src="/js/set-cart-token.js" async></script>
 </head>
 <body>
 <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
@@ -73,11 +72,10 @@
 
     <div class="container">
         <form action="#" th:action="@{/add-to-cart}" method="get" id="add-to-cart">
-            <input type="text" value="" name="token" id="token"> <!-- JS token -->
             <input type="text" name="id" id="id-input" th:value="${product.id}" class="hidden">
             <label for="qty-input">Quantité</label>
-            <input type="number" name="qty" id="qty-input" value="1">
-            <input type="submit" value="Ajouter au panier">
+            <input type="number" name="qty" id="qty-input" value="1" style="width: 74px;">
+            <input type="submit" value="Ajouter au panier" class="button">
         </form>
     </div>
 

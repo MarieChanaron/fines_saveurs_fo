@@ -34,14 +34,13 @@ public class CartController {
     }
 
     @GetMapping("/add-to-cart")
-    public String addToCart(@RequestParam int id, @RequestParam byte qty, @RequestParam String token, HttpSession session) {
+    public String addToCart(@RequestParam int id, @RequestParam byte qty, HttpSession session) {
 
         Cart cart;
 
         if (session.getAttribute("cart") == null) {
             Cart newCart = new Cart();
             newCart.setCreatedAt(LocalDateTime.now());
-            newCart.setToken(token);
             cart = cartService.saveCart(newCart);
         } else {
             cart = (Cart) session.getAttribute("cart");

@@ -32,10 +32,6 @@ input, select, textarea {
     font-size: 1.4rem !important;
 }
 
-form .button {
-    float: right !important;
-}
-
 
 #login-form {
     width: fit-content;
@@ -48,4 +44,8 @@ form .button {
 
 #login-form input:not([type="submit"]) {
     width: 300px;
+}
+
+#login-form .button {
+    float: right !important;
 }
