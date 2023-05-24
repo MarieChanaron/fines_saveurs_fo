@@ -13,8 +13,9 @@ public class OrderController {
 
     @GetMapping
     public String order(HttpSession session, Model model) {
+        session.removeAttribute("redirect");
         Cart cart = (Cart) session.getAttribute("cart");
-        if (cart.getCustomer() == null) {
+        if (cart.getCustomer() == null) { // If the customer is not logged in
             session.setAttribute("redirect", "order");
             return "redirect:/login";
         } else {

@@ -47,7 +47,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <a href="#" th:href="@{/order}">
+                <a th:if="${cartItems.size() != 0}" href="#" th:href="@{/order}">
                     <button class="button" id="order-button">Commander</button>
                 </a>
             </div>

@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class WabAuthController {
+
     @Autowired
     CustomerRepository customerRepository;
+
     @GetMapping("/login")
     public String loginForm (Model model) {
-
         return "login";
     }
+
     @GetMapping("profile")
     public String displayUserProfile (Model model) {
         return "/customer-profile";
