@@ -3,6 +3,7 @@ package fr.poei.fines_saveurs_fo.controller;
 import fr.poei.fines_saveurs_fo.entity.Product;
 import fr.poei.fines_saveurs_fo.service.ProductServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +19,10 @@ public class ProductController {
     private ProductServiceImpl productService;
 
     @GetMapping("/products")
-    public String getAllProduct(Model model) {
-        List<Product> products = productService.getAllProduct();
+    public String getAllProduct(Model model, @Param("keyword") String keyword) {
+        List<Product> products = productService.getAllProduct(keyword);
         model.addAttribute("listProducts", products);
+        model.addAttribute("keyword", keyword);
         model.addAttribute("newProduct", new Product());
         return "products";
     }
@@ -35,5 +37,4 @@ public class ProductController {
             return "error-page";
         }
     }
-
 }
