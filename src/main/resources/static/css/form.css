@@ -18,7 +18,7 @@ input {
 }
 
 form input[type="submit"] {
-    margin-top: 72px;
+    margin-top: 32px;
     min-width: 156px;
     width: fit-content;
     padding-left: 16px;
@@ -34,4 +34,17 @@ input, select, textarea {
 
 form .button {
     float: right !important;
+}
+
+#login-form {
+    width: fit-content;
+    margin: auto;
+}
+
+#login-form label {
+    width: 148px;
+}
+
+#login-form input:not([type="submit"]) {
+    width: 300px;
 }

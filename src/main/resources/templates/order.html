@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Title</title>
+    <div th:replace="~{fragments/frag_head :: frag_head}"></div>
 </head>
 <body>
-  <h1>Order</h1>
+
+    <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Order</h1>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

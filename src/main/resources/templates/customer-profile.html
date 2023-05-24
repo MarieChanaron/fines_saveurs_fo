@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+  <div th:replace="~{fragments/frag_head :: frag_head}"></div>
   <title>Title</title>
 </head>
+
+
 <body>
+
+<div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
+
 <main>
   <div class="container d-flex flex-column align-items-center justify-content-center mt-4">
     <div class=" mb-4 d-flex justify-content-around " >
