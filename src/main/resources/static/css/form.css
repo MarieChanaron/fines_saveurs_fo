@@ -18,7 +18,6 @@ input {
 }
 
 form input[type="submit"] {
-    margin-top: 32px;
     min-width: 156px;
     width: fit-content;
     padding-left: 16px;

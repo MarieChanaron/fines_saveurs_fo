@@ -16,10 +16,12 @@ public class CartProduct {
     @ManyToOne
     @JoinColumn(name = "cart")
     private Cart cart;
+
     @Id
     @ManyToOne
     @JoinColumn(name = "product")
     private Product product;
+
     private byte quantity;
 
 }

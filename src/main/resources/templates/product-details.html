@@ -71,7 +71,7 @@
     </div>
 
     <div class="container">
-        <form action="#" th:action="@{/add-to-cart}" method="get" id="add-to-cart">
+        <form action="#" th:action="@{/cart/add}" method="get" id="add-to-cart">
             <input type="text" name="id" id="id-input" th:value="${product.id}" class="hidden">
             <label for="qty-input">Quantité</label>
             <input type="number" name="qty" id="qty-input" value="1" style="width: 74px;">
