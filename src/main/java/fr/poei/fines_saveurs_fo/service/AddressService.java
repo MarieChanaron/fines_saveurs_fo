@@ -43,6 +43,11 @@ public class AddressService {
     }
 
     public void saveCustomerAddress(Address address, Customer customer, String type) {
-
+        addressRepository.save(address);
+        AddressCustomer addressCustomer = new AddressCustomer();
+        addressCustomer.setAddress(address);
+        addressCustomer.setCustomer(customer);
+        addressCustomer.setType(type);
+        addressCustomerRepository.save(addressCustomer);
     }
 }

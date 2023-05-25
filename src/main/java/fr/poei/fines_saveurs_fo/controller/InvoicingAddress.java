@@ -55,6 +55,6 @@ public class InvoicingAddress {
             addressService.saveCustomerAddress(address, customer, "invoicing");
         }
 
-        return "redirect:/invoicing-address";
+        return "redirect:/summary";
     }
 }

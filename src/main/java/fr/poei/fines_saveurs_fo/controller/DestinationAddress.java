@@ -46,10 +46,12 @@ public class DestinationAddress {
         Customer customer = customerOptional.get();
 
         long addressId = addressService.getDestinationAddress(customer).getId();
-        address.setId(addressId);
-
-        // Update address
-        addressService.updateAddress(address);
+        if (addressId != 0) {
+            address.setId(addressId);
+            addressService.updateAddress(address); // Update address
+        } else {
+            addressService.saveCustomerAddress(address, customer, "destination");
+        }
 
         return "redirect:/invoicing-address";
     }
