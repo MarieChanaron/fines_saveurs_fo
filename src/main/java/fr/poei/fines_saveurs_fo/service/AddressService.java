@@ -1,6 +1,8 @@
 package fr.poei.fines_saveurs_fo.service;
 
+import fr.poei.fines_saveurs_fo.controller.dto.MapStructMapper;
 import fr.poei.fines_saveurs_fo.entity.Address;
+import fr.poei.fines_saveurs_fo.entity.AddressCustomer;
 import fr.poei.fines_saveurs_fo.entity.Customer;
 import fr.poei.fines_saveurs_fo.repository.AddressCustomerRepository;
 import lombok.AllArgsConstructor;
@@ -13,9 +15,17 @@ import java.util.Optional;
 public class AddressService {
 
     final AddressCustomerRepository addressCustomerRepository;
+    final MapStructMapper mapStructMapper;
 
-    public Optional<Address> getAddress(Customer customer, String addressType) {
+    public Address getDestinationAddress(Customer customer) {
+        Optional<AddressCustomer> addressCustomer = addressCustomerRepository.findByCustomerAndType(customer, "destination");
+        if (addressCustomer.isEmpty()) return new Address();
+        return addressCustomer.get().getAddress();
+    }
 
-        return null;
+    public Address getInvoicingAddress(Customer customer) {
+        Optional<AddressCustomer> addressCustomer = addressCustomerRepository.findByCustomerAndType(customer, "invoicing");
+        if (addressCustomer.isEmpty()) return new Address();
+        return addressCustomer.get().getAddress();
     }
 }

@@ -28,20 +28,11 @@ public class DestinationAddress {
     public String getDestinationAddress(HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
         Optional<Customer> customerOptional = customerService.fetchByEmail(email);
-        Address address = null;
-
         if (customerOptional.isEmpty()) return "404";
 
         Customer customer = customerOptional.get();
-        Optional<Address> addressOptional = addressService.getAddress(customer, "destination");
-
-        if (addressOptional.isPresent()) {
-            address = addressOptional.get();
-        } else {
-            address = new Address();
-        }
-
-        model.addAttribute("address", address);
+        Address destinationAddress = addressService.getDestinationAddress(customer);
+        model.addAttribute("address", destinationAddress);
 
         return "destination-address";
     }
