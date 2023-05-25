@@ -52,7 +52,7 @@ public class InvoicingAddress {
             address.setId(addressId);
             addressService.updateAddress(address); // Update address
         } else {
-            // Sauvegarder l'adresse
+            addressService.saveCustomerAddress(address, customer, "invoicing");
         }
 
         return "redirect:/invoicing-address";
