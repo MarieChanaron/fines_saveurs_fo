@@ -22,10 +22,6 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public void delete(int id){
-        customerRepository.deleteById(id);}
-
-
     public Optional<Customer> fetchByEmail(String email) {
         return customerRepository.findByEmail(email);
     }

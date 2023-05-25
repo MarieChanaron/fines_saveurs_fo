@@ -15,12 +15,15 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @Table(name = "customer")
-@Data @NoArgsConstructor
+@Data
+@NoArgsConstructor
 public class Customer implements UserDetails, Serializable {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "email", unique = true)
@@ -34,16 +37,19 @@ public class Customer implements UserDetails, Serializable {
 
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
+    @ManyToOne
+    private Role role;
 
     public List<Order> getOrders() {
         return orders;
     }
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinTable( name = "customer_role", joinColumns = @JoinColumn(name = "id_customer"),
-    inverseJoinColumns =
-    @JoinColumn(name = "id_role"))
+    @JoinTable(name = "customer_role", joinColumns = @JoinColumn(name = "id_customer"),
+            inverseJoinColumns =
+            @JoinColumn(name = "id_role"))
     private List<Role> roleList;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roleList

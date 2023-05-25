@@ -22,22 +22,21 @@
       </div>
       <div class="card-body col-12">
         <tr th:each="customer : ${customers}">
-          <td th:text="${customer.id}"/>
+<!--          <td th:text="${customer.id}"/>-->
         <p>Nom: <td th:text="${customer.lastname}"/></p>
         <p>Prénom: <td th:text="${customer.firstname}"/></p>
         <p>Email : <td th:text="${customer.email}"/></p>
         <p>Password: ********</p>
           <div class="d-flex justify-content-around col-12">
             <div class=" mt-2 mb-2">
-              <li>
-              <a th:href="@{'customers/edit/'+${customer.id}}">Modifier le profil </a>
-              </li>
+              <td>
+              <a th:href="@{'customers/edit'}" class="btn btn-primary">Modifier le profil </a>
+              </td>
 
             </div>
           </div>
         </tr>
       </div>
-
     </div>
   </div>
 </main>
