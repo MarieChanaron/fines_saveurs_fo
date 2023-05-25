@@ -14,7 +14,7 @@ public class CustomerDto {
     private String email;
     private String firstname;
     private String lastname;
-    private String password;
-    private List<Order> orders;
+    /*private String password;
+    private List<Order> orders;*/
 
 }

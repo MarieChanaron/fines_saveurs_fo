@@ -9,6 +9,7 @@ import fr.poei.fines_saveurs_fo.entity.Product;
 import fr.poei.fines_saveurs_fo.service.CartService;
 import fr.poei.fines_saveurs_fo.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,16 +34,16 @@ public class CartController {
     }
 
     @GetMapping("/add-to-cart")
-    public String addToCart(@RequestParam int id, @RequestParam byte qty, HttpServletRequest request) {
+    public String addToCart(@RequestParam int id, @RequestParam byte qty, HttpSession session) {
 
         Cart cart;
 
-        if (request.getSession().getAttribute("cart") == null) {
+        if (session.getAttribute("cart") == null) {
             Cart newCart = new Cart();
             newCart.setCreatedAt(LocalDateTime.now());
             cart = cartService.saveCart(newCart);
         } else {
-            cart = (Cart) request.getSession().getAttribute("cart");
+            cart = (Cart) session.getAttribute("cart");
         }
 
         CartProduct lineItem = new CartProduct();
@@ -55,14 +56,14 @@ public class CartController {
         }
         cartService.saveLineItems(lineItem);
 
-        request.getSession().setAttribute("cart", cart);
+        session.setAttribute("cart", cart);
 
         return "redirect:/cart";
     }
 
     @GetMapping("cart")
-    public String cart(HttpServletRequest request, Model model) {
-        Cart cart = (Cart) request.getSession().getAttribute("cart");
+    public String cart(HttpSession session, Model model) {
+        Cart cart = (Cart) session.getAttribute("cart");
 
         // Retrieve the items from the cart
         List<CartProduct> cartProducts = cartService.findAllCartItems(cart);

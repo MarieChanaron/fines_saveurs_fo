@@ -20,5 +20,4 @@ public class Cart implements Serializable {
     private Customer customer;
     @Column(name = "created_at", columnDefinition = "DATE")
     private LocalDateTime createdAt;
-
 }
