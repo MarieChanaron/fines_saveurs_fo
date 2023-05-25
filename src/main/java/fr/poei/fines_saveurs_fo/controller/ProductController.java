@@ -1,13 +1,11 @@
 package fr.poei.fines_saveurs_fo.controller;
 
 import fr.poei.fines_saveurs_fo.entity.Cart;
-import fr.poei.fines_saveurs_fo.entity.Customer;
 import fr.poei.fines_saveurs_fo.entity.Product;
-import fr.poei.fines_saveurs_fo.service.CustomerService;
 import fr.poei.fines_saveurs_fo.service.ProductServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +21,9 @@ public class ProductController {
 
     private ProductServiceImpl productService;
 
-    @Autowired
-    private CustomerService customerService;
 
     @GetMapping("/products")
-    public String getAllProduct(Model model, HttpSession session) {
+    public String getAllProduct(Model model, HttpSession session, @Param("keyword") String keyword) {
 
         // Get cart and set customer
         Cart cart = (Cart) session.getAttribute("cart");
@@ -35,8 +31,10 @@ public class ProductController {
             return "redirect:/order";
         }
 
-        List<Product> products = productService.getAllProduct();
+        List<Product> products = productService.getAllProduct(keyword);
+
         model.addAttribute("listProducts", products);
+        model.addAttribute("keyword", keyword);
         model.addAttribute("newProduct", new Product());
         return "products";
     }
@@ -51,5 +49,4 @@ public class ProductController {
             return "error-page";
         }
     }
-
 }

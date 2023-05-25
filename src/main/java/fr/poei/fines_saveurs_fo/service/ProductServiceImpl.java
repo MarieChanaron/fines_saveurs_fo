@@ -16,11 +16,15 @@ public class ProductServiceImpl implements ProductService{
         this.productRepository = productRepository;
     }
     @Override
-    public List<Product> getAllProduct() {
+    public List<Product> getAllProduct(String keyword) {
+        if (keyword != null) {
+            return productRepository.search(keyword);
+        }
         return productRepository.findAll();
     }
 
     @Override
     public Optional<Product> getById(Long id) { return productRepository.findById(id);}
+
 
 }
