@@ -11,6 +11,11 @@
 <div th:replace="fragments/frag_nav :: frag_nav"></div>
 
     <div class="container">
+        <div th:if="${cartItems == null || cartItems.size() == 0}" class="row">
+            <div class="col my-5">
+                <p>Votre panier est vide. Parcourir la <a href="#" th:href="@{/products}">boutique</a>.</p>
+            </div>
+        </div>
         <div class="row">
             <div class="col">
                 <table class="table table-striped">
