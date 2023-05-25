@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("/cart")
 public class CartController {
 
     final CartService cartService;
@@ -30,7 +32,7 @@ public class CartController {
     final MapStructMapper mapStructMapper;
 
 
-    @GetMapping("/add-to-cart")
+    @GetMapping("/add")
     public String addToCart(@RequestParam long id, @RequestParam byte qty, HttpSession session) {
 
         Cart cart;
@@ -67,7 +69,7 @@ public class CartController {
         return "redirect:/cart";
     }
 
-    @GetMapping("cart")
+    @GetMapping
     public String cart(HttpSession session, Model model) {
         Cart cart = (Cart) session.getAttribute("cart");
 
@@ -93,5 +95,11 @@ public class CartController {
         model.addAttribute("totalPrice", totalPrice);
 
         return "cart";
+    }
+
+    @GetMapping("/delete")
+    public String deleteFromCart(@RequestParam String product, HttpSession session) {
+        System.out.println(product);
+        return "redirect:/cart";
     }
 }

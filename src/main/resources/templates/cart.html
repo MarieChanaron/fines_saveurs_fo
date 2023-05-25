@@ -26,6 +26,11 @@
                             <th scope="row" th:text="${item.productDto.name}"></th>
                             <td th:text="${item.quantity}"></td>
                             <td th:text="${item.productDto.price}"></td>
+                            <td>
+                                <a href="#" th:href="@{/cart/delete(product=${item.productDto.id})}">
+                                    <img src="/images/dashicons_trash.svg" alt="retirer du panier">
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                     <tfoot>
