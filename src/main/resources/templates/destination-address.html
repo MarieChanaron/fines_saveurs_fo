@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Cart</title>
+  <div th:replace="fragments/frag_head :: frag_head"></div>
+</head>
+
+<body>
+
+  <div th:replace="fragments/frag_nav :: frag_nav"></div>
+
+  <div class="container">
+
+    <div class="row my-5">
+      <div class="col">
+        <p>Veuillez saisir ci-dessous <b>l'adresse d'expédition</b> de la commande :</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <form action="#" th:action="@{/invoicing-address}" method="post" class="mx-auto address-form">
+        <div class="my-4">
+          <label for="number">Numéro</label>
+          <input type="text" id="number" name="number">
+        </div>
+        <div class="my-4">
+          <label for="street">Rue *</label>
+          <input type="text" id="street" name="street" required>
+        </div>
+        <div class="my-4">
+          <label for="info">Information complémentaire</label>
+          <input type="text" id="info" name="info">
+        </div>
+        <div class="my-4">
+          <label for="postcode">Code postal</label>
+          <input type="text" id="postcode" name="postcode">
+        </div>
+        <div class="mt-4 mb-5">
+          <label for="city">Ville *</label>
+          <input type="text" id="city" name="city" required>
+        </div>
+        <div class="buttons">
+          <input type="submit" class="button mt-5 float-end" value="Continuer"></input>
+        </div>
+
+      </form>
+      <a href="#" th:href="@{/order}">
+        <button class="button position-relative" style="bottom: 36px;">Retour</button>
+      </a>
+    </div>
+
+  </div>
+
+  <!--div class="container my-5">
+    <div class="row">
+      <div class="col">
+
+      </div>
+      <div class="col">
+        <a href="#" th:href="@{/invoicing-address}">
+          <button class="button float-end">Continuer</button>
+        </a>
+      </div>
+    </div>
+  </div-->
+
+</body>
+
+</html>

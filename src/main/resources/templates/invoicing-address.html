@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Cart</title>
+  <div th:replace="fragments/frag_head :: frag_head"></div>
+</head>
+
+<body>
+
+<div th:replace="fragments/frag_nav :: frag_nav"></div>
+
+<div class="container">
+
+  <div class="row my-5">
+    <div class="col">
+      <p>Veuillez saisir ci-dessous votre <b>adresse de facturation</b> :</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col">
+      <a href="#" th:href="@{/destination-address}">
+        <button class="button">Retour</button>
+      </a>
+    </div>
+    <div class="col">
+      <a href="#" th:href="@{/payment}">
+        <button class="button float-end">Continuer</button>
+      </a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>
