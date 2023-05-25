@@ -98,8 +98,9 @@ public class CartController {
     }
 
     @GetMapping("/delete")
-    public String deleteFromCart(@RequestParam String product, HttpSession session) {
-        System.out.println(product);
+    public String deleteFromCart(@RequestParam long id, HttpSession session) {
+        Cart cart = (Cart) session.getAttribute("cart");
+        cartService.deleteLineItem(cart, id);
         return "redirect:/cart";
     }
 }
