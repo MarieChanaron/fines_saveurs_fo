@@ -18,22 +18,22 @@
             <div class="card-body">
                 <form th:action="@{/signup}" method="post" th:object="${customer}">
                     <div>
-                        <div class="mb-3">
+                        <div class="my-4">
                             <label for="firstname" class="form-label">Nom:</label>
                             <input type="text" class="form-control" id="firstname" name="firstname"
                                    th:field="*{firstname}" required>
                         </div>
-                        <div class="mb-3">
+                        <div class="my-4">
                             <label for="lastname" class="form-label">Prénom:</label>
                             <input type="text" class="form-control" id="lastname" name="lastname" th:field="*{lastname}"
                                    required>
                         </div>
-                        <div class="mb-3">
+                        <div class="my-4">
                             <label for="password" class="form-label">Mot de passe:</label>
                             <input type="password" class="form-control" id="password" name="password"
                                    th:field="*{password}" required>
                         </div>
-                        <div class="mb-3">
+                        <div class="my-4">
                             <label for="email" class="form-label">Email:</label>
                             <input type="email" class="form-control" id="email" name="email" th:field="*{email}"
                                    required>
@@ -47,7 +47,7 @@
                         <!--                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" required>-->
                         <!--                        </div>-->
                         <div>
-                            <input type="submit" class="btn btn-primary" value="Sign Up">
+                            <input type="submit" class="button my-4"  value="S'inscrire">
                         </div>
                     </div>
                 </form>

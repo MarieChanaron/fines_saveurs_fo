@@ -40,6 +40,10 @@ public class Customer implements UserDetails, Serializable {
     @ManyToOne
     private Role role;
 
+    public Customer(String password) {
+        this.password = password;
+    }
+
     public List<Order> getOrders() {
         return orders;
     }

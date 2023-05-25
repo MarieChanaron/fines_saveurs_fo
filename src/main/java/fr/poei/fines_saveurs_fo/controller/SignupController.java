@@ -31,7 +31,7 @@ public class SignupController {
     public String signup(Model model, @ModelAttribute("customer") Customer customer) {
         Optional<Role> customerRole = roleService.findById(4);
         customer.setRole(customerRole .orElse(null));
-        customerService.save(customer);
+        customerService.registerNewCustomer(customer);
         return "redirect:/login";
     }
 }
