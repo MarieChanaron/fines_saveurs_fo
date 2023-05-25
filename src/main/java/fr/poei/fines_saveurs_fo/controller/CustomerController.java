@@ -52,18 +52,5 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
-    //-------------------- Inscription du client/utilisateur--------------------------------
-    @GetMapping("/signup")
-    public String signup(Model model) {
-        model.addAttribute("customer", new Customer());
-        return "signup";
-    }
 
-    @PostMapping("/signup")
-    public String signup(Model model, @ModelAttribute("customer") Customer customer) {
-        Optional<Role> customerRole = roleService.findById(4);
-        customer.setRole(customerRole .orElse(null));
-        customerService.save(customer);
-        return "redirect:/login";
-    }
 }

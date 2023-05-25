@@ -40,7 +40,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li th:if="${session.email == null || session.email == ''}"><a class="dropdown-item" href="#" th:href="@{/login}">Se connecter</a></li>
-                                <li th:if="${session.email == null || session.email == ''}"><a class="dropdown-item" href="#" th:href="@{/subscription}">S'inscrire</a></li>
+                                <li th:if="${session.email == null || session.email == ''}"><a class="dropdown-item" href="#" th:href="@{/signup}">S'inscrire</a></li>
                                 <li th:if="${session.email != null && session.email != ''}"><a class="dropdown-item" href="#" th:href="@{/customers}">Mon compte</a></li>
                                 <li th:if="${session.email != null && session.email != ''}">
                                     <hr class="dropdown-divider">
