@@ -51,6 +51,6 @@ public class DestinationAddress {
         // Update address
         addressService.updateAddress(address);
 
-        return "redirect:/destination-address";
+        return "redirect:/invoicing-address";
     }
 }
