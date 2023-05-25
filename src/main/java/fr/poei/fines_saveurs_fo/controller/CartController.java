@@ -46,26 +46,7 @@ public class CartController {
             cart = (Cart) session.getAttribute("cart");
         }
 
-        CartProduct lineItem = null;
-        Optional<Product> productOptional = productService.getById(id);
-
-        if (productOptional.isPresent()) {
-            Product product = productOptional.get();
-            // Search an instance of CartProduct by product and by cart
-            List<CartProduct> lineItems = cartService.findLineItemsByCartAndProduct(cart, product);
-            if (lineItems.size() == 1) { // If an instance of CartProduct exists
-                lineItem = lineItems.get(0);
-                byte quantity = lineItem.getQuantity();
-                quantity += qty; // set the quantity
-                lineItem.setQuantity(quantity);
-            } else {
-                lineItem = new CartProduct(); // create a new line item
-                lineItem.setCart(cart);
-                lineItem.setProduct(product);
-                lineItem.setQuantity(qty);
-            }
-        }
-        cartService.saveLineItems(lineItem); // saves if doesn't exist or updates
+        cartService.saveLineItem(cart, id, qty); // saves if doesn't exist or updates
         return "redirect:/cart";
     }
 
