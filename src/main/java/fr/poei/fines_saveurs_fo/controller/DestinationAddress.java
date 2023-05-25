@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,8 +30,8 @@ public class DestinationAddress {
         String email = (String) session.getAttribute("email");
         Optional<Customer> customerOptional = customerService.fetchByEmail(email);
         if (customerOptional.isEmpty()) return "404";
-
         Customer customer = customerOptional.get();
+
         Address destinationAddress = addressService.getDestinationAddress(customer);
         model.addAttribute("address", destinationAddress);
 
@@ -38,7 +39,20 @@ public class DestinationAddress {
     }
 
     @PostMapping
-    public String setDestinationAddress(HttpSession session) {
-        return "";
+    public String setDestinationAddress(HttpSession session, @ModelAttribute Address address) {
+        String email = (String) session.getAttribute("email");
+        Optional<Customer> customerOptional = customerService.fetchByEmail(email);
+        if (customerOptional.isEmpty()) return "404";
+        Customer customer = customerOptional.get();
+
+        long addressId = addressService.getDestinationAddress(customer).getId();
+        if (addressId != 0) {
+            address.setId(addressId);
+            addressService.updateAddress(address); // Update address
+        } else {
+            addressService.saveCustomerAddress(address, customer, "destination");
+        }
+
+        return "redirect:/invoicing-address";
     }
 }

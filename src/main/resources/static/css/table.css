@@ -1,0 +1,7 @@
+table tfoot tr {
+    background-color: rgba(38, 34, 33, 0.05);
+}
+
+table {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);;
+}

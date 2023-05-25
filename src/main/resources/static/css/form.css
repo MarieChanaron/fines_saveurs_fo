@@ -23,14 +23,23 @@ form input[type="submit"] {
     padding-left: 16px;
     padding-right: 16px;
     border-radius: 0;
+    border: 0;
 }
 
-input, select, textarea {
+input:not([type="submit"]),
+select,
+textarea {
     border: 1px solid var(--primary-color-dark) !important;
     border-radius: 0px !important;
     font-size: 1.4rem !important;
 }
 
+/* Login */
+
+#login-form .button,
+.address-form .button {
+    float: right !important;
+}
 
 #login-form {
     width: fit-content;
@@ -45,6 +54,49 @@ input, select, textarea {
     width: 300px;
 }
 
-#login-form .button {
-    float: right !important;
+/* Address */
+
+.address-form label {
+    width: 250px;
 }
+
+.address-form input:not([type="submit"]) {
+    width: 500px;
+}
+
+/* Payment */
+
+#payment label {
+    width: 130px;
+}
+
+#payment .long {
+    width: 300px;
+}
+
+#payment .short {
+    width: 80px;
+}
+
+#payment #name {
+    text-transform: uppercase;
+}
+
+#payment img {
+    max-width: 100px;
+}
+
+#payment .big {
+    font-size: 2.0rem;
+}
+
+#payment {
+    width: fit-content;
+    margin: auto;
+}
+
+
+
+
+
+

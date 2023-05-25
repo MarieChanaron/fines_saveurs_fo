@@ -1,6 +1,5 @@
 package fr.poei.fines_saveurs_fo.repository;
 
-import fr.poei.fines_saveurs_fo.entity.Address;
 import fr.poei.fines_saveurs_fo.entity.AddressCustomer;
 import fr.poei.fines_saveurs_fo.entity.AddressCustomerId;
 import fr.poei.fines_saveurs_fo.entity.Customer;

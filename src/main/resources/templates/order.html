@@ -2,7 +2,7 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Title</title>
+    <title>Fines Saveurs | Commande</title>
     <div th:replace="~{fragments/frag_head :: frag_head}"></div>
 </head>
 <body>
@@ -17,7 +17,7 @@
     </div>
     <div class="row my-5">
         <div class="col">
-            <table class="table table-striped">
+            <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">Article</th>
@@ -27,19 +27,16 @@
                 </thead>
                 <tbody>
                 <tr th:each="item: ${cartItems}">
-                    <th scope="row" th:text="${item.productDto.name}"></th>
+                    <td th:text="${item.productDto.name}"></th>
                     <td th:text="${item.quantity}"></td>
                     <td th:text="${item.productDto.price}"></td>
                 </tr>
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th colspan="2">Nombre de produits</th>
-                    <td th:text="${totalQuantity}"></td>
-                </tr>
-                <tr>
-                    <th colspan="2">Prix</th>
-                    <td th:text="${totalPrice} + ' €'"></td>
+                    <th scope="row">Total</th>
+                    <th th:text="${totalQuantity}"></th>
+                    <th th:text="${totalPrice} + ' €'"></th>
                 </tr>
                 </tfoot>
             </table>
@@ -47,7 +44,7 @@
     </div>
     <div class="row my-5">
         <div class="col">
-            <p>Vous avez choisi <span th:text="${totalQuantity}"></span> produits, pour un total de <span th:text="${totalPrice}"></span> €.</p>
+            <p>Vous avez choisi <span th:text="${totalQuantity}"></span> produit<span th:if="${totalQuantity > 1}">s</span>, pour un total de <span th:text="${totalPrice}"></span> €.</p>
         </div>
     </div>
 </div>
