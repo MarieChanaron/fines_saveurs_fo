@@ -23,9 +23,12 @@ form input[type="submit"] {
     padding-left: 16px;
     padding-right: 16px;
     border-radius: 0;
+    border: 0;
 }
 
-input, select, textarea {
+input:not([type="submit"]),
+select,
+textarea {
     border: 1px solid var(--primary-color-dark) !important;
     border-radius: 0px !important;
     font-size: 1.4rem !important;

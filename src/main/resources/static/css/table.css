@@ -3,7 +3,5 @@ table tfoot tr {
 }
 
 table {
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgba(38, 34, 33, 0.1) !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);;
 }
