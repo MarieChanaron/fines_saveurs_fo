@@ -10,6 +10,7 @@ import fr.poei.fines_saveurs_fo.service.CartService;
 import fr.poei.fines_saveurs_fo.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,17 +22,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@AllArgsConstructor
 public class CartController {
 
     final CartService cartService;
     final ProductService productService;
     final MapStructMapper mapStructMapper;
 
-    public CartController(CartService cartService, ProductService productService, MapStructMapper mapStructMapper) {
-        this.cartService = cartService;
-        this.productService = productService;
-        this.mapStructMapper = mapStructMapper;
-    }
 
     @GetMapping("/add-to-cart")
     public String addToCart(@RequestParam int id, @RequestParam byte qty, HttpSession session) {
@@ -42,22 +39,31 @@ public class CartController {
             Cart newCart = new Cart();
             newCart.setCreatedAt(LocalDateTime.now());
             cart = cartService.saveCart(newCart);
+            session.setAttribute("cart", cart);
         } else {
             cart = (Cart) session.getAttribute("cart");
         }
 
-        CartProduct lineItem = new CartProduct();
+        CartProduct lineItem = null;
         Optional<Product> productOptional = productService.getById((long) id);
+
         if (productOptional.isPresent()) {
-            lineItem.setCart(cart);
             Product product = productOptional.get();
-            lineItem.setProduct(product);
-            lineItem.setQuantity(qty);
+            // Search an instance of CartProduct by product and by cart
+            List<CartProduct> lineItems = cartService.findLineItemsByCartAndProduct(cart, product);
+            if (lineItems.size() == 1) { // If an instance of CartProduct exists
+                lineItem = lineItems.get(0);
+                byte quantity = lineItem.getQuantity();
+                quantity += qty; // set the quantity
+                lineItem.setQuantity(quantity);
+            } else {
+                lineItem = new CartProduct(); // create a new line item
+                lineItem.setCart(cart);
+                lineItem.setProduct(product);
+                lineItem.setQuantity(qty);
+            }
         }
-        cartService.saveLineItems(lineItem);
-
-        session.setAttribute("cart", cart);
-
+        cartService.saveLineItems(lineItem); // saves if doesn't exist or updates
         return "redirect:/cart";
     }
 
