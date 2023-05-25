@@ -31,7 +31,7 @@ public class CartController {
 
 
     @GetMapping("/add-to-cart")
-    public String addToCart(@RequestParam int id, @RequestParam byte qty, HttpSession session) {
+    public String addToCart(@RequestParam long id, @RequestParam byte qty, HttpSession session) {
 
         Cart cart;
 
@@ -45,7 +45,7 @@ public class CartController {
         }
 
         CartProduct lineItem = null;
-        Optional<Product> productOptional = productService.getById((long) id);
+        Optional<Product> productOptional = productService.getById(id);
 
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
