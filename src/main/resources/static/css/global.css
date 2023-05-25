@@ -118,6 +118,10 @@ a, a:hover {
     display: none;
 }
 
+.fit-content {
+    width: fit-content;
+}
+
 .page {
     height: 100%;
     display: flex;

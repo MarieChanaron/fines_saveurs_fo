@@ -32,6 +32,12 @@ input, select, textarea {
 }
 
 
+#login-form .button,
+.address-form .button {
+    float: right !important;
+}
+
+
 #login-form {
     width: fit-content;
     margin: auto;
@@ -45,6 +51,11 @@ input, select, textarea {
     width: 300px;
 }
 
-#login-form .button {
-    float: right !important;
+
+.address-form label {
+    width: 250px;
+}
+
+.address-form input:not([type="submit"]) {
+    width: 500px;
 }
