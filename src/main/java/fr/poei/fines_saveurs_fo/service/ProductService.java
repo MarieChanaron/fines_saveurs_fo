@@ -9,7 +9,8 @@ import java.util.Optional;
 @Service
 public interface ProductService {
 
-    List<Product> getAllProduct(String keyword);
+
+    List<Product> searchByKeywords(String keyword);
 
     List<Product> getAllProduct();
 

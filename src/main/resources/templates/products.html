@@ -4,6 +4,7 @@
 <head>
     <title>Fines Saveurs | Boutique</title>
     <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+    <script src="/js/search-feature.js" type="application/javascript" defer></script>
 </head>
 
 <body id="products">
@@ -59,27 +60,6 @@
     </div>
 </div>
 <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
-
-
-<script type="text/javascript">
-
-    if (
-        document.getElementsByClassName("product-card").length > 0 &&
-        document.querySelector("input[type='text']").value.length === 0
-    ) {
-        document.getElementById("no-result").style.display = "none";
-    }
-
-    const handleClick = event => {
-        const inputElement = event.target;
-        inputElement.setSelectionRange(0, inputElement.value.length);
-    }
-
-    document
-        .querySelector('input[name="keywords"]')
-        .addEventListener("click", handleClick);
-
-</script>
 
 </body>
 </html>

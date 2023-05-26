@@ -48,7 +48,7 @@ public class ProductController {
     @GetMapping("/products/search")
     public String getAllProduct(Model model, @Param("keywords") String keywords) {
 
-        List<Product> products = productService.getAllProduct(keywords);
+        List<Product> products = productService.searchByKeywords(keywords);
 
         model.addAttribute("products", products);
         model.addAttribute("keywords", keywords);

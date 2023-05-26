@@ -18,10 +18,15 @@ public class ProductServiceImpl implements ProductService{
     private final ProductRepository productRepository;
 
 
-
     @Override
-    public List<Product> getAllProduct(String keyword) {
-        return productRepository.search(keyword);
+    public List<Product> searchByKeywords(String keywords) {
+        String[] keywordsArray = keywords.split(" ");
+        List<Product> products = new ArrayList<>();
+        for (String keyword : keywordsArray) {
+            List<Product> productsForKeyword = productRepository.search(keyword);
+            products.addAll(productsForKeyword);
+        }
+        return products;
     }
 
     @Override
