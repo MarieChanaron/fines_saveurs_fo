@@ -4,7 +4,7 @@ body#confirmation {
     background-repeat: no-repeat;
 }
 
-#confirmation p {
+#confirmation p.white-bg {
     background-color: rgba(255, 255, 255, 0.5);
     padding: 2px 8px;
 }
