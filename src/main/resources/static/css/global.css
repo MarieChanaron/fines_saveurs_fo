@@ -75,6 +75,10 @@ a, a:hover {
     border: 0;
 }
 
+.button[disabled] {
+    opacity: 0.8;
+}
+
 .button-outline {
     min-width: 154px;
     width: fit-content;

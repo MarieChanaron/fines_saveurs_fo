@@ -181,7 +181,6 @@ public class FinesSaveursFoApplication implements CommandLineRunner {
 //
 //        Order order = new Order();
 //        order.setCreatedAt(LocalDateTime.now());
-//        order.setPaidAt(LocalDateTime.now());
 //        order.setCart(cart);
 //        order.setCustomer(cart.getCustomer());
 //        orderRepository.save(order);
