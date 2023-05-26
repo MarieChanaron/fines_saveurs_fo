@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+    <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+</head>
+<body>
+
+<div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
+
+<form id="ticket-form" action="/secured/tickets" method="POST">
+    <input type="email" id="userEmail" name="userEmail" placeholder="mon.email@gmail.com" required>
+
+    <label for="admin-select">Administrateur:</label>
+    <select id="admin-select" name="adminId" required>
+        <option th:each="admin : ${admins}" th:value="${admin.id}" th:text="${admin.firstname + ' ' + admin.lastname}"></option>
+    </select>
+
+    <input type="text" id="text-input" name="textInput" placeholder="Bonjour, ..." required>
+
+    <button type="submit">Soumettre</button>
+</form>
+
+
+<div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+
+<script>
+  const url = 'http://localhost:8080/webapi/admins';
+
+  fetch(url)
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+              let admins = data;
+              let adminSelect  = document.getElementById('admin-select');
+
+              admins.forEach((admin) => {
+                  let option = document.createElement('option');
+                  option.value = admin.id;
+                  option.text = admin.firstname + ' ' + admin.lastname;
+                  adminSelect.appendChild(option);
+              })
+          });
+</script>
+<script>
+    const form = document.getElementById('ticket-form');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const url = 'http://localhost:8080/webapi/tickets/create';
+
+        const userEmail = document.getElementById('userEmail').value;
+        const adminId = +document.getElementById('admin-select').value;
+        const textInput = document.getElementById('text-input').value;
+
+        const data = {
+            userEmail: userEmail,
+            adminId: adminId,
+            textInput: textInput
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then((response) => {
+                if (response.ok) {
+                    console.log('Ticket ok');
+                } else {
+                    console.log('Erreur');
+                }
+            })
+            .catch((error) => {
+                console.log('Erreur :', error);
+            });
+    });
+</script>
+</body>
+</html>

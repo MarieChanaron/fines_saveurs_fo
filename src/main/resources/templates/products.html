@@ -10,9 +10,9 @@
   <form th:action="@{/products}">
     Rechercher : <input type="text" name="keyword" size="50" th:value="${keyword}" />
     &nbsp;
-    <input type="submit" th:value="Chercher" />
-    &nbsp;
-    <input type="button" th:value="Effacer" id="btnClear", onclick="clearSearch()" />
+    <input type="submit" th:placeholder="Rechercher" />
+  &nbsp;
+    <a href="/products" class="ms-4">Tout afficher</a>
   </form>
 
 <div class="container">
@@ -55,14 +55,8 @@
     </div>
   </div>
 </div>
+
+
 <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
-
-
-
-<script type="text/javascript">
-  function clearSearch() {
-    window.location = "[[@{/products}]]";
-  }
-</script>
 </body>
 </html>
