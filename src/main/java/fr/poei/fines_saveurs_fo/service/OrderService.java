@@ -17,13 +17,14 @@ public class OrderService {
     final CustomerService customerService;
     final OrderRepository orderRepository;
 
-    public Optional<Order> saveOrder(Cart cart, String email) {
+    public Optional<Order> saveOrder(Cart cart, String email, double totalPrice) {
         Order order = new Order();
         order.setCreatedAt(LocalDateTime.now());
         order.setCart(cart);
         Optional<Customer> customerOptional = customerService.fetchByEmail(email);
         if (customerOptional.isEmpty()) return Optional.of(new Order());
         order.setCustomer(customerOptional.get());
+        order.setAmountPaid(totalPrice);
         return Optional.of(orderRepository.save(order));
     }
 }

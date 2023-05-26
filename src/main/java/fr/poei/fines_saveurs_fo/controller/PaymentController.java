@@ -27,8 +27,10 @@ public class PaymentController {
     public String afterPayment(HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");;
         String email = (String) session.getAttribute("email");
-        Optional<Order> orderSaved = orderService.saveOrder(cart, email);
+        double totalPrice = (Double) session.getAttribute("totalPrice");
+        Optional<Order> orderSaved = orderService.saveOrder(cart, email, totalPrice);
         session.removeAttribute("cart");
+        session.removeAttribute("totalPaid");
         if (orderSaved.isEmpty()) return "404";
         return "redirect:/confirmation";
     }
