@@ -44,7 +44,7 @@
     </div>
     <div class="row my-5">
         <div class="col">
-            <p>Vous avez choisi <span th:text="${totalQuantity}"></span> produit<span th:if="${totalQuantity > 1}">s</span>, pour un total de <span th:text="${totalPrice}"></span> €.</p>
+            <p>Vous avez choisi <span th:text="${totalQuantity}"></span> produit<span th:if="${totalQuantity > 1}">s</span>, pour un total de <span th:text="${session.totalPrice}"></span> €.</p>
         </div>
     </div>
 </div>
