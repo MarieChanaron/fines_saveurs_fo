@@ -38,7 +38,6 @@ public class CustomerService {
         List<Role> roles = new ArrayList<>();
         roles.add(roleService.findByName("CUSTOMER"));
         customer.setRoleList(roles);
-
         return  customerRepository.save(customer);
     }
 }
