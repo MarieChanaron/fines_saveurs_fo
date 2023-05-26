@@ -61,7 +61,7 @@
                 </a>
             </div>
             <div class="col">
-                <a th:if="${cartItems.size() != 0}" href="#" th:href="@{/order}">
+                <a th:if="${cartItems.size() != 0}" href="#" th:href="@{/changeSessionAttribute}">
                     <button class="button float-end">Commander</button>
                 </a>
             </div>
@@ -69,10 +69,6 @@
     </div>
 
 <div th:replace="fragments/frag_footer :: frag_footer"></div>
-
-<script>
-    document.getElementById("order-button").onclick = () => sessionStorage.setItem("redirect", "order");
-</script>
 
 </body>
 

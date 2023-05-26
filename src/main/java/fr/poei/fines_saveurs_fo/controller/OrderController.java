@@ -28,14 +28,7 @@ public class OrderController {
     @GetMapping
     public String order(HttpSession session, Model model) {
 
-        session.removeAttribute("redirect");
-
-        if (session.getAttribute("email") == null || session.getAttribute("email") == "") { // If the customer is not logged in
-
-            session.setAttribute("redirect", "order");
-            return "redirect:/login";
-
-        } else {
+            session.removeAttribute("redirect");
 
             Cart cart = (Cart) session.getAttribute("cart");
 
@@ -61,7 +54,7 @@ public class OrderController {
             model.addAttribute("totalPrice", totalPrice);
 
             return "order";
-        }
 
     }
+
 }
