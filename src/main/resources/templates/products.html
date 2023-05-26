@@ -40,7 +40,7 @@
                     <div class="aligned">
                         <p class="mb-0"><a href="#" th:href="@{/product/{id}(id=${prod.id})}"
                                            class="underline-none uppercase bold smaller text-white">Détails</a></p>
-                        <a href=""></a> <!-- Ajouter au panier -->
+                        <a href="#" th:href="@{/cart/add(id=${prod.id}, qty=${1})}" class="float-end"><img src="/images/solar_cart-bold.svg" alt=""></a> <!-- Ajouter au panier -->
                     </div>
                 </div>
 
