@@ -10,7 +10,7 @@
     width: fit-content;
 }
 
-#products input[type="submit"] {
+#products #magnifying-glass {
     width: 32px;
     height: 32px;
     background-image: url("../images/healthicons_magnifying-glass-outline.svg");
