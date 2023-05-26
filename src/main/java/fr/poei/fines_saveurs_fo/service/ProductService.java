@@ -8,11 +8,13 @@ import java.util.Optional;
 
 @Service
 public interface ProductService {
+
     List<Product> getAllProduct(String keyword);
 
     List<Product> getAllProduct();
 
     Optional<Product> getById(Long id);
 
+    List<Product> fetchProductsByCategory(long categoryId);
 
 }

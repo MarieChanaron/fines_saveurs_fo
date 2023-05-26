@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +25,7 @@ public class ProductController {
 
 
     @GetMapping("/products")
-    public String getAllProduct(Model model, HttpSession session) {
+    public String getAllProduct(Model model, HttpSession session, @RequestParam("cat") Optional<Long> cat) {
 
         // Get cart and set customer
         Cart cart = (Cart) session.getAttribute("cart");
@@ -31,7 +33,13 @@ public class ProductController {
             return "redirect:/order";
         }
 
-        List<Product> products = productService.getAllProduct();
+        List<Product> products = new ArrayList<>();
+
+        if (cat.isEmpty()) {
+            products = productService.getAllProduct();
+        } else {
+            products = productService.fetchProductsByCategory(cat.get());
+        }
 
         model.addAttribute("products", products);
         return "products";
