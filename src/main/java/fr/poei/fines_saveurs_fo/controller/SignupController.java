@@ -29,7 +29,8 @@ public class SignupController {
 
     @PostMapping("/signup")
     public String signup(Model model, @ModelAttribute("customer") Customer customer) {
-        Optional<Role> customerRole = roleService.findById(4);
+        Optional<Role> customerRole = roleService.findByName("USER");
+        if (customerRole.isEmpty()) return "404";
         customer.setRole(customerRole .orElse(null));
         customerService.registerNewCustomer(customer);
         return "redirect:/login";

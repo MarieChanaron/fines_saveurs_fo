@@ -36,7 +36,8 @@ public class CustomerService {
     public Customer registerNewCustomer (Customer customer) {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         List<Role> roles = new ArrayList<>();
-        roles.add(roleService.findByName("CUSTOMER"));
+        Optional<Role> role = roleService.findByName("CUSTOMER");
+        role.ifPresent(roles::add);
         customer.setRoleList(roles);
 
         return  customerRepository.save(customer);
