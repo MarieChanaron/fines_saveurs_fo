@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface ProductService {
     List<Product> getAllProduct(String keyword);
 
+    List<Product> getAllProduct();
+
     Optional<Product> getById(Long id);
 
 

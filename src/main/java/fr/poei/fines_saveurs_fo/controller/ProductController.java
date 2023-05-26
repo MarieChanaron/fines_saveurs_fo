@@ -23,7 +23,7 @@ public class ProductController {
 
 
     @GetMapping("/products")
-    public String getAllProduct(Model model, HttpSession session, @Param("keyword") String keyword) {
+    public String getAllProduct(Model model, HttpSession session) {
 
         // Get cart and set customer
         Cart cart = (Cart) session.getAttribute("cart");
@@ -31,13 +31,23 @@ public class ProductController {
             return "redirect:/order";
         }
 
-        List<Product> products = productService.getAllProduct(keyword);
+        List<Product> products = productService.getAllProduct();
 
-        model.addAttribute("listProducts", products);
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("newProduct", new Product());
+        model.addAttribute("products", products);
         return "products";
     }
+
+
+    @GetMapping("/products/search")
+    public String getAllProduct(Model model, @Param("keywords") String keywords) {
+
+        List<Product> products = productService.getAllProduct(keywords);
+
+        model.addAttribute("products", products);
+        model.addAttribute("keywords", keywords);
+        return "products";
+    }
+
 
     @GetMapping("/product/{id}")
     public String detailProduct(@PathVariable("id") Long id, Model model) {
@@ -46,7 +56,7 @@ public class ProductController {
             model.addAttribute("product", product.get());
             return "/product-details";
         } else {
-            return "error-page";
+            return "404";
         }
     }
 }

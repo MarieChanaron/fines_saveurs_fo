@@ -17,7 +17,7 @@ input {
     width: 220px;
 }
 
-form input[type="submit"] {
+form input[type="submit"]:not(#magnifying-glass) {
     min-width: 156px;
     width: fit-content;
     padding-left: 16px;

@@ -2,68 +2,84 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Fines Saveurs | Boutique</title>
-  <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+    <title>Fines Saveurs | Boutique</title>
+    <div th:replace="~{fragments/frag_head :: frag_head}"></div>
 </head>
-<body>
+
+<body id="products">
+
 <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
 
-  <form th:action="@{/products}">
-    Rechercher : <input type="text" name="keyword" size="50" th:value="${keyword}" />
-    &nbsp;
-    <input type="submit" th:value="Chercher" />
-    &nbsp;
-    <input type="button" th:value="Effacer" id="btnClear", onclick="clearSearch()" />
-  </form>
+<div class="container my-5">
+    <div class="row">
+        <div class="col">
+            <form th:action="@{/products/search}" method="get" class="d-flex align-items-center">
+                <div class="position-relative">
+                    <input type="text" placeholder="Rechercher" name="keywords" value="" th:value="${keywords}">
+                    <input type="submit" class="position-absolute end-0" value="" id="magnifying-glass">
+                </div>
+                <a th:href="@{/products}" class="ms-4">Tout afficher</a>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="container">
-  <div class="card">
-    <div class="card-header">Liste des produits</div>
-    <div class="card-body">
-      <table>
-        <thead class="table">
-        <tr>
-          <th>ID</th><th>Marque</th><th>Conditionnement</th><th>Description</th><th>Ingrédients</th><th>Nom</th><th>Origine</th><th>Prix</th><th>Référence</th><th>Stock</th><th>image</th>, <th>Catégorie (id)</th><th>Go</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="p:${listProducts}">
-          <td th:text="${p.id}"></td>
-          <td th:text="${p.brand}"></td>
-          <td th:text="${p.conditioning}"></td>
-          <td th:text="${p.description}"></td>
-          <td>
-            <th:block th:if="${p.imageUrl == null or p.imageUrl.isEmpty()}">
-              <img th:src="@{/images/placeholder.jpg}" alt="">
-            </th:block>
-            <th:block th:unless="${p.imageUrl == null or p.imageUrl.isEmpty()}">
-              <img th:src="@{'http://localhost:8080/image?file=' + ${p.imageUrl}}" alt="">
-            </th:block>
-          </td>
-          <td th:text="${p.ingredient}"></td>
-          <td th:text="${p.name}"></td>
-          <td th:text="${p.origin}"></td>
-          <td th:text="${p.price}"></td>
-          <td th:text="${p.reference}"></td>
-          <td th:text="${p.stock}"></td>
-          <td th:text="${p.category.name}"></td>
-          <td>
-            <a th:href="@{/product/{id}(id=${p.id})}">Voir détails</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="row my-5 pb-5">
+        <div class="col pb-5" id="grid-products">
+
+            <p id="no-result">Votre recherche n'a produit aucun résultat.</p>
+
+            <div th:each="prod: ${products}" class="product-card overflow-hidden">
+                <div class="col-left">
+                    <p class="uppercase bold small" th:text="${prod.name}"></p>
+                    <p class="bold" th:text="${prod.brand}"></p>
+                    <p> Ref. <span th:text="${prod.reference}"></span></p>
+                    <p><span th:text="${prod.price}"></span> €</p>
+                    <p class="conditioning" th:text="${prod.conditioning}"></p>
+                    <div class="aligned">
+                        <p class="mb-0"><a href="#" th:href="@{/product/{id}(id=${prod.id})}"
+                                           class="underline-none uppercase bold smaller text-white">Détails</a></p>
+                        <a href=""></a> <!-- Ajouter au panier -->
+                    </div>
+                </div>
+
+                <div class="col-right">
+                    <th:block th:if="${prod.imageUrl == null or prod.imageUrl.isEmpty()}">
+                        <img th:src="@{/images/placeholder.jpg}" alt="">
+                    </th:block>
+                    <th:block th:unless="${prod.imageUrl == null or prod.imageUrl.isEmpty()}">
+                        <img th:src="@{'http://localhost:8080/image?file=' + ${prod.imageUrl}}" alt="">
+                    </th:block>
+                </div>
+
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>
+
 <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
 
 
-
 <script type="text/javascript">
-  function clearSearch() {
-    window.location = "[[@{/products}]]";
-  }
+
+    if (
+        document.getElementsByClassName("product-card").length > 0 &&
+        document.querySelector("input[type='text']").value.length === 0
+    ) {
+        document.getElementById("no-result").style.display = "none";
+    }
+
+    const handleClick = event => {
+        const inputElement = event.target;
+        inputElement.setSelectionRange(0, inputElement.value.length);
+    }
+
+    document
+        .querySelector('input[name="keywords"]')
+        .addEventListener("click", handleClick);
+
 </script>
 </body>
 </html>

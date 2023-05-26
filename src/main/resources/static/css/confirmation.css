@@ -8,3 +8,7 @@ body#confirmation {
     background-color: rgba(255, 255, 255, 0.5);
     padding: 2px 8px;
 }
+
+#confirmation nav {
+    box-shadow: 0px 4px 8px rgba(38, 34, 33, 0.3);
+}

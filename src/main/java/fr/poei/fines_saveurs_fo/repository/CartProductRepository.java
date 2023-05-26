@@ -13,10 +13,10 @@ import java.util.List;
 @Repository
 public interface CartProductRepository extends JpaRepository<CartProduct, CartProductId> {
 
-    public List<CartProduct> findCartProductsByCart(Cart cart);
+    List<CartProduct> findCartProductsByCart(Cart cart);
 
-    public List<CartProduct> findCartProductsByCartAndProduct(Cart cart, Product product);
+    List<CartProduct> findCartProductsByCartAndProduct(Cart cart, Product product);
 
     @Transactional
-    public int deleteCartProductByCartAndProduct(Cart cart, Product product);
+    int deleteCartProductByCartAndProduct(Cart cart, Product product);
 }

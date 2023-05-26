@@ -10,16 +10,19 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements ProductService{
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
+
     @Override
     public List<Product> getAllProduct(String keyword) {
-        if (keyword != null) {
-            return productRepository.search(keyword);
-        }
+        return productRepository.search(keyword);
+    }
+
+    @Override
+    public List<Product> getAllProduct() {
         return productRepository.findAll();
     }
 
