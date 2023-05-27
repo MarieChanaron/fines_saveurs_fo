@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/payment")
+@RequestMapping("/order/payment")
 public class PaymentController {
 
     final OrderService orderService;
@@ -41,6 +41,6 @@ public class PaymentController {
         productService.updateStock(cart);
 
         if (orderSaved.isEmpty()) return "404";
-        return "redirect:/confirmation";
+        return "redirect:/order/confirmation";
     }
 }

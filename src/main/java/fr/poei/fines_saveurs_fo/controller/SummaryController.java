@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/summary")
+@RequestMapping("/order/summary")
 public class SummaryController {
 
     @GetMapping
