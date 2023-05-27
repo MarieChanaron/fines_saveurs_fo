@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Fines Saveurs | Commande</title>
+    <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+</head>
+<body>
+
+<div th:replace="fragments/frag_nav :: frag_nav"></div>
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col">
+            <p class="m-0">Veuillez vérifier les détails de votre commande : </p>
+        </div>
+    </div>
+    <div class="row my-5">
+        <div class="col">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Article</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Prix</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item: ${cartItems}">
+                    <td th:text="${item.productDto.name}"></th>
+                    <td th:text="${item.quantity}"></td>
+                    <td th:text="${item.productDto.price}"></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th scope="row">Total</th>
+                    <th th:text="${totalQuantity}"></th>
+                    <th th:text="${session.totalPrice} + ' €'"></th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="row my-5">
+        <div class="col">
+            <p>Vous avez choisi <span th:text="${totalQuantity}"></span> produit<span th:if="${totalQuantity > 1}">s</span>, pour un total de <span th:text="${session.totalPrice}"></span> €.</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col">
+            <a href="#" th:href="@{/cart}">
+                <button class="button">Modifier</button>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" th:href="@{/destination-address}">
+                <button class="button float-end">Valider</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/frag_footer :: frag_footer"></div>
+
+</body>
+</html>

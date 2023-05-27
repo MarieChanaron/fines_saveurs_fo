@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Fines Saveurs | Panier</title>
+    <div th:replace="fragments/frag_head :: frag_head"></div>
+</head>
+
+<body>
+
+<div th:replace="fragments/frag_nav :: frag_nav"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col my-5">
+                <p th:if="${cartItems == null || cartItems.size() == 0}" >Votre panier est vide. Parcourir la <a href="#" th:href="@{/products}">boutique</a>.</p>
+                <p th:if="${cartItems != null && cartItems.size() > 0}">Voici les détails de votre panier :</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table m-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Article</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item: ${cartItems}">
+                            <td th:text="${item.productDto.name}"></td>
+                            <td th:text="${item.quantity}"></td>
+                            <td th:text="${item.productDto.price}"></td>
+                            <td>
+                                <a href="#" th:href="@{/cart/delete(id=${item.productDto.id})}">
+                                    <img src="/images/dashicons_trash.svg" alt="retirer du panier">
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th scope="row">Total</th>
+                            <th th:text="${totalQuantity}"></th>
+                            <th th:text="${totalPrice} + ' €'"></th>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5 py-3">
+        <div class="row">
+            <div class="col">
+                <a href="#" th:href="@{/products}">
+                    <button class="button">Boutique</button>
+                </a>
+            </div>
+            <div class="col">
+                <form action="#" th:action="@{/changeSessionAttribute}" method="post">
+                    <button type="submit" class="button float-end" th:disabled="${totalQuantity == 0}">Commander</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<div th:replace="fragments/frag_footer :: frag_footer"></div>
+
+</body>
+
+</html>

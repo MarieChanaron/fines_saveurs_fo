@@ -4,10 +4,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Table(name = "admin")
 @Data @NoArgsConstructor
-public class Admin {
+public class Admin{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id")
@@ -18,6 +19,8 @@ public class Admin {
     private String firstname;
     @Column(name = "lastname")
     private String lastname;
+    @Column(name = "status")
+    private byte status;
     @Column(name = "password")
     private String password;
 }

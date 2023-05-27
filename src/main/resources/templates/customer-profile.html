@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+  <title>Fines Saveurs | Profil</title>
+</head>
+
+
+<body>
+
+<div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
+
+<main>
+  <div class="container d-flex flex-column align-items-center justify-content-center mt-4">
+    <div class=" mb-4 d-flex justify-content-around " >
+      <a href="account" title="retour"><img src="/images/arrow_back.svg" style="width: 1.5rem; margin-right: 1em" alt=""></a>
+      <h2>Mes informations personnelles</h2>
+    </div>
+    <div class="card row shadow p-3 mb-5 bg-body rounded" style="width: 35%">
+      <div class="col-12">
+        <img class="w-100" src="/images/card_profile.png" alt="">
+      </div>
+      <div class="card-body col-12">
+        <tr th:each="customer : ${customers}">
+<!--          <td th:text="${customer.id}"/>-->
+        <p>Nom: <td th:text="${customer.lastname}"/></p>
+        <p>Prénom: <td th:text="${customer.firstname}"/></p>
+        <p>Email : <td th:text="${customer.email}"/></p>
+        <p>Password: ********</p>
+          <div class="d-flex justify-content-around col-12">
+            <div class=" mt-2 mb-2">
+              <td>
+              <a th:href="@{'customers/edit'}" class="btn btn-primary">Modifier le profil </a>
+              </td>
+
+            </div>
+          </div>
+        </tr>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

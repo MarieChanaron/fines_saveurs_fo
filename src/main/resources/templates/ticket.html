@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+    <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+    <script src="/js/fetch-admins.js" async></script>
+    <script src="/js/post-ticket.js" defer></script>
+</head>
+<body>
+
+<div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
+
+<form id="ticket-form" action="#" method="POST">
+    <input type="email" id="userEmail" name="userEmail" placeholder="mon.email@gmail.com" required>
+
+    <label for="admin-select">Administrateur:</label>
+    <select id="admin-select" name="adminId" required>
+        <option th:each="admin : ${admins}" th:value="${admin.id}" th:text="${admin.firstname + ' ' + admin.lastname}"></option>
+    </select>
+
+    <input type="text" id="text-input" name="textInput" placeholder="Bonjour, ..." required>
+
+    <button type="submit">Soumettre</button>
+</form>
+
+<p id="confirmation"></p>
+
+<div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+
+</body>
+</html>
