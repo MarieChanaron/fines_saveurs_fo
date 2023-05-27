@@ -27,8 +27,7 @@ public class ProductController {
     @GetMapping("/products")
     public String getAllProduct(Model model, HttpSession session, @RequestParam("cat") Optional<Long> cat) {
 
-        Cart cart = (Cart) session.getAttribute("cart");
-        if (cart != null && session.getAttribute("email") != null && session.getAttribute("redirect") == "order") {
+        if (session.getAttribute("redirect") == "order") {
             return "redirect:/order";
         }
 

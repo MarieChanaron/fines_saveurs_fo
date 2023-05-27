@@ -24,10 +24,7 @@
                                aria-expanded="false">
                                 Catégories
                             </a>
-                            <ul class="dropdown-menu">
-                                <li th:each="category: ${session.categories}">
-                                    <a class="dropdown-item" href="#" th:href="@{/products(cat=${category.id})}" th:text="${category.name}"></a>
-                                </li>
+                            <ul class="dropdown-menu" id="dropdown-categories">
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

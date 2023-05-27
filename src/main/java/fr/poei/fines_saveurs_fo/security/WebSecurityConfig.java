@@ -29,7 +29,7 @@ import java.io.IOException;
 public class WebSecurityConfig {
 
     public static final String[] ENDPOINTS_BlACKLIST = {
-            "/customers", "/order/*"
+            "/customers", "/order", "/order/*"
     };
 
     @Bean
