@@ -19,6 +19,8 @@ public class Admin{
     private String firstname;
     @Column(name = "lastname")
     private String lastname;
+    @Column(name = "status")
+    private byte status;
     @Column(name = "password")
     private String password;
 }

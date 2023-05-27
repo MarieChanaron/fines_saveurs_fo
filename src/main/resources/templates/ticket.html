@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Tickets</title>
     <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+    <script src="/js/fetch-admins.js" async></script>
+    <script src="/js/post-ticket.js" defer></script>
 </head>
 <body>
 
 <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
 
-<form id="ticket-form" action="/ticket" method="POST">
+<form id="ticket-form" action="#" method="POST">
     <input type="email" id="userEmail" name="userEmail" placeholder="mon.email@gmail.com" required>
 
     <label for="admin-select">Administrateur:</label>
@@ -22,65 +24,9 @@
     <button type="submit">Soumettre</button>
 </form>
 
+<p id="confirmation"></p>
 
 <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
 
-<script>
-  const url = 'http://localhost:8080/webapi/admins';
-
-  fetch(url)
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-              let admins = data;
-              let adminSelect  = document.getElementById('admin-select');
-
-              admins.forEach((admin) => {
-                  let option = document.createElement('option');
-                  option.value = admin.id;
-                  option.text = admin.firstname + ' ' + admin.lastname;
-                  adminSelect.appendChild(option);
-              })
-          });
-</script>
-<script>
-    const form = document.getElementById('ticket-form');
-
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const url = 'http://localhost:8080/webapi/tickets/create';
-
-        const userEmail = document.getElementById('userEmail').value;
-        const adminId = +document.getElementById('admin-select').value;
-        const textInput = document.getElementById('text-input').value;
-
-        const data = {
-            userEmail: userEmail,
-            adminId: adminId,
-            textInput: textInput
-        };
-
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then((response) => {
-                if (response.ok) {
-                    alert('Le ticket a été envoyé avec succès.');
-                } else {
-                    alert('Une erreur s\'est produite lors de l\'envoi du ticket.');
-                }
-            })
-            .catch((error) => {
-                console.log('Erreur :', error);
-                alert('Une erreur s\'est produite lors de l\'envoi du ticket.');
-            });
-    });
-</script>
 </body>
 </html>
