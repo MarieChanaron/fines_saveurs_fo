@@ -44,6 +44,12 @@ public class SignupController {
     @PostMapping("/signup")
     public String signup(Model model, @ModelAttribute("customer") Customer customer, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
+        String email = customer.getEmail();
+        if (customerService.fetchByEmail(email).isPresent()) {
+            model.addAttribute("emailError", true);
+            return "signup";
+        }
+
         Optional<Role> customerRole = roleService.findByName("USER");
         if (customerRole.isEmpty()) return "404";
         customer.setRole(customerRole .orElse(null));
