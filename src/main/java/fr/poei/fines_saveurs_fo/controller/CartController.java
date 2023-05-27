@@ -47,6 +47,7 @@ public class CartController {
         }
 
         cartService.saveLineItem(cart, id, qty); // saves if doesn't exist or updates
+
         return "redirect:/cart";
     }
 
@@ -74,6 +75,7 @@ public class CartController {
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("totalQuantity", totalQuantity);
         model.addAttribute("totalPrice", totalPrice);
+        session.removeAttribute("totalPrice");
 
         return "cart";
     }

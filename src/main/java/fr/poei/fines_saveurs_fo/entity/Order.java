@@ -16,10 +16,8 @@ public class Order {
     private int id;
     @Column(name = "created_at", columnDefinition = "DATE")
     private LocalDateTime createdAt;
-    @Column(name = "sent_at", columnDefinition = "DATE")
-    private LocalDateTime sentAt;
-    @Column(name = "paid_at", columnDefinition = "DATE")
-    private LocalDateTime paidAt;
+    @Column(name = "amount_paid")
+    private double amountPaid;
     @ManyToOne
     @JoinColumn(name = "customer")
     private Customer customer;
