@@ -18,10 +18,12 @@ import java.util.Optional;
 @RequestMapping("/customers")
 @Controller
 public class CustomerController {
+
     @Autowired
     CustomerService customerService;
     @Autowired
     RoleService roleService;
+
     // ---------------Récupérer et afficher les données du client connecté-------------
     @GetMapping
     public String customer(Model model, HttpSession session) {

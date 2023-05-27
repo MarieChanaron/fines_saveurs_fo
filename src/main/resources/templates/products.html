@@ -4,6 +4,7 @@
 <head>
     <title>Fines Saveurs | Boutique</title>
     <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+    <script src="/js/search-feature.js" type="application/javascript" defer></script>
 </head>
 
 <body id="products">
@@ -31,6 +32,7 @@
             <p id="no-result">Votre recherche n'a produit aucun résultat.</p>
 
             <div th:each="prod: ${products}" class="product-card overflow-hidden">
+
                 <div class="col-left">
                     <p class="uppercase bold small" th:text="${prod.name}"></p>
                     <p class="bold" th:text="${prod.brand}"></p>
@@ -40,7 +42,8 @@
                     <div class="aligned">
                         <p class="mb-0"><a href="#" th:href="@{/product/{id}(id=${prod.id})}"
                                            class="underline-none uppercase bold smaller text-white">Détails</a></p>
-                        <a href="#" th:href="@{/cart/add(id=${prod.id}, qty=${1})}" class="float-end"><img src="/images/solar_cart-bold.svg" alt=""></a> <!-- Ajouter au panier -->
+                        <a th:if="${prod.stock > 0}" href="#" th:href="@{/cart/add(id=${prod.id}, qty=${1})}" class="float-end"><img src="/images/solar_cart-bold.svg" alt="ajouter au panier"></a> <!-- Ajouter au panier -->
+                        <img th:if="${prod.stock == 0}" src="/images/solar_cart-bold.svg" alt="" class="float-end disabled">
                     </div>
                 </div>
 
@@ -59,27 +62,6 @@
     </div>
 </div>
 <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
-
-
-<script type="text/javascript">
-
-    if (
-        document.getElementsByClassName("product-card").length > 0 &&
-        document.querySelector("input[type='text']").value.length === 0
-    ) {
-        document.getElementById("no-result").style.display = "none";
-    }
-
-    const handleClick = event => {
-        const inputElement = event.target;
-        inputElement.setSelectionRange(0, inputElement.value.length);
-    }
-
-    document
-        .querySelector('input[name="keywords"]')
-        .addEventListener("click", handleClick);
-
-</script>
 
 </body>
 </html>

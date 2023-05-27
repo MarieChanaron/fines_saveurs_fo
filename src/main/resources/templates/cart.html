@@ -62,7 +62,7 @@
             </div>
             <div class="col">
                 <form action="#" th:action="@{/changeSessionAttribute}" method="post">
-                    <button type="submit" class="button float-end">Commander</button>
+                    <button type="submit" class="button float-end" th:disabled="${totalQuantity == 0}">Commander</button>
                 </form>
             </div>
         </div>

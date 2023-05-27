@@ -51,7 +51,7 @@ public class OrderController {
 
             model.addAttribute("cartItems", cartItems);
             model.addAttribute("totalQuantity", totalQuantity);
-            model.addAttribute("totalPrice", totalPrice);
+            session.setAttribute("totalPrice", totalPrice);
 
             return "order";
 

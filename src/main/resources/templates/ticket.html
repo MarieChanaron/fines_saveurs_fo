@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Tickets</title>
     <div th:replace="~{fragments/frag_head :: frag_head}"></div>
-    <script type="text/javascript" src="/js/fetch-admin.js" async></script>
 
+    <script src="/js/fetch-admins.js" async></script>
+    <script src="/js/post-ticket.js" defer></script>
 </head>
 <body>
 
@@ -38,6 +39,9 @@
 
 </div>
 
+<p id="confirmation"></p>
+
 <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+
 </body>
 </html>
