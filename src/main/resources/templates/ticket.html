@@ -4,83 +4,40 @@
     <meta charset="UTF-8">
     <title>Tickets</title>
     <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+    <script type="text/javascript" src="/js/fetch-admin.js" async></script>
+
 </head>
 <body>
 
 <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
+<div class="container">
 
-<form id="ticket-form" action="/ticket" method="POST">
-    <input type="email" id="userEmail" name="userEmail" placeholder="mon.email@gmail.com" required>
+    <form id="ticket-form" class="row row-cols-lg-auto g-3 align-items-center" action="/ticket" method="POST">
+        <div class="col-12">
+            <label class="visually-hidden" for="userEmail">Username</label>
+            <div class="input-group">
+                <div class="input-group-text">@</div>
+                <input type="email" id="userEmail" name="userEmail" placeholder="mon.email@gmail.com" required>
+            </div>
+        </div>
 
-    <label for="admin-select">Administrateur:</label>
-    <select id="admin-select" name="adminId" required>
-        <option th:each="admin : ${admins}" th:value="${admin.id}" th:text="${admin.firstname + ' ' + admin.lastname}"></option>
-    </select>
+        <div class="col-12">
+            <label class="visually-hidden" for="admin-select">Preference</label>
+            <select id="admin-select" class="form-select" name="adminId" required>
+                <option selected>Choose one of our great admins</option>
+                <option th:each="admin : ${admins}" th:value="${admin.id}" th:text="${admin.firstname + ' ' + admin.lastname}"></option>
+            </select>
+        </div>
+        <input type="text" id="text-input" name="textInput" placeholder="Bonjour, ..." maxlength=255 required>
 
-    <input type="text" id="text-input" name="textInput" placeholder="Bonjour, ..." required>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Soumettre</button>
+        </div>
+    </form>
 
-    <button type="submit">Soumettre</button>
-</form>
 
+</div>
 
 <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
-
-<script>
-  const url = 'http://localhost:8080/webapi/admins';
-
-  fetch(url)
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-              let admins = data;
-              let adminSelect  = document.getElementById('admin-select');
-
-              admins.forEach((admin) => {
-                  let option = document.createElement('option');
-                  option.value = admin.id;
-                  option.text = admin.firstname + ' ' + admin.lastname;
-                  adminSelect.appendChild(option);
-              })
-          });
-</script>
-<script>
-    const form = document.getElementById('ticket-form');
-
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const url = 'http://localhost:8080/webapi/tickets/create';
-
-        const userEmail = document.getElementById('userEmail').value;
-        const adminId = +document.getElementById('admin-select').value;
-        const textInput = document.getElementById('text-input').value;
-
-        const data = {
-            userEmail: userEmail,
-            adminId: adminId,
-            textInput: textInput
-        };
-
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then((response) => {
-                if (response.ok) {
-                    alert('Le ticket a été envoyé avec succès.');
-                } else {
-                    alert('Une erreur s\'est produite lors de l\'envoi du ticket.');
-                }
-            })
-            .catch((error) => {
-                console.log('Erreur :', error);
-                alert('Une erreur s\'est produite lors de l\'envoi du ticket.');
-            });
-    });
-</script>
 </body>
 </html>
