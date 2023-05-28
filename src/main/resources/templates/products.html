@@ -14,7 +14,7 @@
 <div class="container my-5">
     <div class="row">
         <div class="col">
-            <form th:action="@{/products/search}" method="get" class="d-flex align-items-center">
+            <form th:action="@{/products/search}" method="get" class="d-flex align-items-baseline">
                 <div class="position-relative">
                     <input type="text" placeholder="Rechercher" name="keywords" value="" th:value="${keywords}">
                     <input type="submit" class="position-absolute end-0" value="" id="magnifying-glass">

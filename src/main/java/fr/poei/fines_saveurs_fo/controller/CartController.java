@@ -5,10 +5,10 @@ import fr.poei.fines_saveurs_fo.controller.dto.MapStructMapper;
 import fr.poei.fines_saveurs_fo.controller.dto.ProductDto;
 import fr.poei.fines_saveurs_fo.entity.Cart;
 import fr.poei.fines_saveurs_fo.entity.CartProduct;
-import fr.poei.fines_saveurs_fo.entity.Product;
+import fr.poei.fines_saveurs_fo.entity.Customer;
 import fr.poei.fines_saveurs_fo.service.CartService;
+import fr.poei.fines_saveurs_fo.service.CustomerService;
 import fr.poei.fines_saveurs_fo.service.ProductService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -30,16 +30,24 @@ public class CartController {
     final CartService cartService;
     final ProductService productService;
     final MapStructMapper mapStructMapper;
-
+    final CustomerService customerService;
 
     @GetMapping("/add")
     public String addToCart(@RequestParam long id, @RequestParam byte qty, HttpSession session, Model model) {
 
-        Cart cart = (Cart) session.getAttribute("cart");
+        Cart cart;
 
         if (session.getAttribute("cart") == null) {
             Cart newCart = new Cart();
             newCart.setCreatedAt(LocalDateTime.now());
+
+            Optional<Customer> customerOptional = customerService.fetchByEmail(
+                    (String) session.getAttribute("email"));
+            if (customerOptional.isPresent()) {
+                Customer customer = customerOptional.get();
+                newCart.setCustomer(customer);
+            }
+
             cart = cartService.saveCart(newCart);
             session.setAttribute("cart", cart);
         } else {
