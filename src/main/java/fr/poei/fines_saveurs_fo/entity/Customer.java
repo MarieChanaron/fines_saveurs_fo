@@ -33,13 +33,14 @@ public class Customer implements UserDetails, Serializable {
     private String password;
     @Transient
     private String passwordConfirmation;
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders;
     @ManyToOne
     private Role role;
 
     public Customer(String password) {
         this.password = password;
     }
-
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "customer_role", joinColumns = @JoinColumn(name = "id_customer"),

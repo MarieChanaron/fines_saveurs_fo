@@ -15,37 +15,88 @@
   <main>
     <div class="container mt-4">
 
-      <div class="row mb-4">
+      <div class="row mb-5">
 
         <!-- Customer information -->
-        <h3>Mon compte</h3>
+        <h3 class="d-inline me-5 fit-content">Mon compte</h3>
         <hr>
         <div class="col">
           <dl class="row">
             <div>
               <dt>Nom complet :</dt>
-              <dd><span th:text="${customer.firstname}"></span> <span th:text="${customer.lastname}"></span></dd>
+              <dd class="highlight"><span th:text="${customer.firstname}"></span> <span th:text="${customer.lastname}"></span></dd>
+              <a href="" th:href="@{/customers/edit-profile(id=${customer.id})}" class="ms-5"><img src="/images/circum_edit.svg" alt="éditer"></a>
             </div>
-            <div>
+            <div class="fit-content">
               <dt>Adresse e-mail :</dt>
               <dd th:text="${customer.email}"></dd>
             </div>
           </dl>
-          <a href="" class="smaller">Modifier mes informations</a>
+
         </div>
 
         <!-- Addresses -->
-        <div class="row">
+        <div class="row my-5">
+          <h3 class="d-inline me-5 fit-content">Mes adresses</h3>
+          <hr>
 
           <div class="col">
 
+            <dl class="row">
+              <div>
+                <dt>Adresse de livraison :</dt>
+                <dd>
+                  <p class="m-0">
+                    <span th:text="${delivery.streetNumber}"></span> <span th:text="${delivery.street}"></span>
+                    <a href="" class="ms-5"><img src="/images/circum_edit.svg" alt="éditer"></a>
+                  </p>
+                  <p class="m-0" th:text="${delivery.additionalInformation}"></p>
+                  <p class="m-0"><span th:text="${delivery.postcode}"></span> <span th:text="${delivery.city}"></span></p>
+                </dd>
+              </div>
+            </dl>
+
           </div>
 
-          <div class="col"></div>
+          <div class="col">
+            <dl class="row">
+              <div>
+                <dt>Adresse de facturation :</dt>
+                <dd>
+                  <p class="m-0">
+                    <span th:text="${invoicing.streetNumber}"></span> <span th:text="${invoicing.street}"></span>
+                    <a href="" class="ms-5"><img src="/images/circum_edit.svg" alt="éditer"></a>
+                  </p>
+                  <p class="m-0" th:text="${invoicing.additionalInformation}"></p>
+                  <p class="m-0"><span th:text="${invoicing.postcode}"></span> <span th:text="${invoicing.city}"></span></p>
+                </dd>
+              </div>
+            </dl>
+          </div>
         </div>
 
         <!-- Orders -->
-        <div class="row"></div>
+        <div class="row">
+          <h3 class="d-inline me-5 fit-content">Mes commandes passées</h3>
+          <hr>
+
+          <p>Vous avez passé <span th:text="${orders.size()}"></span> commandes :</p>
+
+          <table class="table" id="orders">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Montant</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="order: ${orders}">
+                <td th:text="${#temporals.day(order.createdAt)} + '/' + ${#temporals.month(order.createdAt)} + '/' + ${#temporals.year(order.createdAt)}"></td>
+                <td th:text="${order.amountPaid} + ' €'"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
       </div>
 

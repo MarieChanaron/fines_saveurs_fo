@@ -157,8 +157,14 @@ dl > div {
 }
 
 dt {
-    width: 150px;
+    color: var(--accent-color-light);
+    width: 180px;
     font-weight: 600;
     font-size: 1.3rem;
     text-align: left;
+}
+
+.highlight {
+    font-weight: 600;
+    font-size: 1.3rem;
 }

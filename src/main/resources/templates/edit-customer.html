@@ -25,54 +25,34 @@
                 <img class="w-100" src="/images/card_profile.png" alt="">
             </div>
             <div class="card-body col-12">
-                <form th:action="@{/customers/edit}" th:object="${customers}" method="POST">
-                    <div class="form-group">
-                        <label> Nom du client </label>
-                        <input
-                                type="text"
-                                name="firstName"
-                                th:field="*{firstname}"
-                                class="form-control"
-                                placeholder="Modifier ton nom"
-                        />
+
+                <form th:action="@{/customers/edit}" th:object="${customer}" method="POST">
+
+                    <div class="my-4">
+                        <label for="firstname">Prénom</label>
+                        <input id="firstname" type="text" name="firstname" th:field="*{firstname}" class="form-control" th:value="${customer.firstname}" required>
                     </div>
 
-                    <div class="form-group">
-                        <label> Prénom du client </label>
-                        <input
-                                type="text"
-                                name="lastName"
-                                th:field="*{lastname}"
-                                class="form-control"
-                                placeholder="Modifier ton prénom"
-                        />
+                    <div class="my-4">
+                        <label for="lastname">Nom</label>
+                        <input id="lastname" type="text" name="lastname" th:field="*{lastname}" class="form-control" th:value="${customer.lastname}" required>
                     </div>
 
-                    <div class="form-group">
-                        <label> Email du client </label>
-                        <input disabled
-                               type="text"
-                               name="email"
-                               th:field="*{email}"
-                               class="form-control"
-                               placeholder="Enter Student Email"
-                        />
+                    <div class="my-4">
+                        <label for="email">Email</label>
+                        <input id="email" type="text" name="email" th:field="*{email}" class="form-control" th:value="${customer.email}" required>
                     </div>
-                    <div class="form-group">
-                        <label> Mot de passe du client </label>
-                        <input disabled
-                               type="text"
-                               name="email"
-                               value= "*********"
-                               class="form-control"
-                               placeholder="Enter Student Email"
-                        />
+                    <div class="my-4">
+                        <label for="password">Mot de passe</label>
+                        <input id="password" type="text" name="password" value="" placeholder= "*********" class="form-control" th:field="*{password}">
+                    </div>
+                    <div class="my-4">
+                        <label for="confirmation">Confirmation de mot de passe</label>
+                        <input id="confirmation" type="text" name="confirmation" value="" placeholder= "*********" class="form-control" th:field="*{passwordConfirmation}">
                     </div>
 
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">
-                            Submit
-                        </button>
+                    <div class="my-4">
+                        <button type="submit" class="button my-4 float-end">Submit</button>
                     </div>
                 </form>
             </div>

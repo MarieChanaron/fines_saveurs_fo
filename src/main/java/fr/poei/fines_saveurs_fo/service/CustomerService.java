@@ -24,7 +24,7 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Optional<Customer> fetchById(int id) {
+    public Optional<Customer> fetchById(long id) {
         return customerRepository.findById(id);
     }
 

@@ -5,3 +5,21 @@ table tfoot tr {
 table {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);;
 }
+
+
+table#orders th {
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-align: left;
+}
+
+table#orders {
+    width: fit-content;
+}
+
+table#orders th,
+table#orders td {
+    width: fit-content;
+    padding-right: 16px;
+    padding-left: 16px;
+}
