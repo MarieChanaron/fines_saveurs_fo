@@ -23,21 +23,17 @@
         <img class="w-100" src="/images/card_profile.png" alt="">
       </div>
       <div class="card-body col-12">
-        <tr th:each="customer : ${customers}">
-<!--          <td th:text="${customer.id}"/>-->
-        <p>Nom: <td th:text="${customer.lastname}"/></p>
-        <p>Prénom: <td th:text="${customer.firstname}"/></p>
-        <p>Email : <td th:text="${customer.email}"/></p>
-        <p>Password: ********</p>
+        <div th:each="customer : ${customers}">
+        <p class="mb-4">Nom: <span th:text="${customer.lastname}"></span></p>
+        <p class="mb-4">Prénom: <span th:text="${customer.firstname}"></span></p>
+        <p class="mb-4">Email : <span th:text="${customer.email}"></span></p>
+        <p class="mb-4">Password: ********</p>
           <div class="d-flex justify-content-around col-12">
-            <div class=" mt-2 mb-2">
-              <td>
-              <a th:href="@{'customers/edit'}" class="btn btn-primary">Modifier le profil </a>
-              </td>
-
+            <div class="my-4">
+              <a th:href="@{'customers/edit'}"><button class="button">Modifier le profil</button></a>
             </div>
           </div>
-        </tr>
+        </div>
       </div>
     </div>
   </div>
