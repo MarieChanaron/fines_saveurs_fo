@@ -29,7 +29,7 @@
             <div class="col-12">
                 <label class="visually-hidden" for="admin-select">Preference</label>
                 <select id="admin-select" class="form-select" name="adminId" required>
-                    <option value="" selected disabled>Choose one of our great admins</option>
+                    <option value="" selected disabled>Choisissez un admin </option>
                     <option th:each="admin : ${admins}" th:value="${admin.id}" th:text="${admin.firstname + ' ' + admin.lastname}"></option>
                 </select>
             </div>
