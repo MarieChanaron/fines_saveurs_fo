@@ -20,14 +20,15 @@ public class CustomerService {
     @Autowired
     RoleService roleService;
 
-    public List <Customer> fetchAll() {
+    public List<Customer> fetchAll() {
         return customerRepository.findAll();
     }
 
-    public Optional<Customer> fetchById (int id) {
+    public Optional<Customer> fetchById(int id) {
         return customerRepository.findById(id);
     }
-    public void save (Customer customer) {
+
+    public void save(Customer customer) {
         customerRepository.save(customer);
     }
 
@@ -35,13 +36,12 @@ public class CustomerService {
         return customerRepository.findByEmail(email);
     }
 
-    public Customer registerNewCustomer (Customer customer) {
+    public Customer registerNewCustomer(Customer customer) {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         List<Role> roles = new ArrayList<>();
         Optional<Role> role = roleService.findByName("CUSTOMER");
         role.ifPresent(roles::add);
         customer.setRoleList(roles);
-
         return  customerRepository.save(customer);
     }
 }

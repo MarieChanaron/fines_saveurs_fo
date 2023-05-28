@@ -1,6 +1,7 @@
 package fr.poei.fines_saveurs_fo.controller;
 
 import fr.poei.fines_saveurs_fo.controller.dto.CartProductDto;
+import fr.poei.fines_saveurs_fo.controller.dto.CustomerDto;
 import fr.poei.fines_saveurs_fo.controller.dto.MapStructMapper;
 import fr.poei.fines_saveurs_fo.controller.dto.ProductDto;
 import fr.poei.fines_saveurs_fo.entity.Cart;
@@ -45,7 +46,9 @@ public class CartController {
                     (String) session.getAttribute("email"));
             if (customerOptional.isPresent()) {
                 Customer customer = customerOptional.get();
-                newCart.setCustomer(customer);
+                CustomerDto customerDto = mapStructMapper.toDto(customer);
+                Customer customerToSave = mapStructMapper.fromDto(customerDto);
+                newCart.setCustomer(customerToSave);
             }
 
             cart = cartService.saveCart(newCart);
