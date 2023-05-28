@@ -19,7 +19,7 @@ import java.util.Optional;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/order/invoicing-address")
-public class InvoicingAddress {
+public class OrderInvoicingAddress {
 
     final MapStructMapper mapStructMapper;
     final CustomerService customerService;
