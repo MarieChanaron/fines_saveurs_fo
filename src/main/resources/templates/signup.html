@@ -35,6 +35,7 @@
                             <label for="password" class="form-label">Mot de passe:</label>
                             <input type="password" class="form-control" id="password" name="password"
                                    th:field="*{password}" autocomplete="new-password" required>
+                            <label th:if="${passwordEmpty}" class="error">Le mot de passe ne doit pas être vide.</label>
                         </div>
                         <div class="my-4">
                             <label for="confirmation" class="form-label">Confirmation de mot de passe:</label>

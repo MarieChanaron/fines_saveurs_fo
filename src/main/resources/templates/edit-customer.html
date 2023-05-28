@@ -49,6 +49,7 @@
                     <div class="my-4">
                         <label for="password">Mot de passe</label>
                         <input id="password" type="password" name="password" value="" placeholder= "*********" class="form-control" th:field="*{password}">
+                        <label th:if="${passwordEmpty}" class="error">Le mot de passe ne doit pas être vide.</label>
                     </div>
                     <div class="my-4">
                         <label for="confirmation">Confirmation</label>
@@ -57,6 +58,7 @@
                     </div>
 
                     <div class="my-4">
+                        <a href="" class="small-link">Réinitialiser</a>
                         <button type="submit" class="button my-4 float-end">Valider</button>
                     </div>
                 </form>
