@@ -19,8 +19,10 @@
                 <label class="visually-hidden" for="userEmail">Username</label>
                 <div class="input-group">
                     <div class="input-group-text">@</div>
-                    <input type="email" id="userEmail" name="userEmail" placeholder="mon.email@gmail.com"  required>
-<!--                    th:value="userEmail"-->
+                    <input type="email" id="userEmail" name="userEmail"
+                           placeholder="mon.email@gmail.com"
+                           th:placeholder="${#strings.isEmpty(userEmail) || userEmail == 'anonymousUser' ? 'mon.email@gmail.com' : '' }"
+                           th:value="${userEmail != 'anonymousUser' ? userEmail : ''}" required>
                 </div>
             </div>
 
