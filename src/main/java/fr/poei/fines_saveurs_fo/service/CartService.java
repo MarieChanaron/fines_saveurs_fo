@@ -2,6 +2,7 @@ package fr.poei.fines_saveurs_fo.service;
 
 import fr.poei.fines_saveurs_fo.entity.Cart;
 import fr.poei.fines_saveurs_fo.entity.CartProduct;
+import fr.poei.fines_saveurs_fo.entity.Customer;
 import fr.poei.fines_saveurs_fo.entity.Product;
 import fr.poei.fines_saveurs_fo.repository.CartProductRepository;
 import fr.poei.fines_saveurs_fo.repository.CartRepository;
@@ -61,4 +62,7 @@ public class CartService {
         product.ifPresent(value -> cartProductRepository.deleteCartProductByCartAndProduct(cart, value));
     }
 
+    public void setCustomer(Customer customer, long cartId) {
+        cartRepository.setCustomer(customer, cartId);
+    }
 }

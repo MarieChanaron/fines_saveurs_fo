@@ -1,5 +1,3 @@
-const adminSelect = document.getElementById("admin-select");
-
 const ENDPOINT = 'http://localhost:8080/webapi/admins';
 
 const fetchData = async(endpointString) => {
@@ -22,6 +20,7 @@ const fillSelectElement = adminsArray => {
         const id = admin.id;
         const firstname = admin.firstname;
         const lastname = admin.lastname;
+        const adminSelect = document.getElementById("admin-select");
         if (id && firstname && lastname) {
             let option = document.createElement('option');
             option.value = id;

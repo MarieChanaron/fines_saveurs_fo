@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/destination-address")
+@RequestMapping("/order/destination-address")
 public class DestinationAddress {
 
     final MapStructMapper mapStructMapper;
@@ -53,6 +53,6 @@ public class DestinationAddress {
             addressService.saveCustomerAddress(address, customer, "destination");
         }
 
-        return "redirect:/invoicing-address";
+        return "redirect:/order/invoicing-address";
     }
 }

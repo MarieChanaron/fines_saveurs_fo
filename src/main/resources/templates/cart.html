@@ -43,7 +43,7 @@
                     <tfoot>
                         <tr>
                             <th scope="row">Total</th>
-                            <th th:text="${totalQuantity}"></th>
+                            <th th:text="${session.totalQuantity}"></th>
                             <th th:text="${totalPrice} + ' €'"></th>
                             <td></td>
                         </tr>
@@ -61,7 +61,7 @@
                 </a>
             </div>
             <div class="col">
-                <form action="#" th:action="@{/changeSessionAttribute}" method="post">
+                <form action="#" th:action="@{/change-session-attribute}" method="post">
                     <button type="submit" class="button float-end" th:disabled="${totalQuantity == 0}">Commander</button>
                 </form>
             </div>

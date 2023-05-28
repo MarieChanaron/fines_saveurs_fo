@@ -69,7 +69,6 @@ public class Customer implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonExpired() {
-
         return true;
     }
 
@@ -80,13 +79,11 @@ public class Customer implements UserDetails, Serializable {
 
     @Override
     public boolean isCredentialsNonExpired() {
-
         return true;
     }
 
     @Override
     public boolean isEnabled() {
-
         return true;
     }
 }
