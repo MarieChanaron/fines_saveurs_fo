@@ -34,9 +34,7 @@ public class AccountInvoicingAddress {
         Customer customer = customerOptional.get();
 
         Address address = addressService.getInvoicingAddress(customer);
-        if (address.getId() == 0) {
-            address = addressService.getDestinationAddress(customer);
-        }
+
         model.addAttribute("address", address);
         return "account-invoicing-address";
     }
