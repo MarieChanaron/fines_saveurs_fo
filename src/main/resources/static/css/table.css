@@ -7,14 +7,20 @@ table {
 }
 
 
+
+
+table#orders {
+    width: fit-content;
+}
+
+table#orders thead {
+    background-color: rgba(38, 34, 33, 0.05);
+}
+
 table#orders th {
     font-weight: 600;
     font-size: 1.3rem;
     text-align: left;
-}
-
-table#orders {
-    width: fit-content;
 }
 
 table#orders th,
