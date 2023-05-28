@@ -10,38 +10,38 @@
 </head>
 <body>
 
+
 <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
-<div class="container">
+<div class="page">
+    <div class="container">
 
-    <form id="ticket-form" class="row row-cols-lg-auto g-3 align-items-center" action="/ticket" method="POST">
-        <div class="col-12">
-            <label class="visually-hidden" for="userEmail">Username</label>
-            <div class="input-group">
-                <div class="input-group-text">@</div>
-                <input type="email" id="userEmail" name="userEmail" placeholder="mon.email@gmail.com" required>
+        <form id="ticket-form" class="row row-cols-lg-auto g-3 align-items-center" action="/ticket" method="POST">
+            <div class="col-12">
+                <label class="visually-hidden" for="userEmail">Username</label>
+                <div class="input-group">
+                    <div class="input-group-text">@</div>
+                    <input type="email" id="userEmail" name="userEmail" placeholder="mon.email@gmail.com" required>
+                </div>
             </div>
-        </div>
 
-        <div class="col-12">
-            <label class="visually-hidden" for="admin-select">Preference</label>
-            <select id="admin-select" class="form-select" name="adminId" required>
-                <option selected>Choose one of our great admins</option>
-                <option th:each="admin : ${admins}" th:value="${admin.id}" th:text="${admin.firstname + ' ' + admin.lastname}"></option>
-            </select>
-        </div>
-        <input type="text" id="text-input" name="textInput" placeholder="Bonjour, ..." maxlength=255 required>
+            <div class="col-12">
+                <label class="visually-hidden" for="admin-select">Preference</label>
+                <select id="admin-select" class="form-select" name="adminId" required>
+                    <option value="" selected disabled>Choose one of our great admins</option>
+                    <option th:each="admin : ${admins}" th:value="${admin.id}" th:text="${admin.firstname + ' ' + admin.lastname}"></option>
+                </select>
+            </div>
+            <input type="text" id="text-input" name="textInput" placeholder="Bonjour, ..." maxlength=255 required>
 
-        <div class="col-12">
-            <button class="btn btn-primary" type="submit">Soumettre</button>
-        </div>
-    </form>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Soumettre</button>
+            </div>
+        </form>
 
+        <p id="confirmation"></p>
 
+    </div>
+        <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
 </div>
-
-<p id="confirmation"></p>
-
-<div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
-
 </body>
 </html>

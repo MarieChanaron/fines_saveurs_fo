@@ -2,6 +2,21 @@
 
 <th:block th:fragment="frag_footer">
 
+    <footer class="d-flex align-items-center justify-content-between position-absolute">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="" class="d-block">Mentions légales</a>
+                        <a href="" th:href="@{/ticket}" class="d-block">Contacter un administrateur</a>
+                    </div>
+                    <div class="col d-flex align-items-center justify-content-end">
+                        <a href="#"><img src="/images/mdi_facebook.svg" alt="facebook" class="ms-3"></a>
+                        <a href="#"><img src="/images/mdi_pinterest.svg" alt="pinterest" class="ms-3"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-<p>footer</p>
 </th:block>

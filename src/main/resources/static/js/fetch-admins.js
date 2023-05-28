@@ -1,11 +1,11 @@
-const ENDPOINT = 'http://localhost:8080/webapi/admins';
+const ENDPOINT_ADMINS = 'http://localhost:8080/webapi/admins';
 
-const fetchData = async(endpointString) => {
+const fetchAdmins = async(endpointString) => {
     try {
-        const response = await fetch(endpointString);
-        if (response) {
-            const jsonResponse = await response.json();
-            return jsonResponse;
+        const adminsResponse = await fetch(endpointString);
+        if (adminsResponse) {
+            const adminsJsonResponse = await adminsResponse.json();
+            return adminsJsonResponse;
         } else {
             throw new Error("Request failed");
         }
@@ -30,5 +30,5 @@ const fillSelectElement = adminsArray => {
     });
 }
 
-const admins = fetchData(ENDPOINT)
+const admins = fetchAdmins(ENDPOINT_ADMINS)
     .then (admins => fillSelectElement(admins));
