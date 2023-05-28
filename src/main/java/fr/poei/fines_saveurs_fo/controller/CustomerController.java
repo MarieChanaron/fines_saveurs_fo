@@ -5,6 +5,7 @@ import fr.poei.fines_saveurs_fo.entity.role.Role;
 import fr.poei.fines_saveurs_fo.service.CustomerService;
 import fr.poei.fines_saveurs_fo.service.RoleService;
 import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,11 @@ import java.util.Optional;
 
 
 @RequestMapping("/customers")
+@AllArgsConstructor
 @Controller
 public class CustomerController {
 
-    @Autowired
     CustomerService customerService;
-    @Autowired
     RoleService roleService;
 
     // ---------------Récupérer et afficher les données du client connecté-------------
