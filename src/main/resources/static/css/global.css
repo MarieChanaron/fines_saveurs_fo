@@ -35,7 +35,6 @@ html {
 body {
     height: 100%;
     color: var(--primary-color-dark);
-    /* padding-top: var(--header-height);*/
 }
 
 h1, h2, h3 {
