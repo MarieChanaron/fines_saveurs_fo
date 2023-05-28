@@ -66,6 +66,7 @@ public class PaymentController {
 
         Optional<Order> orderSaved = orderService.saveOrder(cart, email, totalPrice);
 
+        session.removeAttribute("totalQuantity");
         session.removeAttribute("cart");
         session.removeAttribute("totalPrice");
         session.removeAttribute("orderConfirmed");
