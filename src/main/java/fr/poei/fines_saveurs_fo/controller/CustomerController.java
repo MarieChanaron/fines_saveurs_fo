@@ -1,8 +1,17 @@
 package fr.poei.fines_saveurs_fo.controller;
 
+import fr.poei.fines_saveurs_fo.controller.dto.CartDto;
+import fr.poei.fines_saveurs_fo.controller.dto.CustomerDto;
+import fr.poei.fines_saveurs_fo.controller.dto.MapStructMapper;
+import fr.poei.fines_saveurs_fo.controller.dto.OrderDto;
+import fr.poei.fines_saveurs_fo.entity.Address;
+import fr.poei.fines_saveurs_fo.entity.Cart;
 import fr.poei.fines_saveurs_fo.entity.Customer;
+import fr.poei.fines_saveurs_fo.entity.Order;
 import fr.poei.fines_saveurs_fo.entity.role.Role;
+import fr.poei.fines_saveurs_fo.service.AddressService;
 import fr.poei.fines_saveurs_fo.service.CustomerService;
+import fr.poei.fines_saveurs_fo.service.OrderService;
 import fr.poei.fines_saveurs_fo.service.RoleService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -13,44 +22,93 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
-@RequestMapping("/customers")
+
 @AllArgsConstructor
 @Controller
+@RequestMapping("/customers")
 public class CustomerController {
 
     CustomerService customerService;
+    AddressService addressService;
+    OrderService orderService;
     RoleService roleService;
+    MapStructMapper mapStructMapper;
 
     // ---------------Récupérer et afficher les données du client connecté-------------
     @GetMapping
     public String customer(Model model, HttpSession session) {
-        Customer customer = customerService.fetchByEmail(String.valueOf(session.getAttribute("email"))).get();
-        if (customer != null) {
-            model.addAttribute("customers", customer);
-            return "customer-profile";
-        } else {
-            return "redirect:/login";
-        }
+
+        // Retrieve customer
+        String email = (String) session.getAttribute("email");
+        Optional<Customer> customerOptional = customerService.fetchByEmail(email);
+        if (customerOptional.isEmpty()) return "404";
+        Customer customer = customerOptional.get();
+
+        // Get customer information
+        CustomerDto customerDto = mapStructMapper.toDto(customer);
+        model.addAttribute("customer", customerDto);
+
+        // Get addresses
+        Address destinationAddress = addressService.getDestinationAddress(customer);
+        model.addAttribute("delivery", destinationAddress);
+
+        Address invoicingAddress = addressService.getInvoicingAddress(customer);
+        model.addAttribute("invoicing", invoicingAddress);
+
+        // Get orders
+        List<Order> orders = orderService.fetchOrdersByCustomer(customer);
+        List<OrderDto> orderDtoList = new ArrayList<>();
+        orders.stream().forEach(order -> {
+            OrderDto orderDto = mapStructMapper.toDto(order);
+            CartDto cartDto = mapStructMapper.toDto(order.getCart());
+            orderDto.setCartDto(cartDto);
+            orderDtoList.add(orderDto);
+        });
+        model.addAttribute("orders", orderDtoList);
+
+        return "profile";
     }
 
     // ----------------------------Modifier les données du client----------------
-    @GetMapping("edit")
-    public String editGet(Model model, HttpSession session) {
-        Customer customer = customerService.fetchByEmail(String.valueOf(session.getAttribute("email"))).get();
-        model.addAttribute("customers", customer);
+    @GetMapping("/edit-profile")
+    public String editGet(Model model, @RequestParam long id) {
+        Optional<Customer> customerOptional = customerService.fetchById(id);
+        if (customerOptional.isEmpty()) return "404";
+        Customer customer = customerOptional.get();
+        customer.setPassword(null);
+        model.addAttribute("customer", customer);
         return "edit-customer";
     }
 
-    @PostMapping("edit")
+    @PostMapping("/edit")
     public String editPost(@ModelAttribute("customer") Customer customer, Model model, HttpSession session) {
-        Customer connectedCustomer = customerService.fetchByEmail(String.valueOf(session.getAttribute("email"))).get();
-        connectedCustomer.setFirstname(customer.getFirstname());
-        connectedCustomer.setLastname(customer.getLastname());
-        customerService.save(connectedCustomer);
-        model.addAttribute("customer", connectedCustomer);
+
+        String password = customer.getPassword();
+        if (password == null || password.length() == 0) {
+            model.addAttribute("passwordEmpty", true);
+            return "edit-customer";
+        }
+
+        String confirmation = customer.getPasswordConfirmation();
+        if (!password.equals(confirmation)) {
+            model.addAttribute("passwordError", true);
+            return "edit-customer";
+        }
+
+        String email = customer.getEmail();
+        Optional<Customer> customerOptional = customerService.fetchByEmail(email);
+        if (customerOptional.isPresent() && customerOptional.get().getId() != customer.getId()) {
+            model.addAttribute("emailError", true);
+            return "edit-customer";
+        }
+
+        customerService.updateCustomerDetails(customer);
+
         return "redirect:/customers";
     }
 

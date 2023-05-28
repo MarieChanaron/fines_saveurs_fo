@@ -73,7 +73,7 @@ public class WebSecurityConfig {
                         HttpSession session = request.getSession();
                         String email = authentication.getName();
                         session.setAttribute("email", email);
-                        response.sendRedirect(request.getContextPath() + "/");
+                        response.sendRedirect(request.getContextPath() + "/customers");
                     }
                 })
                 .and()

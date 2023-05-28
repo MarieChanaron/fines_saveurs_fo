@@ -18,41 +18,43 @@ import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/order/destination-address")
-public class DestinationAddress {
+@RequestMapping("/order/invoicing-address")
+public class OrderInvoicingAddress {
 
     final MapStructMapper mapStructMapper;
     final CustomerService customerService;
     final AddressService addressService;
 
     @GetMapping
-    public String getDestinationAddress(HttpSession session, Model model) {
+    public String getInvoicingAddress(HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
         Optional<Customer> customerOptional = customerService.fetchByEmail(email);
         if (customerOptional.isEmpty()) return "404";
         Customer customer = customerOptional.get();
 
-        Address destinationAddress = addressService.getDestinationAddress(customer);
-        model.addAttribute("address", destinationAddress);
-
-        return "destination-address";
+        Address address = addressService.getInvoicingAddress(customer);
+        if (address.getId() == 0) {
+            address = addressService.getDestinationAddress(customer);
+        }
+        model.addAttribute("address", address);
+        return "invoicing-address";
     }
 
     @PostMapping
-    public String setDestinationAddress(HttpSession session, @ModelAttribute Address address) {
+    public String setInvoicingAddress(HttpSession session, @ModelAttribute Address address) {
         String email = (String) session.getAttribute("email");
         Optional<Customer> customerOptional = customerService.fetchByEmail(email);
         if (customerOptional.isEmpty()) return "404";
         Customer customer = customerOptional.get();
 
-        long addressId = addressService.getDestinationAddress(customer).getId();
+        long addressId = addressService.getInvoicingAddress(customer).getId();
         if (addressId != 0) {
             address.setId(addressId);
             addressService.updateAddress(address); // Update address
         } else {
-            addressService.saveCustomerAddress(address, customer, "destination");
+            addressService.saveCustomerAddress(address, customer, "invoicing");
         }
 
-        return "redirect:/order/invoicing-address";
+        return "redirect:/order/payment";
     }
 }

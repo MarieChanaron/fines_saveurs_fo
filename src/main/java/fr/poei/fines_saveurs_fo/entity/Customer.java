@@ -15,11 +15,8 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
 @Table(name = "customer")
-@Data
-@NoArgsConstructor
+@Data @NoArgsConstructor
 public class Customer implements UserDetails, Serializable {
 
     @Id
@@ -43,10 +40,6 @@ public class Customer implements UserDetails, Serializable {
 
     public Customer(String password) {
         this.password = password;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
     }
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)

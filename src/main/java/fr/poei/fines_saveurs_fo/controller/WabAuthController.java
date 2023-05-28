@@ -20,6 +20,6 @@ public class WabAuthController {
 
     @GetMapping("profile")
     public String displayUserProfile (Model model) {
-        return "/customer-profile";
+        return "/customers";
     }
 }
