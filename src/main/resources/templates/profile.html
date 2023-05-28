@@ -48,7 +48,7 @@
                 <dd>
                   <p class="m-0">
                     <span th:text="${delivery.streetNumber}"></span> <span th:text="${delivery.street}"></span>
-                    <a href="" class="ms-5"><img src="/images/circum_edit.svg" alt="éditer"></a>
+                    <a href="" th:href="@{/customers/destination-address}" class="ms-5"><img src="/images/circum_edit.svg" alt="éditer"></a>
                   </p>
                   <p class="m-0" th:text="${delivery.additionalInformation}"></p>
                   <p class="m-0"><span th:text="${delivery.postcode}"></span> <span th:text="${delivery.city}"></span></p>
@@ -65,7 +65,7 @@
                 <dd>
                   <p class="m-0">
                     <span th:text="${invoicing.streetNumber}"></span> <span th:text="${invoicing.street}"></span>
-                    <a href="" class="ms-5"><img src="/images/circum_edit.svg" alt="éditer"></a>
+                    <a href="" th:href="@{/customers/invoicing-address}" class="ms-5"><img src="/images/circum_edit.svg" alt="éditer"></a>
                   </p>
                   <p class="m-0" th:text="${invoicing.additionalInformation}"></p>
                   <p class="m-0"><span th:text="${invoicing.postcode}"></span> <span th:text="${invoicing.city}"></span></p>

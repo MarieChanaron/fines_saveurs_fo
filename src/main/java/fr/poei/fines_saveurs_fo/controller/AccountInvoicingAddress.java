@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/account/invoicing-address")
+@RequestMapping("/customers/invoicing-address")
 public class AccountInvoicingAddress {
 
     final MapStructMapper mapStructMapper;
@@ -27,6 +27,7 @@ public class AccountInvoicingAddress {
 
     @GetMapping
     public String getInvoicingAddress(HttpSession session, Model model) {
+
         String email = (String) session.getAttribute("email");
         Optional<Customer> customerOptional = customerService.fetchByEmail(email);
         if (customerOptional.isEmpty()) return "404";
