@@ -41,11 +41,11 @@
                         <input id="lastname" type="text" name="lastname" th:field="*{lastname}" class="form-control" th:value="${customer.lastname}" required>
                     </div>
 
-                    <div class="my-4">
+                    <!--div class="my-4">
                         <label for="email">Email</label>
                         <input id="email" type="text" name="email" th:field="*{email}" class="form-control" th:value="${customer.email}" required>
                         <label th:if="${emailError}" class="error">Un compte existe déjà avec cette adresse e-mail.</label>
-                    </div>
+                    </div-->
                     <div class="my-4">
                         <label for="password">Mot de passe</label>
                         <input id="password" type="password" name="password" value="" placeholder= "*********" class="form-control" th:field="*{password}">
