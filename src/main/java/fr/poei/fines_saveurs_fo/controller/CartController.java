@@ -35,7 +35,7 @@ public class CartController {
     @GetMapping("/add")
     public String addToCart(@RequestParam long id, @RequestParam byte qty, HttpSession session, Model model) {
 
-        Cart cart;
+        Cart cart = (Cart) session.getAttribute("cart");
 
         if (session.getAttribute("cart") == null) {
             Cart newCart = new Cart();
