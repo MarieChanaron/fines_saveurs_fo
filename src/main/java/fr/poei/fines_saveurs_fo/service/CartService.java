@@ -61,4 +61,8 @@ public class CartService {
         product.ifPresent(value -> cartProductRepository.deleteCartProductByCartAndProduct(cart, value));
     }
 
+    public int getNbItems() {
+        //return cartRepository.
+        return 10;
+    }
 }

@@ -17,3 +17,16 @@ nav a {
 .logo {
     width: 110px;
 }
+
+#nb-prod-cart {
+    position: absolute;
+    background-color: var(--accent-color-light);
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    border-radius: 50px;
+    font-size: 10px;
+    color: white;
+    font-weight: 600;
+    right: -14px;
+}

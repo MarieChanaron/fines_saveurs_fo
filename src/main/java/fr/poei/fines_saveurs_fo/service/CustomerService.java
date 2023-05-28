@@ -19,20 +19,22 @@ public class CustomerService {
     CustomerRepository customerRepository;
     @Autowired
     RoleService roleService;
+
     public List <Customer> fetchAll() {
         return customerRepository.findAll();
     }
-    public Customer fetchById (int id) {
-        return customerRepository.findById(id).get();
+
+    public Optional<Customer> fetchById (int id) {
+        return customerRepository.findById(id);
     }
     public void save (Customer customer) {
         customerRepository.save(customer);
     }
 
     public Optional<Customer> fetchByEmail(String email) {
-
         return customerRepository.findByEmail(email);
     }
+
     public Customer registerNewCustomer (Customer customer) {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         List<Role> roles = new ArrayList<>();

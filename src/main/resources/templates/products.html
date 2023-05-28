@@ -42,7 +42,7 @@
                     <div class="aligned">
                         <p class="mb-0"><a href="#" th:href="@{/product/{id}(id=${prod.id})}"
                                            class="underline-none uppercase bold smaller text-white">Détails</a></p>
-                        <a th:if="${prod.stock > 0}" href="#" th:href="@{/cart/add(id=${prod.id}, qty=${1})}" class="float-end"><img src="/images/solar_cart-bold.svg" alt="ajouter au panier"></a> <!-- Ajouter au panier -->
+                        <a th:if="${prod.stock > 0}" href="#" th:href="@{/cart/add(id=${prod.id}, qty=${1})}" class="float-end cart-btn"><img src="/images/solar_cart-bold.svg" alt="ajouter au panier"></a> <!-- Ajouter au panier -->
                         <img th:if="${prod.stock == 0}" src="/images/solar_cart-bold.svg" alt="" class="float-end disabled">
                     </div>
                 </div>

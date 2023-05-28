@@ -1,5 +1,6 @@
 package fr.poei.fines_saveurs_fo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,6 @@ public class Category {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private List<Product> products;
 }

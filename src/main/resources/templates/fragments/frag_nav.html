@@ -49,7 +49,11 @@
                     </ul>
                 </div>
 
-                <a class="nav-link ms-4" href="#" th:href="@{/cart}" id="cart-icon"><img src="/images/solar_cart-bold.svg" alt="panier"></a>
+                <div class="position-relative">
+                    <div th:if="${session.totalQuantity != null && session.totalQuantity > 0}" id="nb-prod-cart" th:text="${session.totalQuantity}"></div>
+                    <a class="nav-link ms-4" href="#" th:href="@{/cart}" id="cart-icon"><img src="/images/solar_cart-bold.svg" alt="panier"></a>
+                </div>
+
 
         </div>
 

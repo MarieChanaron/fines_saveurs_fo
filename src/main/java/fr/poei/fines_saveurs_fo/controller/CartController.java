@@ -33,7 +33,7 @@ public class CartController {
 
 
     @GetMapping("/add")
-    public String addToCart(@RequestParam long id, @RequestParam byte qty, HttpSession session) {
+    public String addToCart(@RequestParam long id, @RequestParam byte qty, HttpSession session, Model model) {
 
         Cart cart;
 
@@ -73,8 +73,9 @@ public class CartController {
         }
 
         model.addAttribute("cartItems", cartItems);
-        model.addAttribute("totalQuantity", totalQuantity);
         model.addAttribute("totalPrice", totalPrice);
+
+        session.setAttribute("totalQuantity", totalQuantity);
         session.removeAttribute("totalPrice");
 
         return "cart";
