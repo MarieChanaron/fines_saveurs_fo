@@ -87,11 +87,22 @@ public class CustomerController {
 
     @PostMapping("/edit")
     public String editPost(@ModelAttribute("customer") Customer customer, Model model, HttpSession session) {
-        Customer connectedCustomer = customerService.fetchByEmail(String.valueOf(session.getAttribute("email"))).get();
+
+        System.out.println(customer);
+
+        String password = customer.getPassword();
+        String confirmation = customer.getPasswordConfirmation();
+        if (!password.equals(confirmation)) {
+            model.addAttribute("passwordError", true);
+            return "edit-customer";
+        }
+
+        /*Customer connectedCustomer = customerService.fetchByEmail(String.valueOf(session.getAttribute("email"))).get();
         connectedCustomer.setFirstname(customer.getFirstname());
         connectedCustomer.setLastname(customer.getLastname());
-        customerService.save(connectedCustomer);
-        model.addAttribute("customer", connectedCustomer);
+        customerService.save(connectedCustomer);*/
+
+        //model.addAttribute("customer", connectedCustomer);
         return "redirect:/customers";
     }
 

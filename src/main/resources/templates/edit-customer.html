@@ -28,6 +28,9 @@
 
                 <form th:action="@{/customers/edit}" th:object="${customer}" method="POST">
 
+                    <!-- Hidden field -->
+                    <input type="text" class="hidden" th:field="*{id}" th:value="${customer.id}">
+
                     <div class="my-4">
                         <label for="firstname">Prénom</label>
                         <input id="firstname" type="text" name="firstname" th:field="*{firstname}" class="form-control" th:value="${customer.firstname}" required>
@@ -41,18 +44,20 @@
                     <div class="my-4">
                         <label for="email">Email</label>
                         <input id="email" type="text" name="email" th:field="*{email}" class="form-control" th:value="${customer.email}" required>
+                        <label th:if="${emailError}" class="error">Un compte existe déjà avec cette adresse e-mail.</label>
                     </div>
                     <div class="my-4">
                         <label for="password">Mot de passe</label>
-                        <input id="password" type="text" name="password" value="" placeholder= "*********" class="form-control" th:field="*{password}">
+                        <input id="password" type="password" name="password" value="" placeholder= "*********" class="form-control" th:field="*{password}">
                     </div>
                     <div class="my-4">
-                        <label for="confirmation">Confirmation de mot de passe</label>
-                        <input id="confirmation" type="text" name="confirmation" value="" placeholder= "*********" class="form-control" th:field="*{passwordConfirmation}">
+                        <label for="confirmation">Confirmation</label>
+                        <input id="confirmation" type="password" name="confirmation" value="" placeholder= "*********" class="form-control" th:field="*{passwordConfirmation}">
+                        <label th:if="${passwordError}" class="error">Le mot de passe et la confirmation ne correspondent pas.</label>
                     </div>
 
                     <div class="my-4">
-                        <button type="submit" class="button my-4 float-end">Submit</button>
+                        <button type="submit" class="button my-4 float-end">Valider</button>
                     </div>
                 </form>
             </div>
