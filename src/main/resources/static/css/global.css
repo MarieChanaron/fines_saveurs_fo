@@ -141,3 +141,13 @@ a, a:hover {
     opacity: 0.8;
     cursor: not-allowed;
 }
+
+.error {
+    font-size: 1.2rem;
+    color: var(--accent-color-dark);
+}
+
+.small-link {
+    font-size: 1.2rem;
+    color: var(--primary-color-light);
+}

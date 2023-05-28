@@ -34,18 +34,19 @@
                         <div class="my-4">
                             <label for="password" class="form-label">Mot de passe:</label>
                             <input type="password" class="form-control" id="password" name="password"
-                                   th:field="*{password}" required>
+                                   th:field="*{password}" autocomplete="new-password" required>
                         </div>
                         <div class="my-4">
                             <label for="confirmation" class="form-label">Confirmation de mot de passe:</label>
                             <input type="password" class="form-control" id="confirmation" name="confirmation"
-                                   th:field="*{confirmation}" required>
+                                   th:field="*{passwordConfirmation}" autocomplete="new-password" required>
+                            <label th:if="${passwordError}" class="error">Le mot de passe et la confirmation ne correspondent pas.</label>
                         </div>
                         <div class="my-4">
                             <label for="email" class="form-label">Email:</label>
                             <input type="email" class="form-control" id="email" name="email" th:field="*{email}"
                                    required>
-                            <label th:if="${emailError}">Un compte existe déjà avec cette adresse e-mail.</label>
+                            <label th:if="${emailError}" class="error">Un compte existe déjà avec cette adresse e-mail.</label>
                         </div>
                         <!--                        <div class="mb-3">-->
                         <!--                            <label for="address" class="form-label">Address:</label>-->
@@ -55,8 +56,9 @@
                         <!--                            <label for="phoneNumber" class="form-label">Phone Number:</label>-->
                         <!--                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" required>-->
                         <!--                        </div>-->
-                        <div>
-                            <input type="submit" class="button my-4" value="S'inscrire">
+                        <div class="my-4 d-flex justify-content-between">
+                            <a href="" class="small-link">Réinitialiser</a>
+                            <input type="submit" class="button my-4 float-end" value="S'inscrire">
                         </div>
                     </div>
                 </form>

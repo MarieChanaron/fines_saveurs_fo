@@ -34,6 +34,8 @@ public class Customer implements UserDetails, Serializable {
     private String lastname;
     @Column(name = "password")
     private String password;
+    @Transient
+    private String passwordConfirmation;
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
     @ManyToOne
