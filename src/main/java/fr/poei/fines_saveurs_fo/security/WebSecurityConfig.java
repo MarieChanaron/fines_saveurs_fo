@@ -34,11 +34,13 @@ public class WebSecurityConfig {
 
     @Bean
     CustomerDetailsService customUserDetailsService() {
+
         return new CustomerDetailsService();
     }
 
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
+
         return new BCryptPasswordEncoder();
     }
 

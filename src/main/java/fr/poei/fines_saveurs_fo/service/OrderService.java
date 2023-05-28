@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,4 +28,8 @@ public class OrderService {
         order.setAmountPaid(totalPrice);
         return Optional.of(orderRepository.save(order));
     }
+    public List<Order> fetchAllByCustomer(Customer customer) {
+        return orderRepository.findAllByCustomer(customer);
+    }
+
 }

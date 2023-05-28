@@ -22,17 +22,29 @@
         <img class="w-100" src="/images/card_profile.png" alt="">
       </div>
       <div class="card-body col-12">
-        <tr th:each="customer : ${customers}">
-<!--          <td th:text="${customer.id}"/>-->
+         <!----------- Afficher les informations du client------------->
         <p>Nom: <td th:text="${customer.lastname}"/></p>
         <p>Prénom: <td th:text="${customer.firstname}"/></p>
+            <p>Numéro de rue: <td th:text="${addressFact.streetNumber}"/></p>
+            <p>Rue: <td th:text="${addressFact.street}"/></p>
+            <p>Informations supplémentaires: <td th:text="${addressFact.additionalInformation}"/></p>
+            <p>Ville: <td th:text="${addressFact.city}"/></p>
+            <p>Code postale: <td th:text="${addressFact.postcode}"/></p>
+          <!----------- Afficher la liste des commande du client------------->
+          <tr th:each="order : ${orders}">
+            <p>Date de la commande: <td th:text="${order.createdAt}"/></p>
+              <p>Montant payé: <td th:text="${order.amountPaid}"/></p>
+              <p>Montant payé: <td th:text="${order.cart}"/></p>
+          </tr>
+          <!----------- Afficher les identifiants du client------------->
         <p>Email : <td th:text="${customer.email}"/></p>
         <p>Password: ********</p>
           <div class="d-flex justify-content-around col-12">
             <div class=" mt-2 mb-2">
               <td>
-              <a th:href="@{'customers/edit'}" class="btn btn-primary">Modifier le profil </a>
+              <a th:href="@{'customers/edit'}" class="button my-4">Modifier mon profil </a>
               </td>
+
 
             </div>
           </div>
