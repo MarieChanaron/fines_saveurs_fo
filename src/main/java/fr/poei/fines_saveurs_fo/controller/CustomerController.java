@@ -1,5 +1,7 @@
 package fr.poei.fines_saveurs_fo.controller;
 
+import fr.poei.fines_saveurs_fo.controller.dto.CustomerDto;
+import fr.poei.fines_saveurs_fo.controller.dto.MapStructMapper;
 import fr.poei.fines_saveurs_fo.entity.Customer;
 import fr.poei.fines_saveurs_fo.entity.role.Role;
 import fr.poei.fines_saveurs_fo.service.CustomerService;
@@ -23,17 +25,18 @@ public class CustomerController {
 
     CustomerService customerService;
     RoleService roleService;
+    MapStructMapper mapStructMapper;
 
     // ---------------Récupérer et afficher les données du client connecté-------------
     @GetMapping
     public String customer(Model model, HttpSession session) {
-        Customer customer = customerService.fetchByEmail(String.valueOf(session.getAttribute("email"))).get();
-        if (customer != null) {
-            model.addAttribute("customers", customer);
-            return "customer-profile";
-        } else {
-            return "redirect:/login";
-        }
+        String email = (String) session.getAttribute("email");
+        Optional<Customer> customerOptional = customerService.fetchByEmail(email);
+        if (customerOptional.isEmpty())  return "redirect:/login";
+        Customer customer = customerOptional.get();
+        CustomerDto customerDto = mapStructMapper.toDto(customer);
+        model.addAttribute("customer", customerDto);
+        return "profile";
     }
 
     // ----------------------------Modifier les données du client----------------

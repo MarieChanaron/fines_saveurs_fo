@@ -151,3 +151,14 @@ a, a:hover {
     font-size: 1.2rem;
     color: var(--primary-color-light);
 }
+
+dl > div {
+    display: flex;
+}
+
+dt {
+    width: 150px;
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-align: left;
+}
