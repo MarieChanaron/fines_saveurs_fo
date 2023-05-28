@@ -37,6 +37,11 @@
                                    th:field="*{password}" required>
                         </div>
                         <div class="my-4">
+                            <label for="confirmation" class="form-label">Confirmation de mot de passe:</label>
+                            <input type="password" class="form-control" id="confirmation" name="confirmation"
+                                   th:field="*{confirmation}" required>
+                        </div>
+                        <div class="my-4">
                             <label for="email" class="form-label">Email:</label>
                             <input type="email" class="form-control" id="email" name="email" th:field="*{email}"
                                    required>
