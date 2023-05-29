@@ -9,18 +9,18 @@ import lombok.NoArgsConstructor;
 public class CreditCard {
 
     @NotNull
-    @Pattern(regexp = "^[0-9]{13,16}")
+    @Pattern(regexp = "^[0-9]{13,16}$")
     private String cardNumber;
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z\\s]+$\n")
+    @Pattern(regexp = "^[A-Za-z]{5,50}\\s[A-Za-z]{5,50}$")
     private String cardHolder;
     @NotNull
     @Pattern(regexp = "^(0[1-9]|1[0-2])$")
     String expirationMonth;
     @NotNull
-    @Pattern(regexp = "^\\d{2}$\n")
+    @Pattern(regexp = "^\\d{2}$")
     String expirationYear;
     @NotNull
-    @Pattern(regexp = "^\\d{3}$\n")
+    @Pattern(regexp = "^\\d{3}$")
     String cvc;
 }
