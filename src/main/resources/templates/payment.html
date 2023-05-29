@@ -16,7 +16,7 @@
 
   <div class="row">
     <div class="col">
-      <form action="#" th:action="@{/order/payment}" method="post" id="payment">
+      <form action="#" th:action="@{/order/payment}" method="post" th:object="${creditCard}" id="payment">
 
         <fieldset class="my-5 py-4">
           <p>Choisir une méthode de paiement :</p>
@@ -34,25 +34,25 @@
 
           <div class="mb-3">
             <label for="name">Nom complet</label>
-            <input class="long" type="text" name="name" id="name" placeholder="NOM COMPLET" required>
+            <input class="long" type="text" name="name" id="name" placeholder="NOM COMPLET" th:field="*{cardHolder}" required>
           </div>
 
           <div class="mb-3">
             <label for="number">Numéro de carte</label>
-            <input class="long" type="number" name="number" id="number" placeholder="XXXX XXXX XXXX XXXX" required>
+            <input class="long" type="number" name="number" id="number" th:field="*{cardNumber}" placeholder="XXXX XXXX XXXX XXXX" required>
           </div>
 
           <div class="mb-3">
             <label for="date">Date</label>
             <div class="d-inline" id="date">
-              <input class="short" type="number" name="month" id="month" placeholder="XX" required>
+              <input class="short" type="number" name="month" id="month" placeholder="XX" th:field="*{expirationMonth}" required>
               <span class="big">/</span>
-              <input class="short" type="number" name="year" id="year" placeholder="XX" required></div>
+              <input class="short" type="number" name="year" id="year" placeholder="XX" th:field="*{expirationYear}" required></div>
           </div>
 
           <div class="mb-3">
             <label for="cvc">CVC</label>
-            <input class="short" type="number" name="cvc" id="cvc" placeholder="XXX" required>
+            <input class="short" type="number" name="cvc" id="cvc" placeholder="XXX" th:field="*{cvc}" required>
           </div>
 
         </fieldset>

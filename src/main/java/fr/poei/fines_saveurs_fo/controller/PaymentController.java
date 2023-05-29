@@ -4,10 +4,13 @@ import fr.poei.fines_saveurs_fo.entity.Address;
 import fr.poei.fines_saveurs_fo.entity.Customer;
 import fr.poei.fines_saveurs_fo.service.AddressService;
 import fr.poei.fines_saveurs_fo.service.CustomerService;
+import fr.poei.fines_saveurs_fo.validator.CreditCard;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Optional;
@@ -22,7 +25,7 @@ public class PaymentController {
 
 
     @GetMapping
-    public String payment(HttpSession session) {
+    public String payment(HttpSession session, Model model) {
 
         // Check that the order has been confirmed by clicking on the button
         if (session.getAttribute("orderConfirmed") == null) {
@@ -47,13 +50,16 @@ public class PaymentController {
             return "redirect:/order/invoicing-address";
         }
 
+        model.addAttribute("creditCard", new CreditCard());
+
         return "payment";
     }
 
 
     @PostMapping
-    public String checkPaymentMethod() {
+    public String checkPaymentMethod(@ModelAttribute CreditCard creditCard) {
 
+        System.out.println(creditCard);
         // Check here the card number
 
         return "redirect:/order/confirmation";
