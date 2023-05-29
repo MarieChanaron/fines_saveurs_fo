@@ -9,31 +9,43 @@ table {
 
 
 
-table#orders {
+#profile table {
     width: fit-content;
 }
 
-table#orders thead {
+#profile table thead {
     background-color: rgba(38, 34, 33, 0.05);
 }
 
-table#orders th {
+#profile table th {
     font-weight: 600;
     font-size: 1.3rem;
     text-align: left;
 }
 
-table#orders th,
-table#orders td {
+#profile table th,
+#profile table td {
     width: fit-content;
     padding-right: 16px;
     padding-left: 16px;
 }
 
-table#orders tbody tr {
+#profile table tr {
+    border-width: 1px;
+}
+
+#profile table#orders tbody tr {
     cursor: pointer;
 }
 
-table#orders tbody tr:hover {
-    background-color: var(--secondary-color-medium)
+#profile table tbody td {
+    vertical-align: middle;
+}
+
+#profile table#orders tbody tr:hover {
+    background-color: var(--grey-0);
+}
+
+#profile table#orders tbody tr.highlight-row {
+    background-color: var(--grey-1);
 }

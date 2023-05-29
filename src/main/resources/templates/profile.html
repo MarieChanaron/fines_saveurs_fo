@@ -7,7 +7,7 @@
   <script src="/js/order-details.js" defer></script>
 </head>
 
-<body>
+<body id="profile">
 
 <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
 
@@ -104,7 +104,7 @@
           <div class="col pt-5">
 
             <p th:if="${cart != null}">Voici les détails de la commande sélectionnée :</p>
-            <p th:if="${cart == null}" class="bg-beige fit-content">Veuillez sélectionner une commande dans la liste pour en voir les détails.</p>
+            <p th:if="${cart == null}" class="bg-beige fit-content">Veuillez sélectionner une commande dans le tableau pour en voir les détails.</p>
 
             <table th:if="${cart != null}" class="table m-0">
               <thead>
@@ -126,7 +126,6 @@
                 <th scope="row">Total</th>
                 <th th:text="${totalQuantity}"></th>
                 <th th:text="${totalPrice}"></th>
-                <td></td>
               </tr>
               </tfoot>
             </table>

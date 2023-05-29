@@ -12,11 +12,21 @@ const setEndpoint = id => {
 }
 
 const handleClick = event => {
-    const id = event.target.parentNode.id;
+    const row = event.target.parentNode;
+    const id = row.id;
     const endpoint = setEndpoint(id);
     redirect(endpoint);
 }
 
+const getUrlParameter = () => {
+    const url = new URL(window.location.href);
+    const param = url.searchParams.get("orderId");
+    return param;
+}
+
 for (let row of orderRows) {
+    if (row.id === getUrlParameter()) {
+        row.classList.add("highlight-row");
+    }
     row.addEventListener("click", handleClick);
 }

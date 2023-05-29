@@ -84,6 +84,7 @@ public class CustomerController {
                 cartProductDtoList.add(lineItem);
             }
 
+            model.addAttribute("orderId", orderId);
             model.addAttribute("totalQuantity", totalQuantity);
             model.addAttribute("totalPrice", totalPrice);
             model.addAttribute("cart", cartProductDtoList);
