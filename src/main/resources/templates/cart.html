@@ -25,6 +25,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Article</th>
+                            <th scope="col">Id</th>
                             <th scope="col">Quantité</th>
                             <th scope="col">Prix</th>
                             <th scope="col"></th>
@@ -33,6 +34,7 @@
                     <tbody>
                         <tr th:each="item: ${cartItems}">
                             <td th:text="${item.productDto.name}"></td>
+                            <td id="id-product" th:text="${item.productDto.id}"></td>
                             <td th:text="${item.quantity}"></td>
                             <td th:text="${item.productDto.price}"></td>
                             <td>
@@ -45,12 +47,14 @@
                     <tfoot>
                         <tr>
                             <th scope="row">Total</th>
+                            <th></th>
                             <th th:text="${session.totalQuantity}"></th>
                             <th th:text="${totalPrice} + ' €'"></th>
                             <td></td>
                         </tr>
                     </tfoot>
                 </table>
+                <p class="pt-4 fst-italic" th:if="${stockAlert}">Il se peut que les quantités ajoutées à votre panier soient réajustées en fonction du stock disponible.</p>
             </div>
         </div>
     </div>
@@ -73,6 +77,10 @@
 <div th:replace="fragments/frag_footer :: frag_footer"></div>
 
 </div>
+
+<script>
+
+</script>
 
 </body>
 

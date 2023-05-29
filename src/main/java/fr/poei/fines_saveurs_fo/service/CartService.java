@@ -32,12 +32,18 @@ public class CartService {
 
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
+            // Check availability in stock
+            int stock = product.getStock();
             // Search an instance of CartProduct by product and by cart
             List<CartProduct> lineItems = this.findLineItemsByCartAndProduct(cart, product);
             if (lineItems.size() == 1) { // If an instance of CartProduct exists
                 lineItem = lineItems.get(0);
                 byte quantity = lineItem.getQuantity();
-                quantity += qty; // set the quantity
+                if ((byte) stock < quantity + qty) {
+                    quantity = (byte) stock;
+                } else {
+                    quantity += qty; // set the quantity
+                }
                 lineItem.setQuantity(quantity);
             } else {
                 lineItem = new CartProduct(); // create a new line item
@@ -65,4 +71,5 @@ public class CartService {
     public void setCustomer(Customer customer, long cartId) {
         cartRepository.setCustomer(customer, cartId);
     }
+
 }
