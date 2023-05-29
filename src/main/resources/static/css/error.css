@@ -26,4 +26,20 @@
     padding: 18px;
     font-size: 25px;
     letter-spacing: 10px;
+    border: none !important;
+}
+
+.back-to-home {
+    position: absolute;
+    left: 0;
+    top: 80%;
+    width: 100%;
+    text-align: center;
+    color: #000;
+}
+
+button {
+    background: white;
+    padding: .5rem;
+    border-radius: 5px;
 }
