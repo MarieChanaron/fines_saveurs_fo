@@ -22,7 +22,6 @@
 
     <div class="row">
       <form action="#" th:action="@{/customers/destination-address}" th:object="${address}" method="post" class="mx-auto address-form fit-content">
-        <div class="fit-content">
           <div class="my-4">
             <label for="number">Numéro</label>
             <input type="text" id="number" name="number" th:value="${address.streetNumber}" th:field="${address.streetNumber}">
@@ -43,8 +42,7 @@
             <label for="city">Ville *</label>
             <input type="text" id="city" name="city" required th:value="${address.city}" th:field="${address.city}">
           </div>
-        </div>
-        <input type="submit" class="button mt-5 float-end" value="Valider"></input>
+          <input type="submit" class="button float-end" value="Valider"></input>
       </form>
     </div>
 

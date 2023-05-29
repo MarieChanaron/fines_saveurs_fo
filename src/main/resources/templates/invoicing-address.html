@@ -21,32 +21,30 @@
   </div>
 
   <div class="row">
-    <form action="#" th:action="@{/order/invoicing-address}" th:object="${address}" method="post" class="mx-auto address-form">
-      <div class="fit-content">
-        <div class="my-4">
-          <label for="number">Numéro</label>
-          <input type="text" id="number" name="number" th:value="${address.streetNumber}" th:field="${address.streetNumber}">
-        </div>
-        <div class="my-4">
-          <label for="street">Rue *</label>
-          <input type="text" id="street" name="street" required th:value="${address.street}" th:field="${address.street}">
-        </div>
-        <div class="my-4">
-          <label for="info">Information complémentaire</label>
-          <input type="text" id="info" name="info" th:value="${address.additionalInformation}" th:field="${address.additionalInformation}">
-        </div>
-        <div class="my-4">
-          <label for="postcode">Code postal *</label>
-          <input type="text" id="postcode" name="postcode" th:value="${address.postcode}" th:field="${address.postcode}" required>
-        </div>
-        <div class="mt-4 mb-5">
-          <label for="city">Ville *</label>
-          <input type="text" id="city" name="city" required th:value="${address.city}" th:field="${address.city}">
-        </div>
-      </div>
-      <input type="submit" class="button mt-5 float-end" value="Continuer"></input>
-    </form>
-    <a href="#" th:href="@{/destination-address}">
+      <form action="#" th:action="@{/order/invoicing-address}" th:object="${address}" method="post" class="mx-auto address-form">
+          <div class="my-4">
+            <label for="number">Numéro</label>
+            <input type="text" id="number" name="number" th:value="${address.streetNumber}" th:field="${address.streetNumber}">
+          </div>
+          <div class="my-4">
+            <label for="street">Rue *</label>
+            <input type="text" id="street" name="street" required th:value="${address.street}" th:field="${address.street}">
+          </div>
+          <div class="my-4">
+            <label for="info">Information complémentaire</label>
+            <input type="text" id="info" name="info" th:value="${address.additionalInformation}" th:field="${address.additionalInformation}">
+          </div>
+          <div class="my-4">
+            <label for="postcode">Code postal *</label>
+            <input type="text" id="postcode" name="postcode" th:value="${address.postcode}" th:field="${address.postcode}" required>
+          </div>
+          <div class="mt-4 mb-5">
+            <label for="city">Ville *</label>
+            <input type="text" id="city" name="city" required th:value="${address.city}" th:field="${address.city}">
+          </div>
+          <input type="submit" class="button mt-5 float-end" value="Continuer"></input>
+      </form>
+    <a href="#" th:href="@{/order/destination-address}">
       <button class="button position-relative" style="bottom: 36px;">Retour</button>
     </a>
   </div>
