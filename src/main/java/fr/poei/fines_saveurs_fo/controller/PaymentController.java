@@ -6,13 +6,17 @@ import fr.poei.fines_saveurs_fo.service.AddressService;
 import fr.poei.fines_saveurs_fo.service.CustomerService;
 import fr.poei.fines_saveurs_fo.validator.CreditCard;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -57,10 +61,12 @@ public class PaymentController {
 
 
     @PostMapping
-    public String checkPaymentMethod(@ModelAttribute CreditCard creditCard) {
+    public String checkPaymentMethod(@ModelAttribute("creditCard") @Valid CreditCard creditCard, BindingResult bindingResult, Model model) {
 
-        System.out.println(creditCard);
-        // Check here the card number
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("paymentError", true);
+            return "payment";
+        }
 
         return "redirect:/order/confirmation";
     }

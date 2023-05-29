@@ -21,7 +21,7 @@ form input[type="submit"]:not(#magnifying-glass) {
     border: 0;
 }
 
-input:not([type="submit"]),
+input:not([type="submit"]):not([type="radio"]),
 select,
 textarea {
     border: 1px solid var(--primary-color-dark) !important;

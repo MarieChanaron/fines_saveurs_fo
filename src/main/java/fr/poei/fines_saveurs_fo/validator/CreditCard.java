@@ -1,20 +1,26 @@
 package fr.poei.fines_saveurs_fo.validator;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.LuhnCheck;
 
-
-
-@NotNull
 @Data @NoArgsConstructor
 public class CreditCard {
 
-    @LuhnCheck
+    @NotNull
+    @Pattern(regexp = "^[0-9]{13,16}")
     private String cardNumber;
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z\\s]+$\n")
     private String cardHolder;
-    int expirationMonth;
-    int expirationYear;
-    int cvc;
+    @NotNull
+    @Pattern(regexp = "^(0[1-9]|1[0-2])$")
+    String expirationMonth;
+    @NotNull
+    @Pattern(regexp = "^\\d{2}$\n")
+    String expirationYear;
+    @NotNull
+    @Pattern(regexp = "^\\d{3}$\n")
+    String cvc;
 }
