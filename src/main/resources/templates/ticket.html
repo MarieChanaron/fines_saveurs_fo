@@ -13,32 +13,49 @@
 
 <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
 <div class="page">
+
     <div class="container">
-        <form id="ticket-form" class="row row-cols-lg-auto g-3 align-items-center" action="/ticket" method="POST">
-            <div class="col-12">
-                <label class="visually-hidden" for="userEmail">Username</label>
-                <div class="input-group">
-                    <div class="input-group-text">@</div>
-                    <input type="email" id="userEmail" name="userEmail"
-                           placeholder="mon.email@gmail.com"
-                           th:placeholder="${#strings.isEmpty(userEmail) || userEmail == 'anonymousUser' ? 'mon.email@gmail.com' : '' }"
-                           th:value="${userEmail != 'anonymousUser' ? userEmail : ''}" required>
+        <div class="row">
+            <div class="col">
+                <p>Une question, une remarque ou une suggestion ? Dites-nous tout !</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+
+            <form id="ticket-form" class="mx-auto" action="" th:action="@{/ticket}" method="POST">
+
+                <div class="mb-4">
+                    <label for="userEmail">Votre adresse e-mail</label>
+                    <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="email" id="userEmail" name="userEmail"
+                               placeholder="mon.email@gmail.com"
+                               th:placeholder="${#strings.isEmpty(userEmail) || userEmail == 'anonymousUser' ? 'mon.email@gmail.com' : '' }"
+                               th:value="${userEmail != 'anonymousUser' ? userEmail : ''}" required>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-12">
-                <label class="visually-hidden" for="admin-select">Preference</label>
-                <select id="admin-select" class="form-select" name="adminId" required>
-                    <option value="" selected disabled>Choisissez un admin </option>
-                    <option th:each="admin : ${admins}" th:value="${admin.id}" th:text="${admin.firstname + ' ' + admin.lastname}"></option>
-                </select>
-            </div>
-            <input type="text" id="text-input" name="textInput" placeholder="Bonjour, ..." maxlength=255 required>
+                <div class="mb-4">
+                    <label for="admin-select">Choisissez un administrateur</label>
+                    <select id="admin-select" class="form-select" name="adminId" required>
+                        <option value="" selected disabled>Choisissez un admin </option>
+                        <option th:each="admin : ${admins}" th:value="${admin.id}" th:text="${admin.firstname + ' ' + admin.lastname}"></option>
+                    </select>
+                </div>
 
-            <div class="col-12">
-                <button class="btn btn-primary" type="submit">Soumettre</button>
-            </div>
-        </form>
+                <div class="mb-4">
+                    <label for="message" class="form-label">Votre message</label>
+                    <textarea class="form-control" id="message" rows="10" placeholder="Bonjour, ..." required></textarea>
+                </div>
+
+                <div class="my-5">
+                    <button class="button float-end ms-auto" type="submit">Soumettre</button>
+                </div>
+            </form>
+        </div>
 
         <p id="confirmation"></p>
     </div>

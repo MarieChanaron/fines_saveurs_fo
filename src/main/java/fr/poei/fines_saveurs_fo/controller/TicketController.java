@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TicketController {
 
     @GetMapping("/ticket")
-    public String displayTicketForm(Model model, HttpSession session) {
+    public String displayTicketForm(Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();

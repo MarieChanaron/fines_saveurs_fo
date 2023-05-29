@@ -5,16 +5,11 @@ input {
     border-width: 1px;
     border-style: solid;
     border-color: var(--primary-color-dark);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
     padding: 0 8px;
 }
 
-.mb-3 {
+form > div {
     display: flex;
-}
-
-.mb-3 label {
-    width: 220px;
 }
 
 form input[type="submit"]:not(#magnifying-glass) {
@@ -32,6 +27,7 @@ textarea {
     border: 1px solid var(--primary-color-dark) !important;
     border-radius: 0px !important;
     font-size: 1.4rem !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
 }
 
 /* Login */
@@ -96,7 +92,18 @@ textarea {
 }
 
 
+/* Contact */
 
+#ticket-form {
+    width: fit-content;
+    margin: auto;
+}
 
+#ticket-form label {
+    width: 350px;
+}
 
+#ticket-form input:not([type="submit"]) {
+    width: 500px;
+}
 
