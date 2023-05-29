@@ -60,7 +60,7 @@ class CustomerServiceTest {
         Optional<Customer> expectedCustomer = Optional.of(new Customer());
         expectedCustomer.get().setId(customerId);
 
-        when(customerRepositoryMock.findById(customerId)).thenReturn(expectedCustomer);
+        when(customerRepositoryMock.findById((long) customerId)).thenReturn(expectedCustomer);
 
         Optional<Customer> result = underTest.fetchById(customerId);
 

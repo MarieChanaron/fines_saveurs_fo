@@ -20,6 +20,10 @@ public class CustomerService {
     CustomerRepository customerRepository;
     RoleService roleService;
 
+    public void save(Customer customer) {
+        customerRepository.save(customer);
+    }
+
     public List<Customer> fetchAll() {
         return customerRepository.findAll();
     }
