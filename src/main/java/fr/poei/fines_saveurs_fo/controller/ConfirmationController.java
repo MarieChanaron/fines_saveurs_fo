@@ -24,7 +24,9 @@ public class ConfirmationController {
     @GetMapping
     public String saveOrder(HttpSession session) {
 
-        Cart cart = (Cart) session.getAttribute("cart");;
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) return "redirect:/cart";
+
         String email = (String) session.getAttribute("email");
         double totalPrice = (Double) session.getAttribute("totalPrice");
 
