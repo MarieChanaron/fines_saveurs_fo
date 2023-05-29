@@ -32,7 +32,7 @@
                     </thead>
                     <tbody>
                         <tr th:each="item: ${cartItems}">
-                            <td th:text="${item.productDto.name}"></td>
+                            <td><a href="" th:href="@{/product/{id}(id=${item.productDto.id})}" th:text="${item.productDto.name}"></a></td>
                             <td th:text="${item.quantity}"></td>
                             <td th:text="${item.productDto.price}"></td>
                             <td>
