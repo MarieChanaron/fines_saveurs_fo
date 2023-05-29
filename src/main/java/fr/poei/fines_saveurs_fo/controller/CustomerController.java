@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -119,11 +121,16 @@ public class CustomerController {
             return "edit-customer";
         }
 
-        String email = customer.getEmail();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
         Optional<Customer> customerOptional = customerService.fetchByEmail(email);
-        if (customerOptional.isPresent() && customerOptional.get().getId() != customer.getId()) {
+        if (customerOptional.isEmpty()) return "404";
+        if (customerOptional.get().getId() != customer.getId()) {
             model.addAttribute("emailError", true);
             return "edit-customer";
+        }
+        if (customerOptional.get().getEmail() != customer.getEmail()) {
+            session.setAttribute("email", customer.getEmail());
         }
 
         customerService.updateCustomerDetails(customer);
