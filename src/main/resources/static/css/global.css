@@ -156,10 +156,10 @@ dl > div {
     display: flex;
 }
 
-dt {
+#profile dt {
     color: var(--accent-color-light);
     width: 180px;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.3rem;
     text-align: left;
 }
