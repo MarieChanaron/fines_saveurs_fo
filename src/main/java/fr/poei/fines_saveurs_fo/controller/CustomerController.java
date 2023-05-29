@@ -1,18 +1,9 @@
 package fr.poei.fines_saveurs_fo.controller;
 
-import fr.poei.fines_saveurs_fo.controller.dto.CartDto;
-import fr.poei.fines_saveurs_fo.controller.dto.CustomerDto;
-import fr.poei.fines_saveurs_fo.controller.dto.MapStructMapper;
-import fr.poei.fines_saveurs_fo.controller.dto.OrderDto;
-import fr.poei.fines_saveurs_fo.entity.Address;
-import fr.poei.fines_saveurs_fo.entity.Cart;
-import fr.poei.fines_saveurs_fo.entity.Customer;
-import fr.poei.fines_saveurs_fo.entity.Order;
+import fr.poei.fines_saveurs_fo.controller.dto.*;
+import fr.poei.fines_saveurs_fo.entity.*;
 import fr.poei.fines_saveurs_fo.entity.role.Role;
-import fr.poei.fines_saveurs_fo.service.AddressService;
-import fr.poei.fines_saveurs_fo.service.CustomerService;
-import fr.poei.fines_saveurs_fo.service.OrderService;
-import fr.poei.fines_saveurs_fo.service.RoleService;
+import fr.poei.fines_saveurs_fo.service.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +28,12 @@ public class CustomerController {
     AddressService addressService;
     OrderService orderService;
     RoleService roleService;
+    CartService cartService;
     MapStructMapper mapStructMapper;
 
     // ---------------Récupérer et afficher les données du client connecté-------------
     @GetMapping
-    public String customer(Model model, HttpSession session) {
+    public String customer(Model model, HttpSession session, @RequestParam(required = false) Optional<Long> orderId) {
 
         // Retrieve customer
         String email = (String) session.getAttribute("email");
@@ -70,6 +62,32 @@ public class CustomerController {
             orderDtoList.add(orderDto);
         });
         model.addAttribute("orders", orderDtoList);
+
+        // Get a specific cart order
+        if (orderId.isPresent()) {
+            long id = orderId.get();
+            Optional<Cart> cartOptional = orderService.getOrderCart(id);
+            if (cartOptional.isEmpty()) return "profile";
+            Cart cart = cartOptional.get();
+
+            List<CartProduct> cartProducts = cartService.findAllCartItems(cart);
+            List<CartProductDto> cartProductDtoList = new ArrayList<>();
+            int totalQuantity = 0;
+            double totalPrice = 0;
+
+            for (CartProduct item : cartProducts) {
+                ProductDto productDto = mapStructMapper.toDto(item.getProduct());
+                CartProductDto lineItem = mapStructMapper.toDto(item);
+                totalQuantity += lineItem.getQuantity();
+                totalPrice += productDto.getPrice().doubleValue() * lineItem.getQuantity();
+                lineItem.setProductDto(productDto);
+                cartProductDtoList.add(lineItem);
+            }
+
+            model.addAttribute("totalQuantity", totalQuantity);
+            model.addAttribute("totalPrice", totalPrice);
+            model.addAttribute("cart", cartProductDtoList);
+        }
 
         return "profile";
     }
@@ -111,6 +129,5 @@ public class CustomerController {
 
         return "redirect:/customers";
     }
-
 
 }

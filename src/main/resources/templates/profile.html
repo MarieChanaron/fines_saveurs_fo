@@ -4,6 +4,7 @@
 <head>
   <div th:replace="~{fragments/frag_head :: frag_head}"></div>
   <title>Fines Saveurs | Gérer mon profil</title>
+  <script src="/js/order-details.js" defer></script>
 </head>
 
 <body>
@@ -80,22 +81,58 @@
           <h3 class="d-inline me-5 fit-content">Mes commandes passées</h3>
           <hr>
 
-          <p>Vous avez passé <span th:text="${orders.size()}"></span> commandes :</p>
+          <div class="col">
+            <p>Vous avez passé <span th:text="${orders.size()}"></span> commandes :</p>
 
-          <table class="table" id="orders">
-            <thead>
+            <table class="table" id="orders">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Montant</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="order: ${orders}" th:id="${order.id}" class="order-row">
+                  <td th:text="${#temporals.day(order.createdAt)} + '/' + ${#temporals.month(order.createdAt)} + '/' + ${#temporals.year(order.createdAt)}"></td>
+                  <td th:text="${order.amountPaid} + ' €'"></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+          <div class="col pt-5">
+
+            <p th:if="${cart != null}">Voici les détails de la commande sélectionnée :</p>
+            <p th:if="${cart == null}" class="bg-beige fit-content">Veuillez sélectionner une commande dans la liste pour en voir les détails.</p>
+
+            <table th:if="${cart != null}" class="table m-0">
+              <thead>
               <tr>
-                <th>Date</th>
-                <th>Montant</th>
+                <th scope="col">Article</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix</th>
               </tr>
-            </thead>
-            <tbody>
-              <tr th:each="order: ${orders}">
-                <td th:text="${#temporals.day(order.createdAt)} + '/' + ${#temporals.month(order.createdAt)} + '/' + ${#temporals.year(order.createdAt)}"></td>
-                <td th:text="${order.amountPaid} + ' €'"></td>
+              </thead>
+              <tbody>
+              <tr th:each="item: ${cart}">
+                <td th:text="${item.productDto.name}"></td>
+                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.productDto.price} + ' €'"></td>
               </tr>
-            </tbody>
-          </table>
+              </tbody>
+              <tfoot>
+              <tr>
+                <th scope="row">Total</th>
+                <th th:text="${totalQuantity}"></th>
+                <th th:text="${totalPrice}"></th>
+                <td></td>
+              </tr>
+              </tfoot>
+            </table>
+
+          </div>
+
         </div>
 
       </div>

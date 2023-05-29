@@ -29,3 +29,11 @@ table#orders td {
     padding-right: 16px;
     padding-left: 16px;
 }
+
+table#orders tbody tr {
+    cursor: pointer;
+}
+
+table#orders tbody tr:hover {
+    background-color: var(--secondary-color-medium)
+}

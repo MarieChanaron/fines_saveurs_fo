@@ -46,11 +46,13 @@
                         <input id="email" type="text" name="email" th:field="*{email}" class="form-control" th:value="${customer.email}" required>
                         <label th:if="${emailError}" class="error">Un compte existe déjà avec cette adresse e-mail.</label>
                     </div-->
+
                     <div class="my-4">
                         <label for="password">Mot de passe</label>
                         <input id="password" type="password" name="password" value="" placeholder= "*********" class="form-control" th:field="*{password}">
                         <label th:if="${passwordEmpty}" class="error">Le mot de passe ne doit pas être vide.</label>
                     </div>
+
                     <div class="my-4">
                         <label for="confirmation">Confirmation</label>
                         <input id="confirmation" type="password" name="confirmation" value="" placeholder= "*********" class="form-control" th:field="*{passwordConfirmation}">

@@ -32,4 +32,14 @@ public class OrderService {
     public List<Order> fetchOrdersByCustomer(Customer customer) {
         return orderRepository.findAllByCustomer(customer);
     }
+
+    public Optional<Cart> getOrderCart(long id) {
+        Optional<Order> orderOptional = orderRepository.findById(id);
+        Cart cart = new Cart();
+        if (orderOptional.isPresent()) {
+            Order order = orderOptional.get();
+            cart = order.getCart();
+        }
+        return Optional.of(cart);
+    }
 }
