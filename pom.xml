@@ -21,6 +21,13 @@
     </properties>
     <dependencies>
 
+        <!-- ### Hibernate Validator ### -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.0.Final</version>
+        </dependency>
+
         <!-- ### MapStruct ### -->
         <dependency>
             <groupId>org.mapstruct</groupId>
