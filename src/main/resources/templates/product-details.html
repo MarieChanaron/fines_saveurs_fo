@@ -18,29 +18,29 @@
 
                 <dl class="row">
 
-                    <dt class="col-sm-3 py-3">Nom</dt>
-                    <dd class="col-sm-9 py-3 uppercase bold small" th:text="${product.name}"></dd>
+                    <dt class="col-sm-4 py-3">Nom</dt>
+                    <dd class="col-sm-8 py-3 uppercase bold small" th:text="${product.name}"></dd>
                     <hr>
-                    <dt class="col-sm-3 py-3">Marque</dt>
-                    <dd class="col-sm-9 py-3 bold" th:text="${product.brand}"></dd>
+                    <dt class="col-sm-4 py-3">Marque</dt>
+                    <dd class="col-sm-8 py-3 bold" th:text="${product.brand}"></dd>
                     <hr>
-                    <dt class="col-sm-3 py-3">Prix</dt>
-                    <dd class="col-sm-9 py-3" th:text="${product.price} + ' €'"></dd>
+                    <dt class="col-sm-4 py-3">Prix</dt>
+                    <dd class="col-sm-8 py-3" th:text="${product.price} + ' €'"></dd>
                     <hr>
-                    <dt class="col-sm-3 py-3">Conditionnement</dt>
-                    <dd class="col-sm-9 py-3" th:text="${product.conditioning}"></dd>
+                    <dt class="col-sm-4 py-3">Conditionnement</dt>
+                    <dd class="col-sm-8 py-3" th:text="${product.conditioning}"></dd>
                     <hr>
-                    <dt class="col-sm-3 py-3">Description</dt>
-                    <dd class="col-sm-9 py-3" th:text="${product.description}"></dd>
+                    <dt class="col-sm-4 py-3">Description</dt>
+                    <dd class="col-sm-8 py-3" th:text="${product.description}"></dd>
                     <hr>
-                    <dt class="col-sm-3 py-3">Ingrédients</dt>
-                    <dd class="col-sm-9 py-3" th:text="${product.ingredient}"></dd>
+                    <dt class="col-sm-4 py-3">Ingrédients</dt>
+                    <dd class="col-sm-8 py-3" th:text="${product.ingredient}"></dd>
                     <hr>
-                    <dt class="col-sm-3 py-3">Origine</dt>
-                    <dd class="col-sm-9 py-3" th:text="${product.origin}"></dd>
+                    <dt class="col-sm-4 py-3">Origine</dt>
+                    <dd class="col-sm-8 py-3" th:text="${product.origin}"></dd>
                     <hr>
-                    <dt class="col-sm-3 py-3">Catégorie</dt>
-                    <dd class="col-sm-9 py-3"><a href="" th:href="@{/products(cat=${product.category.id})}"
+                    <dt class="col-sm-4 py-3">Catégorie</dt>
+                    <dd class="col-sm-8 py-3"><a href="" th:href="@{/products(cat=${product.category.id})}"
                                                  th:text="${product.category.name}"></a></dd>
                 </dl>
             </div>
