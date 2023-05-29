@@ -20,6 +20,10 @@
     --page-padding: 40px;
 }
 
+::selection {
+    background-color: rgba(196, 97, 77, 0.9);
+}
+
 * {
     margin: 0;
     padding: 0;
