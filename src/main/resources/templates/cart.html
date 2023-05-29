@@ -15,7 +15,9 @@
     <div class="container">
         <div class="row">
             <div class="col my-5">
-                <p th:if="${cartItems == null || cartItems.size() == 0}" >Votre panier est vide. Parcourir la <a href="#" th:href="@{/products}">boutique</a>.</p>
+                <p th:if="${cartItems == null || cartItems.size() == 0}">Votre panier est vide. Parcourir la <a href="#"
+                                                                                                                th:href="@{/products}">boutique</a>.
+                </p>
                 <p th:if="${cartItems != null && cartItems.size() > 0}">Voici les détails de votre panier :</p>
             </div>
         </div>
@@ -23,35 +25,37 @@
             <div class="col">
                 <table class="table m-0">
                     <thead>
-                        <tr>
-                            <th scope="col">Article</th>
-                            <th scope="col">Quantité</th>
-                            <th scope="col">Prix</th>
-                            <th scope="col"></th>
-                        </tr>
+                    <tr>
+                        <th scope="col">Article</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col"></th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="item: ${cartItems}">
-                            <td><a href="" th:href="@{/product/{id}(id=${item.productDto.id})}" th:text="${item.productDto.name}"></a></td>
-                            <td th:text="${item.quantity}"></td>
-                            <td th:text="${item.productDto.price}"></td>
-                            <td>
-                                <a href="#" th:href="@{/cart/delete(id=${item.productDto.id})}">
-                                    <img src="/images/dashicons_trash.svg" alt="retirer du panier">
-                                </a>
-                            </td>
-                        </tr>
+                    <tr th:each="item: ${cartItems}">
+                        <td><a href="" th:href="@{/product/{id}(id=${item.productDto.id})}"
+                               th:text="${item.productDto.name}"></a></td>
+                        <td th:text="${item.quantity}"></td>
+                        <td th:text="${item.productDto.price}"></td>
+                        <td>
+                            <a href="#" th:href="@{/cart/delete(id=${item.productDto.id})}">
+                                <img src="/images/dashicons_trash.svg" alt="retirer du panier">
+                            </a>
+                        </td>
+                    </tr>
                     </tbody>
                     <tfoot>
-                        <tr>
-                            <th scope="row">Total</th>
-                            <th th:text="${session.totalQuantity}"></th>
-                            <th th:text="${totalPrice} + ' €'"></th>
-                            <td></td>
-                        </tr>
+                    <tr>
+                        <th scope="row">Total</th>
+                        <th th:text="${session.totalQuantity}"></th>
+                        <th th:text="${totalPrice} + ' €'"></th>
+                        <td></td>
+                    </tr>
                     </tfoot>
                 </table>
-                <p class="pt-4 fst-italic" th:if="${stockAlert}">Les quantités ajoutées à votre panier sont réajustées en fonction du stock disponible.</p>
+                <p class="pt-4 fst-italic" th:if="${stockAlert}">Les quantités ajoutées à votre panier sont réajustées
+                    en fonction du stock disponible.</p>
             </div>
         </div>
     </div>
@@ -65,19 +69,18 @@
             </div>
             <div class="col">
                 <form action="#" th:action="@{/change-session-attribute}" method="post">
-                    <button type="submit" class="button float-end" th:disabled="${session.totalQuantity == null || session.totalQuantity == 0 || totalPrice == null || totalPrice == 0}">Commander</button>
+                    <button type="submit" class="button float-end"
+                            th:disabled="${session.totalQuantity == null || session.totalQuantity == 0 || totalPrice == null || totalPrice == 0}">
+                        Commander
+                    </button>
                 </form>
             </div>
         </div>
     </div>
 
-<div th:replace="fragments/frag_footer :: frag_footer"></div>
+    <div th:replace="fragments/frag_footer :: frag_footer"></div>
 
 </div>
-
-<script>
-
-</script>
 
 </body>
 

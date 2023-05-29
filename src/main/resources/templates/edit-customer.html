@@ -13,63 +13,72 @@
 
 <div class="page">
 
-<main>
+    <main>
 
-    <div class="container my-5">
-        <div class="row">
-            <div class="col">
+        <div class="container my-5">
+            <div class="row">
+                <div class="col">
 
 
-                <form th:action="@{/customers/edit}" th:object="${customer}" class="signup-form mx-auto" method="post">
+                    <form th:action="@{/customers/edit}" th:object="${customer}" class="signup-form mx-auto"
+                          method="post">
 
-                    <!-- Hidden field -->
-                    <input type="text" class="hidden" th:field="*{id}" th:value="${customer.id}">
+                        <!-- Hidden field -->
+                        <input type="text" class="hidden" th:field="*{id}" th:value="${customer.id}">
 
-                    <div class="my-4">
-                        <label for="firstname">Prénom</label>
-                        <input id="firstname" type="text" name="firstname" th:field="*{firstname}" class="form-control" th:value="${customer.firstname}" required>
-                    </div>
-
-                    <div class="my-4">
-                        <label for="lastname">Nom</label>
-                        <input id="lastname" type="text" name="lastname" th:field="*{lastname}" class="form-control" th:value="${customer.lastname}" required>
-                    </div>
-
-                    <div class="my-4">
-                        <label for="email">Email</label>
-                        <div>
-                            <input id="email" type="text" name="email" th:field="*{email}" class="form-control" th:value="${customer.email}" required>
-                            <p th:if="${emailError}" class="error m-0">Un compte existe déjà avec cette adresse e-mail.</p>
+                        <div class="my-4">
+                            <label for="firstname">Prénom</label>
+                            <input id="firstname" type="text" name="firstname" th:field="*{firstname}"
+                                   class="form-control" th:value="${customer.firstname}" required>
                         </div>
-                    </div>
 
-                    <div class="my-4">
-                        <label for="password">Mot de passe</label>
-                        <input id="password" type="password" name="password" value="" placeholder= "*********" class="form-control" th:field="*{password}" required>
-                    </div>
-
-                    <div class="my-4">
-                        <label for="confirmation">Confirmation</label>
-                        <div>
-                            <input id="confirmation" type="password" name="confirmation" value="" placeholder= "*********" class="form-control" th:field="*{passwordConfirmation}" required>
-                            <p th:if="${passwordError}" class="error m-0">Le mot de passe et la confirmation ne correspondent pas.</p>
+                        <div class="my-4">
+                            <label for="lastname">Nom</label>
+                            <input id="lastname" type="text" name="lastname" th:field="*{lastname}" class="form-control"
+                                   th:value="${customer.lastname}" required>
                         </div>
-                    </div>
 
-                    <div class="my-4 d-flex justify-content-between">
-                        <a href="" class="small-link">Réinitialiser</a>
-                        <input type="submit" class="button my-4 float-end" value="Valider">
-                    </div>
+                        <div class="my-4">
+                            <label for="email">Email</label>
+                            <div>
+                                <input id="email" type="text" name="email" th:field="*{email}" class="form-control"
+                                       th:value="${customer.email}" required>
+                                <p th:if="${emailError}" class="error m-0">Un compte existe déjà avec cette adresse
+                                    e-mail.</p>
+                            </div>
+                        </div>
 
-                </form>
+                        <div class="my-4">
+                            <label for="password">Mot de passe</label>
+                            <input id="password" type="password" name="password" value="" placeholder="*********"
+                                   class="form-control" th:field="*{password}" required>
+                        </div>
 
+                        <div class="my-4">
+                            <label for="confirmation">Confirmation</label>
+                            <div>
+                                <input id="confirmation" type="password" name="confirmation" value=""
+                                       placeholder="*********" class="form-control" th:field="*{passwordConfirmation}"
+                                       required>
+                                <p th:if="${passwordError}" class="error m-0">Le mot de passe et la confirmation ne
+                                    correspondent pas.</p>
+                            </div>
+                        </div>
+
+                        <div class="my-4 d-flex justify-content-between">
+                            <a href="" class="small-link">Réinitialiser</a>
+                            <input type="submit" class="button my-4 float-end" value="Valider">
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
         </div>
-    </div>
 
-</main>
+    </main>
 
-<div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+    <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
 
 </div>
 

@@ -11,33 +11,33 @@
 
     <div class="page">
 
-    <div class="container my-5">
-        <div class="row">
-            <div class="col">
-                <form action="#" th:action="@{/login}" method="post" class="mx-auto" id="login-form">
-                    <div class="my-4">
-                        <label for="email">Adresse e-mail</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="my-4">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    <input type="submit" class="button my-4" value="Se connecter">
-                </form>
+        <div class="container my-5">
+            <div class="row">
+                <div class="col">
+                    <form action="#" th:action="@{/login}" method="post" class="mx-auto" id="login-form">
+                        <div class="my-4">
+                            <label for="email">Adresse e-mail</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="my-4">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <input type="submit" class="button my-4" value="Se connecter">
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="container my-5 py-5">
-        <div class="row">
-            <div class="col">
-                <p class="text-center">Nouveau client ? <a href="" th:href="@{/signup}">Créer un compte</a></p>
+        <div class="container my-5 py-5">
+            <div class="row">
+                <div class="col">
+                    <p class="text-center">Nouveau client ? <a href="" th:href="@{/signup}">Créer un compte</a></p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+        <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
 
     </div>
 

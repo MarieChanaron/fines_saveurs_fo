@@ -11,7 +11,8 @@
 
 <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
 
-<div class="page position-relative">
+<div class="page">
+
     <div class="container">
         <div class="row">
             <div class="col">
@@ -28,37 +29,38 @@
 
     <div class="container">
         <div class="row my-5 pb-5">
-                <p id="no-result">Votre recherche n'a produit aucun résultat.</p>
-                <div th:each="prod: ${products}" class="col-12 col-lg-6 my-5">
-                        <div class="product-card overflow-hidden">
-                            <div class="col-left">
-                                <p class="uppercase bold small" th:text="${prod.name}"></p>
-                                <p class="bold" th:text="${prod.brand}"></p>
-                                <p> Ref. <span th:text="${prod.reference}"></span></p>
-                                <p><span th:text="${prod.price}"></span> €</p>
-                                <p class="conditioning" th:text="${prod.conditioning}"></p>
-                                <div class="aligned">
-                                    <p class="mb-0"><a href="#" th:href="@{/product/{id}(id=${prod.id})}"
-                                                       class="underline-none uppercase bold smaller text-white">Détails</a></p>
-                                    <a th:if="${prod.stock > 0}" href="#" th:href="@{/cart/add(id=${prod.id}, qty=${1})}"
-                                       class="float-end cart-btn"><img src="/images/solar_cart-bold.svg"
-                                                                       alt="ajouter au panier"></a>
-                                    <img th:if="${prod.stock == 0}" src="/images/solar_cart-bold.svg" alt=""
-                                         class="float-end disabled">
-                                </div>
-                            </div>
-                            <div class="col-right">
-                                <th:block th:if="${prod.imageUrl == null or prod.imageUrl.isEmpty()}">
-                                    <img th:src="@{/images/placeholder.jpg}" alt="">
-                                </th:block>
-                                <th:block th:unless="${prod.imageUrl == null or prod.imageUrl.isEmpty()}">
-                                    <img th:src="@{'http://localhost:8080/image?file=' + ${prod.imageUrl}}" alt="">
-                                </th:block>
-                            </div>
+            <p id="no-result">Votre recherche n'a produit aucun résultat.</p>
+            <div th:each="prod: ${products}" class="col-12 col-lg-6 my-5">
+                <div class="product-card overflow-hidden">
+                    <div class="col-left">
+                        <p class="uppercase bold small" th:text="${prod.name}"></p>
+                        <p class="bold" th:text="${prod.brand}"></p>
+                        <p> Ref. <span th:text="${prod.reference}"></span></p>
+                        <p><span th:text="${prod.price}"></span> €</p>
+                        <p class="conditioning" th:text="${prod.conditioning}"></p>
+                        <div class="aligned">
+                            <p class="mb-0"><a href="#" th:href="@{/product/{id}(id=${prod.id})}"
+                                               class="underline-none uppercase bold smaller text-white">Détails</a></p>
+                            <a th:if="${prod.stock > 0}" href="#" th:href="@{/cart/add(id=${prod.id}, qty=${1})}"
+                               class="float-end cart-btn"><img src="/images/solar_cart-bold.svg"
+                                                               alt="ajouter au panier"></a>
+                            <img th:if="${prod.stock == 0}" src="/images/solar_cart-bold.svg" alt=""
+                                 class="float-end disabled">
                         </div>
+                    </div>
+                    <div class="col-right">
+                        <th:block th:if="${prod.imageUrl == null or prod.imageUrl.isEmpty()}">
+                            <img th:src="@{/images/placeholder.jpg}" alt="">
+                        </th:block>
+                        <th:block th:unless="${prod.imageUrl == null or prod.imageUrl.isEmpty()}">
+                            <img th:src="@{'http://localhost:8080/image?file=' + ${prod.imageUrl}}" alt="">
+                        </th:block>
+                    </div>
                 </div>
+            </div>
         </div>
     </div>
+
     <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
 </div>
 

@@ -11,70 +11,71 @@
 <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
 
 <div class="page">
-<div>
 
-    <div class="container px-0 my-5" id="product-info">
-        <div class="row justify-content-between">
-            <div class="col-6 p-3">
+    <div>
 
-                <dl class="row">
+        <div class="container px-0 my-5" id="product-info">
+            <div class="row justify-content-between">
+                <div class="col-6 p-3">
 
-                    <dt class="col-sm-4 py-3">Nom</dt>
-                    <dd class="col-sm-8 py-3 uppercase bold small" th:text="${product.name}"></dd>
-                    <hr>
-                    <dt class="col-sm-4 py-3">Marque</dt>
-                    <dd class="col-sm-8 py-3 bold" th:text="${product.brand}"></dd>
-                    <hr>
-                    <dt class="col-sm-4 py-3">Prix</dt>
-                    <dd class="col-sm-8 py-3" th:text="${product.price} + ' €'"></dd>
-                    <hr>
-                    <dt class="col-sm-4 py-3">Conditionnement</dt>
-                    <dd class="col-sm-8 py-3" th:text="${product.conditioning}"></dd>
-                    <hr>
-                    <dt class="col-sm-4 py-3">Description</dt>
-                    <dd class="col-sm-8 py-3" th:text="${product.description}"></dd>
-                    <hr>
-                    <dt class="col-sm-4 py-3">Ingrédients</dt>
-                    <dd class="col-sm-8 py-3" th:text="${product.ingredient}"></dd>
-                    <hr>
-                    <dt class="col-sm-4 py-3">Origine</dt>
-                    <dd class="col-sm-8 py-3" th:text="${product.origin}"></dd>
-                    <hr>
-                    <dt class="col-sm-4 py-3 hidden">Stock</dt>
-                    <dd class="col-sm-8 py-3 hidden" id="stock-dd" th:text="${product.stock}"></dd>
-                    <hr class="hidden">
-                    <dt class="col-sm-4 py-3">Catégorie</dt>
-                    <dd class="col-sm-8 py-3"><a href="" th:href="@{/products(cat=${product.category.id})}"
-                                                 th:text="${product.category.name}"></a></dd>
-                </dl>
+                    <dl class="row">
+
+                        <dt class="col-sm-4 py-3">Nom</dt>
+                        <dd class="col-sm-8 py-3 uppercase bold small" th:text="${product.name}"></dd>
+                        <hr>
+                        <dt class="col-sm-4 py-3">Marque</dt>
+                        <dd class="col-sm-8 py-3 bold" th:text="${product.brand}"></dd>
+                        <hr>
+                        <dt class="col-sm-4 py-3">Prix</dt>
+                        <dd class="col-sm-8 py-3" th:text="${product.price} + ' €'"></dd>
+                        <hr>
+                        <dt class="col-sm-4 py-3">Conditionnement</dt>
+                        <dd class="col-sm-8 py-3" th:text="${product.conditioning}"></dd>
+                        <hr>
+                        <dt class="col-sm-4 py-3">Description</dt>
+                        <dd class="col-sm-8 py-3" th:text="${product.description}"></dd>
+                        <hr>
+                        <dt class="col-sm-4 py-3">Ingrédients</dt>
+                        <dd class="col-sm-8 py-3" th:text="${product.ingredient}"></dd>
+                        <hr>
+                        <dt class="col-sm-4 py-3">Origine</dt>
+                        <dd class="col-sm-8 py-3" th:text="${product.origin}"></dd>
+                        <hr>
+                        <dt class="col-sm-4 py-3 hidden">Stock</dt>
+                        <dd class="col-sm-8 py-3 hidden" id="stock-dd" th:text="${product.stock}"></dd>
+                        <hr class="hidden">
+                        <dt class="col-sm-4 py-3">Catégorie</dt>
+                        <dd class="col-sm-8 py-3"><a href="" th:href="@{/products(cat=${product.category.id})}"
+                                                     th:text="${product.category.name}"></a></dd>
+                    </dl>
+                </div>
+
+                <div class="col-5 img-container position-relative p-0 my-3">
+                    <th:block th:if="${product.imageUrl == null or product.imageUrl.isEmpty()}">
+                        <img th:src="@{/images/placeholder.jpg}" alt="" class="product-img">
+                    </th:block>
+                    <th:block th:unless="${product.imageUrl == null or product.imageUrl.isEmpty()}">
+                        <img th:src="@{'http://localhost:8080/image?file=' + ${product.imageUrl}}" alt=""
+                             th:alt="${product.name}" class="product-img">
+                    </th:block>
+                </div>
+
             </div>
-
-            <div class="col-5 img-container position-relative p-0 my-3">
-                <th:block th:if="${product.imageUrl == null or product.imageUrl.isEmpty()}">
-                    <img th:src="@{/images/placeholder.jpg}" alt="" class="product-img">
-                </th:block>
-                <th:block th:unless="${product.imageUrl == null or product.imageUrl.isEmpty()}">
-                    <img th:src="@{'http://localhost:8080/image?file=' + ${product.imageUrl}}" alt=""
-                         th:alt="${product.name}" class="product-img">
-                </th:block>
-            </div>
-
         </div>
     </div>
-</div>
 
-<div class="container">
-    <form action="#" th:action="@{/cart/add}" method="get" id="add-to-cart">
-        <input type="text" name="id" id="id-input" th:value="${product.id}" class="hidden">
-        <label for="qty-input" class="me-2">Quantité</label>
-        <input type="number" name="qty" id="qty-input" value="1" style="width: 64px; height: 36px;">
-        <input type="submit" value="Ajouter au panier" class="button cart-btn" th:disabled="${product.stock == 0}">
-        <span th:if="${product.stock == 0}" class="ms-4 fst-italic">Ce produit est actuellement indisponible.</span>
-        <span class="ms-4 fst-italic hidden" id="stock-alert">Il ne reste plus que <span th:text="${product.stock}"></span> produits en stock.</span>
-    </form>
-</div>
+    <div class="container">
+        <form action="#" th:action="@{/cart/add}" method="get" id="add-to-cart">
+            <input type="text" name="id" id="id-input" th:value="${product.id}" class="hidden">
+            <label for="qty-input" class="me-2">Quantité</label>
+            <input type="number" name="qty" id="qty-input" value="1" style="width: 64px; height: 36px;">
+            <input type="submit" value="Ajouter au panier" class="button cart-btn" th:disabled="${product.stock == 0}">
+            <span th:if="${product.stock == 0}" class="ms-4 fst-italic">Ce produit est actuellement indisponible.</span>
+            <span class="ms-4 fst-italic hidden" id="stock-alert">Il ne reste plus que <span th:text="${product.stock}"></span> produits en stock.</span>
+        </form>
+    </div>
 
-<div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+    <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
 
 </div>
 
