@@ -33,7 +33,7 @@ public class CustomerController {
     CartService cartService;
     MapStructMapper mapStructMapper;
 
-    // ---------------Récupérer et afficher les données du client connecté-------------
+    // Get client data (personal information / addresses / orders) and show them in the profile page
     @GetMapping
     public String customer(Model model, HttpSession session, @RequestParam(required = false) Optional<Long> orderId) {
 
@@ -95,7 +95,7 @@ public class CustomerController {
         return "profile";
     }
 
-    // ----------------------------Modifier les données du client----------------
+    // Get client data and display an edit form
     @GetMapping("/edit-profile")
     public String editGet(Model model, @RequestParam long id) {
         Optional<Customer> customerOptional = customerService.fetchById(id);
@@ -106,6 +106,7 @@ public class CustomerController {
         return "edit-customer";
     }
 
+    // Amend customer data in the database
     @PostMapping("/edit")
     public String editPost(@ModelAttribute("customer") Customer customer, Model model, HttpSession session) {
 
@@ -129,7 +130,7 @@ public class CustomerController {
             model.addAttribute("emailError", true);
             return "edit-customer";
         }
-        if (customerOptional.get().getEmail() != customer.getEmail()) {
+        if (!customerOptional.get().getEmail().equals(customer.getEmail())) {
             session.setAttribute("email", customer.getEmail());
         }
 
