@@ -29,9 +29,13 @@
 
     <div class="container">
         <div class="row my-5 pb-5">
-            <p id="no-result">Votre recherche n'a produit aucun résultat.</p>
-            <div th:each="prod: ${products}" class="col-12 col-lg-6 my-5">
-                <div class="product-card overflow-hidden">
+
+            <div class="col pb-5" id="grid-products">
+
+                <p id="no-result">Votre recherche n'a produit aucun résultat.</p>
+
+                <div th:each="prod: ${products}" class="product-card overflow-hidden">
+
                     <div class="col-left">
                         <p class="uppercase bold small" th:text="${prod.name}"></p>
                         <p class="bold" th:text="${prod.brand}"></p>
@@ -48,6 +52,7 @@
                                  class="float-end disabled">
                         </div>
                     </div>
+
                     <div class="col-right">
                         <th:block th:if="${prod.imageUrl == null or prod.imageUrl.isEmpty()}">
                             <img th:src="@{/images/placeholder.jpg}" alt="">
@@ -56,6 +61,7 @@
                             <img th:src="@{'http://localhost:8080/image?file=' + ${prod.imageUrl}}" alt="">
                         </th:block>
                     </div>
+
                 </div>
             </div>
         </div>
