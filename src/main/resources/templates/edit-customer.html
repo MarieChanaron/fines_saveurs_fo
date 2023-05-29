@@ -37,8 +37,10 @@
 
                     <div class="my-4">
                         <label for="email">Email</label>
-                        <input id="email" type="text" name="email" th:field="*{email}" class="form-control" th:value="${customer.email}" required>
-                        <label th:if="${emailError}" class="error">Un compte existe déjà avec cette adresse e-mail.</label>
+                        <div>
+                            <input id="email" type="text" name="email" th:field="*{email}" class="form-control" th:value="${customer.email}" required>
+                            <p th:if="${emailError}" class="error m-0">Un compte existe déjà avec cette adresse e-mail.</p>
+                        </div>
                     </div>
 
                     <div class="my-4">
@@ -48,8 +50,10 @@
 
                     <div class="my-4">
                         <label for="confirmation">Confirmation</label>
-                        <input id="confirmation" type="password" name="confirmation" value="" placeholder= "*********" class="form-control" th:field="*{passwordConfirmation}" required>
-                        <p th:if="${passwordError}" class="error">Le mot de passe et la confirmation ne correspondent pas.</p>
+                        <div>
+                            <input id="confirmation" type="password" name="confirmation" value="" placeholder= "*********" class="form-control" th:field="*{passwordConfirmation}" required>
+                            <p th:if="${passwordError}" class="error m-0">Le mot de passe et la confirmation ne correspondent pas.</p>
+                        </div>
                     </div>
 
                     <div class="my-4 d-flex justify-content-between">

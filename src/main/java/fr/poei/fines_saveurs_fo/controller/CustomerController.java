@@ -4,17 +4,24 @@ import fr.poei.fines_saveurs_fo.controller.dto.*;
 import fr.poei.fines_saveurs_fo.entity.*;
 import fr.poei.fines_saveurs_fo.entity.role.Role;
 import fr.poei.fines_saveurs_fo.service.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolderStrategy;
+import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +39,8 @@ public class CustomerController {
     RoleService roleService;
     CartService cartService;
     MapStructMapper mapStructMapper;
+    SecurityContextRepository securityContextRepository;
+    CustomerDetailsService customerDetailsService;
 
     // Get client data (personal information / addresses / orders) and show them in the profile page
     @GetMapping
@@ -108,7 +117,7 @@ public class CustomerController {
 
     // Amend customer data in the database
     @PostMapping("/edit")
-    public String editPost(@ModelAttribute("customer") Customer customer, Model model, HttpSession session) {
+    public String editPost(@ModelAttribute("customer") Customer customer, Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
         String password = customer.getPassword();
         if (password == null || password.length() == 0) {
@@ -122,19 +131,15 @@ public class CustomerController {
             return "edit-customer";
         }
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName();
-        Optional<Customer> customerOptional = customerService.fetchByEmail(email);
-        if (customerOptional.isEmpty()) return "404";
-        if (customerOptional.get().getId() != customer.getId()) {
+        session.removeAttribute("email");
+        session.setAttribute("email", customer.getEmail());
+
+        try {
+            customerService.updateCustomerDetails(customer);
+        } catch (Exception e) {
             model.addAttribute("emailError", true);
             return "edit-customer";
         }
-        if (!customerOptional.get().getEmail().equals(customer.getEmail())) {
-            session.setAttribute("email", customer.getEmail());
-        }
-
-        customerService.updateCustomerDetails(customer);
 
         return "redirect:/customers";
     }
