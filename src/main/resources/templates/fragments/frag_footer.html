@@ -1,13 +1,12 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="frag_footer">
-
     <footer class="d-flex align-items-center justify-content-between position-absolute">
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <a href="" class="d-block">Mentions légales</a>
+                        <a href="" th:href="@{/mentions-legales}" class="d-block">Mentions légales</a>
                         <a href="" th:href="@{/ticket}" class="d-block">Contacter un administrateur</a>
                     </div>
                     <div class="col d-flex align-items-center justify-content-end">
@@ -18,5 +17,4 @@
             </div>
         </div>
     </footer>
-
 </th:block>
