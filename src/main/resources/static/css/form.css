@@ -107,3 +107,17 @@ textarea {
     width: 500px;
 }
 
+/* Signup */
+
+#signup-form {
+    max-width: 500px;
+}
+
+#signup-form label {
+    width: 200px;
+}
+
+#signup-form label + div,
+#signup-form label + input {
+    width: 100%;
+}
