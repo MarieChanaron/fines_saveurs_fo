@@ -6,11 +6,12 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.LuhnCheck;
 
 
-@LuhnCheck
+
 @NotNull
 @Data @NoArgsConstructor
 public class CreditCard {
 
+    @LuhnCheck
     private String cardNumber;
     private String cardHolder;
     int expirationMonth;
