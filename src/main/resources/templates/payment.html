@@ -10,57 +10,71 @@
 
 <div th:replace="fragments/frag_nav :: frag_nav"></div>
 
-<div class="container my-5">
+<div class="page">
 
-  <div class="row">
-    <div class="col">
-      <form action="#" th:action="@{/order/payment}" method="post" id="payment">
-
-        <fieldset class="my-5 py-4">
-          <p>Choisir une méthode de paiement :</p>
-          <div class="d-flex">
-            <input type="radio" id="card" name="payment" value="card" class="me-2" checked>
-            <label for="card"><img src="/images/card.png" alt="visa/mastercard"></label>
-            <input type="radio" id="paypal" name="payment" value="paypal" class="me-2">
-            <label for="paypal"><img src="/images/paypal.png" alt="paypal"></label>
-          </div>
-        </fieldset>
-
-
-        <fieldset class="my-5 py-4">
-          <legend class="mb-4 bold uppercase smaller">Vos informations</legend>
-
-          <div class="mb-3">
-            <label for="name">Nom complet</label>
-            <input class="long" type="text" name="name" id="name" placeholder="NOM COMPLET" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="number">Numéro de carte</label>
-            <input class="long" type="number" name="number" id="number" placeholder="XXXX XXXX XXXX XXXX" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="date">Date</label>
-            <div class="d-inline" id="date">
-              <input class="short" type="number" name="month" id="month" placeholder="XX" required>
-              <span class="big">/</span>
-              <input class="short" type="number" name="year" id="year" placeholder="XX" required></div>
-          </div>
-
-          <div class="mb-3">
-            <label for="cvc">CVC</label>
-            <input class="short" type="number" name="cvc" id="cvc" placeholder="XXX" required>
-          </div>
-
-        </fieldset>
-
-          <input type="submit" value="Payer" class="button float-end">
-
-      </form>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <a href="" th:href="@{/order/invoicing-address}">Retour</a>
+      </div>
     </div>
   </div>
 
+  <div class="container my-5">
+
+    <div class="row">
+      <div class="col">
+        <form action="#" th:action="@{/order/payment}" method="post" th:object="${creditCard}" id="payment">
+
+          <fieldset class="my-5 py-4">
+            <p>Choisir une méthode de paiement :</p>
+            <div class="d-flex">
+              <input type="radio" id="card" name="payment" value="card" class="me-2" checked>
+              <label for="card"><img src="/images/card.png" alt="visa/mastercard"></label>
+              <input type="radio" id="paypal" name="payment" value="paypal" class="me-2">
+              <label for="paypal"><img src="/images/paypal.png" alt="paypal"></label>
+            </div>
+          </fieldset>
+
+
+          <fieldset class="my-5 py-4">
+            <legend class="mb-4 bold uppercase smaller">Vos informations</legend>
+
+            <div class="mb-3">
+              <label for="name">Nom complet</label>
+              <input class="long" type="text" name="name" id="name" placeholder="NOM COMPLET" th:field="*{cardHolder}" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="number">Numéro de carte</label>
+              <input class="long" type="number" name="number" id="number" th:field="*{cardNumber}" placeholder="XXXX XXXX XXXX XXXX" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="date">Date</label>
+              <div class="d-inline" id="date">
+                <input class="short" type="number" name="month" id="month" placeholder="XX" th:field="*{expirationMonth}" required>
+                <span class="big">/</span>
+                <input class="short" type="number" name="year" id="year" placeholder="XX" th:field="*{expirationYear}" required></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="cvc">CVC</label>
+              <input class="short" type="number" name="cvc" id="cvc" placeholder="XXX" th:field="*{cvc}" required>
+            </div>
+
+          </fieldset>
+
+            <input type="submit" value="Payer" class="button float-end">
+
+        </form>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
 
 </div>
 

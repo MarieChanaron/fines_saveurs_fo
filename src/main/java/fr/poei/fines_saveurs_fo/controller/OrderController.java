@@ -32,6 +32,8 @@ public class OrderController {
             session.removeAttribute("redirect");
 
             Cart cart = (Cart) session.getAttribute("cart");
+            if (cart == null) return "redirect:/cart";
+
             if (cart.getCustomer() == null) {
                 Optional<Customer> customerOptional = customerService.fetchByEmail(
                         (String) session.getAttribute("email"));

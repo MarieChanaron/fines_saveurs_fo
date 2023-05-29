@@ -1,5 +1,6 @@
 nav {
     height: var(--header-height);
+    width: 100%;
     background-color: var(--grey-0) !important;
 }
 

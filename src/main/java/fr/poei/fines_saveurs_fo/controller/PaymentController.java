@@ -1,34 +1,37 @@
 package fr.poei.fines_saveurs_fo.controller;
 
 import fr.poei.fines_saveurs_fo.entity.Address;
-import fr.poei.fines_saveurs_fo.entity.Cart;
 import fr.poei.fines_saveurs_fo.entity.Customer;
-import fr.poei.fines_saveurs_fo.entity.Order;
 import fr.poei.fines_saveurs_fo.service.AddressService;
 import fr.poei.fines_saveurs_fo.service.CustomerService;
-import fr.poei.fines_saveurs_fo.service.OrderService;
-import fr.poei.fines_saveurs_fo.service.ProductService;
+import fr.poei.fines_saveurs_fo.validator.CreditCard;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @AllArgsConstructor
 @RequestMapping("/order/payment")
 public class PaymentController {
 
-    final OrderService orderService;
-    final ProductService productService;
     final CustomerService customerService;
     final AddressService addressService;
 
 
     @GetMapping
-    public String payment(HttpSession session) {
+    public String payment(HttpSession session, Model model) {
 
         // Check that the order has been confirmed by clicking on the button
         if (session.getAttribute("orderConfirmed") == null) {
@@ -53,27 +56,22 @@ public class PaymentController {
             return "redirect:/order/invoicing-address";
         }
 
+        model.addAttribute("creditCard", new CreditCard());
+
         return "payment";
     }
 
 
     @PostMapping
-    public String validateOrder(HttpSession session) {
+    public String checkPaymentMethod(@ModelAttribute("creditCard") @Valid CreditCard creditCard, BindingResult bindingResult, Model model) {
 
-        Cart cart = (Cart) session.getAttribute("cart");;
-        String email = (String) session.getAttribute("email");
-        double totalPrice = (Double) session.getAttribute("totalPrice");
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("paymentError", true);
+            return "payment";
+        }
 
-        Optional<Order> orderSaved = orderService.saveOrder(cart, email, totalPrice);
-
-        session.removeAttribute("totalQuantity");
-        session.removeAttribute("cart");
-        session.removeAttribute("totalPrice");
-        session.removeAttribute("orderConfirmed");
-
-        productService.updateStock(cart);
-
-        if (orderSaved.isEmpty()) return "404";
         return "redirect:/order/confirmation";
     }
+
+
 }

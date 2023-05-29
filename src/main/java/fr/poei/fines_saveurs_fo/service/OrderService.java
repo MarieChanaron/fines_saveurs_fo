@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,5 +27,19 @@ public class OrderService {
         order.setCustomer(customerOptional.get());
         order.setAmountPaid(totalPrice);
         return Optional.of(orderRepository.save(order));
+    }
+
+    public List<Order> fetchOrdersByCustomer(Customer customer) {
+        return orderRepository.findAllByCustomer(customer);
+    }
+
+    public Optional<Cart> getOrderCart(long id) {
+        Optional<Order> orderOptional = orderRepository.findById(id);
+        Cart cart = new Cart();
+        if (orderOptional.isPresent()) {
+            Order order = orderOptional.get();
+            cart = order.getCart();
+        }
+        return Optional.of(cart);
     }
 }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Fines Saveurs | Compte</title>
+    <div th:replace="fragments/frag_head :: frag_head"></div>
+</head>
+
+<body>
+
+<div th:replace="fragments/frag_nav :: frag_nav"></div>
+
+<div class="page">
+
+    <div class="container">
+
+        <div class="row my-5">
+            <div class="col">
+                <p>Vous pouvez renseigner votre <b>adresse de facturation</b> pour gagner du temps lors de la prochaine commande :</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <form action="#" th:action="@{/customers/invoicing-address}" th:object="${address}" method="post" class="mx-auto fit-content address-form">
+                <div class="my-4">
+                    <label for="number">Numéro</label>
+                    <input type="text" id="number" name="number" th:value="${address.streetNumber}" th:field="${address.streetNumber}">
+                </div>
+                <div class="my-4">
+                    <label for="street">Rue *</label>
+                    <input type="text" id="street" name="street" required th:value="${address.street}" th:field="${address.street}">
+                </div>
+                <div class="my-4">
+                    <label for="info">Information complémentaire</label>
+                    <input type="text" id="info" name="info" th:value="${address.additionalInformation}" th:field="${address.additionalInformation}">
+                </div>
+                <div class="my-4">
+                    <label for="postcode">Code postal *</label>
+                    <input type="text" id="postcode" name="postcode" th:value="${address.postcode}" th:field="${address.postcode}" required>
+                </div>
+                <div class="mt-4 mb-5">
+                    <label for="city">Ville *</label>
+                    <input type="text" id="city" name="city" required th:value="${address.city}" th:field="${address.city}">
+                </div>
+                <input type="submit" class="button float-end" value="Valider"></input>
+            </form>
+        </div>
+
+    </div>
+
+    <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+
+</div>
+
+</body>
+
+</html>

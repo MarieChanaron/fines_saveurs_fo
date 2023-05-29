@@ -2,6 +2,7 @@ package fr.poei.fines_saveurs_fo.controller;
 
 import fr.poei.fines_saveurs_fo.controller.dto.MapStructMapper;
 import fr.poei.fines_saveurs_fo.entity.Address;
+import fr.poei.fines_saveurs_fo.entity.Cart;
 import fr.poei.fines_saveurs_fo.entity.Customer;
 import fr.poei.fines_saveurs_fo.service.AddressService;
 import fr.poei.fines_saveurs_fo.service.CustomerService;
@@ -19,7 +20,7 @@ import java.util.Optional;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/order/invoicing-address")
-public class InvoicingAddress {
+public class OrderInvoicingAddress {
 
     final MapStructMapper mapStructMapper;
     final CustomerService customerService;
@@ -27,8 +28,14 @@ public class InvoicingAddress {
 
     @GetMapping
     public String getInvoicingAddress(HttpSession session, Model model) {
+
+        // Check if the customer has a cart
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) return "redirect:/cart";
+
         String email = (String) session.getAttribute("email");
         Optional<Customer> customerOptional = customerService.fetchByEmail(email);
+
         if (customerOptional.isEmpty()) return "404";
         Customer customer = customerOptional.get();
 

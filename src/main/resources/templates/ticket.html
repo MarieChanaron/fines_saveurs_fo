@@ -4,29 +4,63 @@
     <meta charset="UTF-8">
     <title>Tickets</title>
     <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+
     <script src="/js/fetch-admins.js" async></script>
     <script src="/js/post-ticket.js" defer></script>
 </head>
 <body>
 
+
 <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
+<div class="page">
 
-<form id="ticket-form" action="#" method="POST">
-    <input type="email" id="userEmail" name="userEmail" placeholder="mon.email@gmail.com" required>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>Une question, une remarque ou une suggestion ? Dites-nous tout !</p>
+            </div>
+        </div>
+    </div>
 
-    <label for="admin-select">Administrateur:</label>
-    <select id="admin-select" name="adminId" required>
-        <option th:each="admin : ${admins}" th:value="${admin.id}" th:text="${admin.firstname + ' ' + admin.lastname}"></option>
-    </select>
+    <div class="container my-5">
+        <div class="row">
 
-    <input type="text" id="text-input" name="textInput" placeholder="Bonjour, ..." required>
+            <form id="ticket-form" class="mx-auto" action="" th:action="@{/ticket}" method="POST">
 
-    <button type="submit">Soumettre</button>
-</form>
+                <div class="mb-4">
+                    <label for="userEmail">Votre adresse e-mail</label>
+                    <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="email" id="userEmail" name="userEmail"
+                               placeholder="mon.email@gmail.com"
+                               th:placeholder="${#strings.isEmpty(userEmail) || userEmail == 'anonymousUser' ? 'mon.email@gmail.com' : '' }"
+                               th:value="${userEmail != 'anonymousUser' ? userEmail : ''}" required>
+                    </div>
+                </div>
 
-<p id="confirmation"></p>
+                <div class="mb-4">
+                    <label for="admin-select">Choisissez un administrateur</label>
+                    <select id="admin-select" class="form-select" name="adminId" required>
+                        <option value="" selected disabled>Choisissez un admin </option>
+                        <option th:each="admin : ${admins}" th:value="${admin.id}" th:text="${admin.firstname + ' ' + admin.lastname}"></option>
+                    </select>
+                </div>
 
-<div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+                <div class="mb-4">
+                    <label for="message" class="form-label">Votre message</label>
+                    <textarea class="form-control" id="message" rows="10" placeholder="Bonjour, ..." name="textInput" required></textarea>
+                </div>
 
+                <div class="my-5">
+                    <input type="submit" class="button float-end ms-auto" value="Soumettre">
+                </div>
+            </form>
+        </div>
+
+        <p id="confirmation"></p>
+    </div>
+
+    <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+</div>
 </body>
 </html>

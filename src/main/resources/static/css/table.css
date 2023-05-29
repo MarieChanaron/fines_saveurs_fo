@@ -5,3 +5,47 @@ table tfoot tr {
 table {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);;
 }
+
+
+
+
+#profile table {
+    width: fit-content;
+}
+
+#profile table thead {
+    background-color: rgba(38, 34, 33, 0.05);
+}
+
+#profile table th {
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-align: left;
+}
+
+#profile table th,
+#profile table td {
+    width: fit-content;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+#profile table tr {
+    border-width: 1px;
+}
+
+#profile table#orders tbody tr {
+    cursor: pointer;
+}
+
+#profile table tbody td {
+    vertical-align: middle;
+}
+
+#profile table#orders tbody tr:hover {
+    background-color: var(--grey-0);
+}
+
+#profile table#orders tbody tr.highlight-row {
+    background-color: var(--grey-1);
+}

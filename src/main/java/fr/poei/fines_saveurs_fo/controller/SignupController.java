@@ -44,6 +44,18 @@ public class SignupController {
     @PostMapping("/signup")
     public String signup(Model model, @ModelAttribute("customer") Customer customer, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
+        String password = customer.getPassword();
+        if (password == null || password.length() == 0) {
+            model.addAttribute("passwordEmpty", true);
+            return "signup";
+        }
+
+        String confirmation = customer.getPasswordConfirmation();
+        if (!password.equals(confirmation)) {
+            model.addAttribute("passwordError", true);
+            return "signup";
+        }
+
         String email = customer.getEmail();
         if (customerService.fetchByEmail(email).isPresent()) {
             model.addAttribute("emailError", true);

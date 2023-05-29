@@ -7,9 +7,11 @@ import fr.poei.fines_saveurs_fo.controller.dto.ProductDto;
 import fr.poei.fines_saveurs_fo.entity.Cart;
 import fr.poei.fines_saveurs_fo.entity.CartProduct;
 import fr.poei.fines_saveurs_fo.entity.Customer;
+import fr.poei.fines_saveurs_fo.entity.Product;
 import fr.poei.fines_saveurs_fo.service.CartService;
 import fr.poei.fines_saveurs_fo.service.CustomerService;
 import fr.poei.fines_saveurs_fo.service.ProductService;
+import fr.poei.fines_saveurs_fo.service.ProductServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,7 @@ import java.util.Optional;
 public class CartController {
 
     final CartService cartService;
-    final ProductService productService;
+    final ProductServiceImpl productService;
     final MapStructMapper mapStructMapper;
     final CustomerService customerService;
 
@@ -57,13 +59,14 @@ public class CartController {
             cart = (Cart) session.getAttribute("cart");
         }
 
-        cartService.saveLineItem(cart, id, qty); // saves if doesn't exist or updates
+        CartProduct lineAdded = cartService.saveLineItem(cart, id, qty); // saves if doesn't exist or updates
+        if (lineAdded.getQuantity() == productService.getStock(id)) return "redirect:/cart?alert=stock";
 
         return "redirect:/cart";
     }
 
     @GetMapping
-    public String cart(HttpSession session, Model model) {
+    public String cart(HttpSession session, Model model, @RequestParam(required = false) Optional<String> alert) {
         Cart cart = (Cart) session.getAttribute("cart");
 
         // Retrieve the items from the cart
@@ -83,6 +86,9 @@ public class CartController {
             cartItems.add(lineItem);
         }
 
+        if (alert.isPresent() && alert.get().equals("stock")) {
+            model.addAttribute("stockAlert", true);
+        }
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("totalPrice", totalPrice);
 

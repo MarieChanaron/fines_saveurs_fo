@@ -1,0 +1,15 @@
+footer {
+    width: 100%;
+    bottom: 0;
+    background-color: var(--primary-color-medium);
+    height: var(--footer-height);
+}
+
+footer * {
+    color: white;
+    font-size: 1.2rem;
+}
+
+footer a:hover {
+    color: white !important;
+}

@@ -64,4 +64,8 @@ public class ProductServiceImpl implements ProductService{
             }
         }
     }
+
+    public int getStock(long productId) {
+        return productRepository.findStockById(productId);
+    }
 }

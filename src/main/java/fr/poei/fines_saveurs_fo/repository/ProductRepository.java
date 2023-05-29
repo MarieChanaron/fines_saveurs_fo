@@ -22,4 +22,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> search(String keyword);
 
     List<Product> findAllByCategory(Category category);
+
+    @Query("select p.stock from Product p where p.id = ?1")
+    int findStockById(long id);
 }

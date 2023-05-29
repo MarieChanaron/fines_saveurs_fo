@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <div th:replace="~{fragments/frag_head :: frag_head}"></div>
+  <title>Fines Saveurs | Gérer mon profil</title>
+  <script src="/js/order-details.js" defer></script>
+</head>
+
+<body id="profile">
+
+    <div th:replace="~{fragments/frag_nav :: frag_nav}"></div>
+
+    <div class="page">
+
+      <div class="container">
+
+        <div class="row">
+
+          <!-- Customer information -->
+          <h3 class="d-inline me-5 fit-content">Mon compte</h3>
+          <hr>
+          <div class="col">
+            <dl class="row">
+              <div>
+                <dt>Nom complet :</dt>
+                <dd class="highlight"><span th:text="${customer.firstname}"></span> <span th:text="${customer.lastname}"></span></dd>
+                <a href="" th:href="@{/customers/edit-profile(id=${customer.id})}" class="ms-5"><img src="/images/circum_edit.svg" alt="éditer"></a>
+              </div>
+              <div class="fit-content">
+                <dt>Adresse e-mail :</dt>
+                <dd th:text="${customer.email}"></dd>
+              </div>
+            </dl>
+
+          </div>
+
+          <!-- Addresses -->
+          <div class="row my-5">
+            <h3 class="d-inline me-5 fit-content">Mes adresses</h3>
+            <hr>
+
+            <div class="col">
+
+              <dl class="row">
+                <div>
+                  <dt>Adresse de livraison :</dt>
+                  <dd>
+                    <p class="m-0">
+                      <span th:text="${delivery.streetNumber}"></span> <span th:text="${delivery.street}"></span>
+                      <a href="" th:href="@{/customers/destination-address}" class="ms-5"><img src="/images/circum_edit.svg" alt="éditer"></a>
+                    </p>
+                    <p class="m-0" th:text="${delivery.additionalInformation}"></p>
+                    <p class="m-0"><span th:text="${delivery.postcode}"></span> <span th:text="${delivery.city}"></span></p>
+                  </dd>
+                </div>
+              </dl>
+
+            </div>
+
+            <div class="col">
+              <dl class="row">
+                <div>
+                  <dt>Adresse de facturation :</dt>
+                  <dd>
+                    <p class="m-0">
+                      <span th:text="${invoicing.streetNumber}"></span> <span th:text="${invoicing.street}"></span>
+                      <a href="" th:href="@{/customers/invoicing-address}" class="ms-5"><img src="/images/circum_edit.svg" alt="éditer"></a>
+                    </p>
+                    <p class="m-0" th:text="${invoicing.additionalInformation}"></p>
+                    <p class="m-0"><span th:text="${invoicing.postcode}"></span> <span th:text="${invoicing.city}"></span></p>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+
+          <!-- Orders -->
+          <div class="row">
+            <h3 class="d-inline me-5 fit-content">Mes commandes passées</h3>
+            <hr>
+
+            <div class="col">
+              <p>Vous avez passé <span th:text="${orders.size()}"></span> commande<span th:text="${orders.size() > 1 ? 's' : ''}"></span> :</p>
+
+              <table class="table" id="orders">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Montant</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="order: ${orders}" th:id="${order.id}" class="order-row">
+                    <td th:text="${#temporals.day(order.createdAt)} + '/' + ${#temporals.month(order.createdAt)} + '/' + ${#temporals.year(order.createdAt)}"></td>
+                    <td th:text="${order.amountPaid} + ' €'"></td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+            <div class="col pt-5">
+
+              <p th:if="${cart != null}">Voici les détails de la commande sélectionnée :</p>
+              <p th:if="${cart == null}" class="bg-beige fit-content">Veuillez sélectionner une commande dans le tableau pour en voir les détails.</p>
+
+              <table th:if="${cart != null}" class="table m-0">
+                <thead>
+                <tr>
+                  <th scope="col">Article</th>
+                  <th scope="col">Quantité</th>
+                  <th scope="col">Prix</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item: ${cart}">
+                  <td th:text="${item.productDto.name}"></td>
+                  <td th:text="${item.quantity}"></td>
+                  <td th:text="${item.productDto.price} + ' €'"></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th scope="row">Total</th>
+                  <th th:text="${totalQuantity}"></th>
+                  <th th:text="${totalPrice} + ' €'"></th>
+                </tr>
+                </tfoot>
+              </table>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+
+    </div>
+
+</body>
+</html>

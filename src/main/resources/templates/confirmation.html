@@ -2,32 +2,39 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Fines Saveurs | Confirmation</title>
-  <div th:replace="fragments/frag_head :: frag_head"></div>
+    <title>Fines Saveurs | Confirmation</title>
+    <div th:replace="fragments/frag_head :: frag_head"></div>
 </head>
 
 <body id="confirmation">
 
-  <div th:replace="fragments/frag_nav :: frag_nav"></div>
+<div th:replace="fragments/frag_nav :: frag_nav"></div>
 
-  <div class="container my-5 py-5">
-    <div class="row">
-      <div class="col">
-        <p class="fit-content d-block mx-auto white-bg">Nous vous remercions pour votre commande et espérons vous revoir bientôt !</p>
-        <p class="fit-content d-block mx-auto white-bg">Nous vous avons envoyé un e-mail de confirmation.</p>
-      </div>
-    </div>
-  </div>
+<div class="page">
 
-  <div class="container my-5 py-5">
-    <div class="row">
-      <div class="col">
-        <a href="#" th:href="@{/products}" class="fit-content d-block mx-auto">
-          <button class="button">Boutique</button>
-        </a>
-      </div>
+    <div class="container my-5 py-5">
+        <div class="row">
+            <div class="col">
+                <p class="fit-content d-block mx-auto white-bg">Nous vous remercions pour votre commande et espérons
+                    vous revoir bientôt !</p>
+                <p class="fit-content d-block mx-auto white-bg">Nous vous avons envoyé un e-mail de confirmation.</p>
+            </div>
+        </div>
     </div>
-  </div>
+
+    <div class="container my-5 py-5">
+        <div class="row">
+            <div class="col">
+                <a href="#" th:href="@{/products}" class="fit-content d-block mx-auto">
+                    <button class="button">Boutique</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
+
+</div>
 
 </body>
 </html>

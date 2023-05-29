@@ -1,6 +1,6 @@
-const ENDPOINT = 'http://localhost:8080/webapi/categories';
+const ENDPOINT_CATEGORIES = 'http://localhost:8080/webapi/categories';
 
-const fetchData = async(endpointString) => {
+const fetchCategories = async(endpointString) => {
     try {
         const response = await fetch(endpointString);
         if (response) {
@@ -32,5 +32,5 @@ const fillDropdownMenu = categoriesArray => {
     });
 }
 
-const categories = fetchData(ENDPOINT)
+const categories = fetchCategories(ENDPOINT_CATEGORIES)
     .then (categories => fillDropdownMenu(categories));
