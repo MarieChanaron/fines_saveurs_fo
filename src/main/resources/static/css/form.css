@@ -111,15 +111,15 @@ textarea {
 
 /* Signup */
 
-#signup-form {
+.signup-form {
     max-width: 500px;
 }
 
-#signup-form label {
+.signup-form label {
     width: 200px;
 }
 
-#signup-form label + div,
-#signup-form label + input {
+.signup-form label + div,
+.signup-form label + input {
     width: 100%;
 }

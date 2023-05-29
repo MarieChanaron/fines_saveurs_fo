@@ -24,18 +24,27 @@
         <div class="row">
             <div class="col">
 
-                <form th:action="@{/signup}" method="post" th:object="${customer}" id="signup-form" class="mx-auto">
+                <form th:action="@{/signup}" method="post" th:object="${customer}" class="signup-form mx-auto">
 
                     <div class="my-4">
-                        <label for="firstname" class="form-label">Nom</label>
+                        <label for="firstname" class="form-label">Prénom</label>
                         <input type="text" class="form-control" id="firstname" name="firstname"
                                th:field="*{firstname}" required>
                     </div>
 
                     <div class="my-4">
-                        <label for="lastname" class="form-label">Prénom</label>
+                        <label for="lastname" class="form-label">Nom</label>
                         <input type="text" class="form-control" id="lastname" name="lastname" th:field="*{lastname}"
                                required>
+                    </div>
+
+                    <div class="my-4">
+                        <label for="email" class="form-label">Adresse e-mail</label>
+                        <div>
+                            <input type="email" class="form-control" id="email" name="email" th:field="*{email}" placeholder="mon-email@email.com"
+                                   required>
+                            <p th:if="${emailError}" class="error m-0">Un compte existe déjà avec cette adresse e-mail.</p>
+                        </div>
                     </div>
 
                     <div class="my-4">
@@ -51,15 +60,6 @@
                             <input type="password" class="form-control" id="confirmation" name="confirmation"
                                    th:field="*{passwordConfirmation}" autocomplete="new-password" placeholder="**********" required>
                             <p th:if="${passwordError}" class="error m-0">Le mot de passe et la confirmation ne correspondent pas.</p>
-                        </div>
-                    </div>
-
-                    <div class="my-4">
-                        <label for="email" class="form-label">Adresse e-mail</label>
-                        <div>
-                            <input type="email" class="form-control" id="email" name="email" th:field="*{email}" placeholder="mon-email@email.com"
-                                   required>
-                            <p th:if="${emailError}" class="error m-0">Un compte existe déjà avec cette adresse e-mail.</p>
                         </div>
                     </div>
 

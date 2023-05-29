@@ -14,19 +14,13 @@
 <div class="page">
 
 <main>
-    <div class="container d-flex flex-column align-items-center justify-content-center mt-4">
-        <div class=" mb-4 d-flex justify-content-around ">
-            <a href="account" title="retour"><img src="/images/arrow_back.svg" style="width: 1.5rem; margin-right: 1em"
-                                                  alt=""></a>
-            <h2>Modifier mes informations personnelles</h2>
-        </div>
-        <div class="card row shadow p-3 mb-5 bg-body rounded" style="width: 35%">
-            <div class="col-12">
-                <img class="w-100" src="/images/card_profile.png" alt="">
-            </div>
-            <div class="card-body col-12">
 
-                <form th:action="@{/customers/edit}" th:object="${customer}" method="POST">
+    <div class="container my-5">
+        <div class="row">
+            <div class="col">
+
+
+                <form th:action="@{/customers/edit}" th:object="${customer}" class="signup-form mx-auto" method="post">
 
                     <!-- Hidden field -->
                     <input type="text" class="hidden" th:field="*{id}" th:value="${customer.id}">
@@ -49,24 +43,26 @@
 
                     <div class="my-4">
                         <label for="password">Mot de passe</label>
-                        <input id="password" type="password" name="password" value="" placeholder= "*********" class="form-control" th:field="*{password}">
-                        <label th:if="${passwordEmpty}" class="error">Le mot de passe ne doit pas être vide.</label>
+                        <input id="password" type="password" name="password" value="" placeholder= "*********" class="form-control" th:field="*{password}" required>
                     </div>
 
                     <div class="my-4">
                         <label for="confirmation">Confirmation</label>
-                        <input id="confirmation" type="password" name="confirmation" value="" placeholder= "*********" class="form-control" th:field="*{passwordConfirmation}">
-                        <label th:if="${passwordError}" class="error">Le mot de passe et la confirmation ne correspondent pas.</label>
+                        <input id="confirmation" type="password" name="confirmation" value="" placeholder= "*********" class="form-control" th:field="*{passwordConfirmation}" required>
+                        <p th:if="${passwordError}" class="error">Le mot de passe et la confirmation ne correspondent pas.</p>
                     </div>
 
-                    <div class="my-4">
+                    <div class="my-4 d-flex justify-content-between">
                         <a href="" class="small-link">Réinitialiser</a>
-                        <button type="submit" class="button my-4 float-end">Valider</button>
+                        <input type="submit" class="button my-4 float-end" value="Valider">
                     </div>
+
                 </form>
+
             </div>
         </div>
     </div>
+
 </main>
 
 <div th:replace="~{fragments/frag_footer :: frag_footer}"></div>
