@@ -1,5 +1,5 @@
 ### fines_saveurs_fo
-  # [fines_saveurs_bo](https://github.com/Truong-Terence/fines_saveurs_bo)
+ 
 
 ## BDD credentials :
 - Copier le fichier src/main/resources/appToComplete.properties.
@@ -19,3 +19,5 @@
 
 - contacter un administrateur via un formulaire :
 - Le choix de l'administrateur à contacter sera fera via une API Rest qui renvoie tous les administrateurs. (API Rest => Côté Back Office). La récupération des informations sera fera en Javascript dans le HTML du    FrontOffice
+
+ # [fines_saveurs_bo](https://github.com/Truong-Terence/fines_saveurs_bo)
