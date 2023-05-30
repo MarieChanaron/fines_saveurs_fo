@@ -68,7 +68,7 @@
         <form action="#" th:action="@{/cart/add}" method="get" id="add-to-cart">
             <input type="text" name="id" id="id-input" th:value="${product.id}" class="hidden">
             <label for="qty-input" class="me-2">Quantité</label>
-            <input type="number" name="qty" id="qty-input" value="" style="width: 64px; height: 36px;">
+            <input type="number" name="qty" id="qty-input" value="1" style="width: 64px; height: 36px;">
             <input type="submit" value="Ajouter au panier" class="button cart-btn" th:disabled="${product.stock == 0}">
             <span th:if="${product.stock == 0}" class="ms-4 fst-italic">Ce produit est actuellement indisponible.</span>
             <span class="ms-4 fst-italic hidden" id="stock-alert">Il ne reste plus que <span th:text="${product.stock}"></span> produits en stock.</span>
