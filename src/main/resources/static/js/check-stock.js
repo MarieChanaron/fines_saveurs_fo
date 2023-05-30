@@ -3,7 +3,7 @@ const stock = document.getElementById('stock-dd').innerText;
 const checkValue = event => {
     const pEl = document.getElementById('stock-alert');
     const inputEl = event.target;
-    if (inputEl.value >= stock) {
+    if (Number(inputEl.value) >= Number(stock)) {
         inputEl.value = stock;
         pEl.classList.remove('hidden');
     } else {
